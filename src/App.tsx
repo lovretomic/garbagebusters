@@ -1,12 +1,14 @@
 import './App.scss'
-import Logo from "./assets/icons/search_icon.svg?react"
+import LoginIcon from "./assets/icons/login_icon.svg?react"
+import StartButton from './components/StartButton'
 
 function App() {
 
   return (
     <>
       <p>hi</p>
-	  <Logo />
+	  <LoginIcon />
+	  <StartButton text="desi" subtext="disi" icon={LoginIcon}></StartButton>
     </>
   )
 }
