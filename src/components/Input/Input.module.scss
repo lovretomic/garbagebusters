@@ -1,0 +1,14 @@
+.input {
+  border: 1px solid rgba($primary-black, 0.2);
+  box-sizing: border-box;
+  padding: 18px 24px;
+  background-color: $primary-white;
+  color: $primary-black;
+  font-size: 16px;
+  transition-duration: 200ms;
+
+  &:focus {
+    outline: none;
+    border-color: rgba($primary-white, 0.8);
+  }
+}
