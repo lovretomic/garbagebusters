@@ -1,1 +1,1 @@
-import express from 'express';
+import prisma from '../lib/prisma.js';
