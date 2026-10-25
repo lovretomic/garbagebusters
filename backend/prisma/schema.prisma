@@ -13,3 +13,26 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Report {
+  ID_Report String @id
+
+  //other, TODO: ADD
+
+  cleanup_action Cleanup_Action?
+}
+
+model Cleanup_Action {
+  ID_Report      String   @id
+  name           String
+  description    String
+  max_volunteers Int
+  action_date    DateTime
+  action_time    String
+
+  report Report @relation(fields: [ID_Report], references: [ID_Report])
+}
+
+//ovo je primjer kakav mora biti definiran sa svim atributima koji su i u bazi,
+// nakon dodavanja pokrenuti "yarn prisma generate" (validate za provjeru)
+//TODO: ovu poruku obrisati
