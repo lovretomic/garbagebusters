@@ -28,7 +28,7 @@ model Cleanup_Action {
   description    String
   max_volunteers Int
   action_date    DateTime
-  action_time    String
+  action_time    DateTime @db.Time
 
   report Report @relation(fields: [ID_Report], references: [ID_Report])
 }

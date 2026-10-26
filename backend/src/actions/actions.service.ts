@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma.js';
+import { prisma } from '../lib/prisma';
 
 export async function getActions() {
     return prisma.cleanup_Action.findMany();
