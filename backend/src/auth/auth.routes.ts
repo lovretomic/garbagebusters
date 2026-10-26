@@ -122,4 +122,32 @@ router.get("/google/callback", async (req, res) => {
     }
 });
 
+router.get("/me", (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({
+            error: "Not authenticated"
+        });
+    }
+
+    res.json({
+        user: req.session.user
+    });
+});
+
+router.post("/logout", (req, res) => {
+    req.session.destroy((error) => {
+        if (error) {
+            return res.status(500).json({
+                error: "Logout failed"
+            });
+        }
+
+        res.clearCookie("connect.sid");
+
+        res.json({
+            message: "Logout successful"
+        });
+    });
+});
+
 export default router;
