@@ -7,5 +7,11 @@ declare module "express-session" {
             nonce: string;
             codeVerifier: string;
         };
+
+        user?: {
+            id: string;
+            email: string;
+            name?: string;
+        };
     }
 }

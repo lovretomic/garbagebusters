@@ -54,4 +54,72 @@ router.get("/google", async (req, res) => {
     }
 });
 
+router.get("/google/callback", async (req, res) => {
+    try {
+        const oauth = req.session.oauth;
+
+        if (!oauth) {
+            return res.status(400).json({
+                error: "OAuth session not found"
+            });
+        }
+
+        const client = await createGoogleClient();
+
+        const params = client.callbackParams(req);
+
+        const tokenSet = await client.callback(
+            process.env.GOOGLE_CALLBACK_URL!,
+            params,
+            {
+                state: oauth.state,
+                nonce: oauth.nonce,
+                code_verifier: oauth.codeVerifier
+            }
+        );
+
+        const claims = tokenSet.claims();
+
+        if (!claims.email || !claims.email_verified) {
+            return res.status(403).json({
+                error: "Google email is not verified"
+            });
+        }
+
+        req.session.regenerate((error) => {
+            if (error) {
+                return res.status(500).json({
+                    error: "Failed to create session"
+                });
+            }
+
+            req.session.user = {
+                id: claims.sub,
+                email: claims.email!,
+                name: claims.name
+            };
+
+            req.session.save((saveError) => {
+                if (saveError) {
+                    return res.status(500).json({
+                        error: "Failed to save session"
+                    });
+                }
+
+                res.json({
+                    message: "Google login successful",
+                    user: req.session.user
+                });
+            });
+        });
+
+    } catch (error) {
+        console.error("Google callback error:", error);
+
+        res.status(500).json({
+            error: "Google authentication failed"
+        });
+    }
+});
+
 export default router;
