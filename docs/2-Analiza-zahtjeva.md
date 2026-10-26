@@ -15,8 +15,28 @@ Primjeri koriste temu projekta CrisisMap. Neki namjerno sadrže korisne nedostat
 
 | ID | Opis | Prioritet | Izvor | Kriteriji prihvaćanja |
 | --- | --- | --- | --- | --- |
-| F-001 | [Funkcijski zahtjev/ponašanje sustava] | [Visok/Srednji/Nizak] | [Odobreni zadatak / zahtjev dionika / povratna informacija] | [Opažljivi rezultat] |
-|  |  |  |  |  |
+| F-001 | Građani i volonteri registriraju se u sustav putem OAuth 2.0 servisa za autentifikaciju | Visok | Odobreni zadatak | Prijava omogućuje radnje dostupne prijavljenim korisnicima (prijava odlagališta, praćenje statusa...), a neuspješna prijava ostavlja te radnje nedostupnima. |
+| F-002 | Administrator kreira druge korisnike s korisničkim imenom, lozinkom i adresom e-pošte.  | Visok | Odobreni zadatak | Administrator stvara korisnika s navedenim podacima i stvoreni korisnik se može prijaviti inicijalnom lozinkom. |
+| F-003 | Sustav omogućuje promijenu inicijalne lozinke unosom prethodne za korisnike s računom kreiranim od strane administratora | Srednji | Odobreni zadatak | Promjena inicijalne lozinke uspjeva uz unos ispravne prethodne lozinke, inače se promjena odbija. |
+| F-004 | Sustav omogućuje prijavu divljeg odlagališta građaninu. Automatski se učitavaju koordinate lokacije, zahtjeva se fotografija i nudi se izbornik za kategorizaciju otpada korisniku. | Visok | Odobreni zadatak | Prijava divljeg odlagališta sa svim navedenim parametrima se prikazuje na karti sa statusom "Prijavljeno". Nepotpuna prijava se ne može poslati. |
+| F-005 | Sustav omogućuje prikaz prijava kao pribadače na karti obojene u skladu sa statusom prijave. (Crveno: Prijavljeno, Žuto: Akcija u tijeku, Zeleno: Očišćeno) | Visok | Odobreni zadatak | Valjane prijave se prikazuju obojanom pribadačom u skladu sa statusom te prijave. |
+| F-006 | Sustav geokodira unesenu lokaciju. (Pretvorba koordinata prijave u tekstualnu adresu i obratno) | Srednji | Odobreni zadatak | Za svaku prijavu se prikazuje adresa koja je izvedena iz koordinata učitanih tijekom prijave. |
+| F-007 | Sustav omogućava pregled povijesti vlastitih prijava toga građanina i pregled trenutnih statusa svake prijave. | Srednji | Odobreni zadatak | Građanin vidi povijest svojih prijava i njihov trenutni status. |
+| F-008 | Sustav omogućuje slanje notifikacije o promjeni statusa prijave građanina. | Visok | Odobreni zadatak | Kada se promjeni status prijave građanin koji ju je podnio prima obavijest s oznakom prijave i njezinim novim statusom. |
+| F-009 | Sustav omogućuje komunalnome redaru (administratoru) odbacivanje lažnih prijava, izmjenu krive kategorije otpada u stvarnim prijavama i potvrdu slika "Dokaz o sanaciji" kako bi se riješena prijava zatvorila. | Visok | Odobreni zadatak | Ako administrator odbaci prijavu ona se više ne prikazuje na karti i administrator može promijeniti kategoriju otpada što se nakon mijenjanja ažurira u prikazu detalja na upravljačkoj ploči, kojoj eko-udruga ima pristup. Također kada administrator potvrdi zatjev za zatvaranje prijave koji je eko-udruga poslala ta akcija čišćenja se označava kao "Očišćeno". |
+| F-010 | Sustav omogućuje prikaz aktivnih prijava i njihovih detalja eko-udrugama. | Visok | Odobreni zadatak | Udruga vidi aktivne prijave unutar svoje regije (?kako se vidi regija?) na upravljačkoj ploči i može pogledati detalje te prijave. |
+| F-011 | Sustav omogućuje stvaranje akcija čišćenja s nazivom, opisom, maksimalnim brojem volontera, datumom i vremenom sastanka eko-udrugama. | Visok | Odobreni zadatak | Nakon što je eko-udruga unijela sve potrebne podatke, akcija čišćenja se sprema i sve prijave vezane uz tu akciju čišćenja poprimaju status "Akcija u tijeku" te građani povezani uz tu prijavu dobivaju notifikaciju, a akcija se prikazuje volonterima kao dostupna za sudjelovanje. |
+| F-012 | Sustav omogućuje pregled nadolazećih akcija čišćenja i prijavu za sudjelovanje u akciji građanima. | Visok | Odobreni zadatak | Kada se građanin prijavi kao volonter broj mjesta na akciji se ažurira te kada taj broj dosegne maksimalni daljnje prijave se onemogućavaju. |
+| F-013 | Sustav vodi kalendar eko-udrugama u kojem vide sve nadolazeće akcije i popunjenost mjesta na tim akcijama. | Srednji | Odobreni zadatak | Eko-udruga u kalendaru vidi nadolazeće akcije, broj prijavljenih volontera za te akcije i ukupni broj mjesta. |
+| F-014 | Sustav omogućuje prikaz lokacije akcije čišćenja na karti s rutom dolaska do lokacije. | Srednji | Odobreni zadatak | Kada se akcija selektira prikazuje se ruta do mjesta okupljanja od trenutne lokacije korisnika. |
+| F-015 | Sustav automatski generira događaj u Google Calendaru korisnika kada eko-udruga kreira akciju čišćenja ili kada se građanin prijavi kao volonter. | Visok | Odobreni zadatak | Korisnik u svome Google Calendaru može vidjeti događaj koji sadrži termin, upute za akciju, poveznicu na lokaciju akcije i automatski podsjetnik prije same akcije. |
+| F-016 | Sustav prikazuje prognozu za termin akcije na toj lokaciji. | Visok | Odobreni zadatak | U sučelju volontera i udruge se prikazuje prognoza za taj termin na toj lokaciji. |
+| F-017 | Sustav u sučelju ističe crveno upozorenje i nudi opciju odgađanja ako je predviđeno nevrijeme za termin čišćenja. | Visok | Odobreni zadatak | Pri najavi nevremena u sučelju se prikazuje crveno upozorenje i eko-udruzi se nudi opcija odgode ili prebacivanja termina. |
+| F-018 | Sustav omogućuje učitavanje fotografije "Dokaza o sanaciji" od strane voditelja eko-udruge kako bi se poslao zahtjev za zatvaranje prijave. | Visok | Odobreni zadatak | Zahtjev za zatvaranje prijave se šalje kada voditelj priloži fotografiju. Nakon što ju administrator potvrdi prijava dobiva status "Očišćeno". |
+| F-019 | Sustav omogućuje administratoru da stvori službeni nalog i pošalje ga komunalnoj tvrtci jednim klikom za otpad koji smatra opasnim ili prevelikim za akcije čišćenja eko-udruga. | Visok | Odobreni zadatak | Jednim klikom generira se službeni nalog, proslijeđuje se nadležnoj tvrtci, prijava dobiva status "Službena sanacija" (?i prijavu eko-udruga više ne može pretvoriti u akciju čišćenja za volontere.?) |
+| F-020 | Sustav omogućava administratoru provjeru prijavljenih udruga kako bi se osiguralo da se prijavljuju samo registrirane organizacije. | Visok | Odobreni zadatak | Samo se registrirane organizacije mogu prijaviti za sudjelovanje i mogu stvarati akcije čišćenja. |
+| F-021 | Sustav omogućuje administratorima blokiranje problematičnih korisnika koji šalju lažne prijave. | Srednji | Odobreni zadatak | Kada administrator blokira korisnika taj korisnik se ne može prijaviti ni prijavljivati odlagališta otpada. |
+| F-022 | Sustav omogućava pregled statističkih grafikona administratoru (broj prijava po mjesecima, najkritičniji kvartovi, postotak uspješnosti). | Nizak | Odobreni zadatak | Administrator u sučelju može pregledati statističke grafikone (broj prijava po mjesecima, najkritičniji kvartovi, postotak uspješnosti). |
 
 <details>
 <summary><strong>Izvori zahtjeva i kriteriji prihvaćanja</strong></summary>
@@ -51,10 +71,16 @@ Za složenu interakciju kratak scenarij *Given / When / Then* može pojasniti kr
 
 **Cilj:** Odrediti važna svojstva kvalitete i uvjete rada odobrene aplikacije na način koji tim može razumno provjeriti.
 
-| ID | Opis | Prioritet | Izvor |
-| --- | --- | --- | --- |
-| NF-01 | [Konkretan zahtjev (npr. odziv, sigurnost, pristupačnost)] | Visok / Srednji / Nizak | [Sigurnost / Uputa / SLA] | [Mjerenje / Testni scenarij / Pregled] |
-|  |  |  |  |
+| ID | Opis | Prioritet | Izvor | Tip provjere | 
+| --- | --- | --- | --- | --- |
+| NF-1.1 | Komunikacija između klijenta i poslužitelja se odvija isključivo preko šifrirane veze HTTPS. | Visok | Zahtjev dionika iz [1.2](./1-Projekt.md#1.2-Ciljani-korisnici-i-dionici) | Provjera: HTTP zahtjev se odbija ili preusmjerava na HTTPS. |
+| NF-1.2 | Osobni podaci korisnika su dostupni samo ovlaštenim ulogama te se koriste samo za rad sustava. Građanin vidi detalje samo vlastitih prijava, a e-pošta korisnika vidljiva je samo administratoru. | Visok | Zahtjev dionika iz [1.2](./1-Projekt.md#1.2-Ciljani-korisnici-i-dionici) | Testni scenarij: Samo administrator može dohvatiti podatke drugih korisnika, a građani vide samo vlastite prijave (?osim e pošte koji se osobni podaci građanina biljeze?) |
+| NF-1.3 | Lozinke koje je administrator kreirao pohranjuju se u obliku hasha. | Visok | ?Zahtjev dionika iz [1.2](./1-Projekt.md#1.2-Ciljani-korisnici-i-dionici)? ili samo praksa  | Provjera: U bazi nijedna lozinka ne smije biti čitljiva. |
+| NF-1.4 | Samo korisnik s ulogom administratora može izvršavati radnje administratora.  | Visok | Odobreni zadatak (Uloga C ima potpuna prava kontrole nad bazom podataka i korisnicima.) | Testni scenarij: Uloge građanina i eko-udruga ne mogu izvršiti nijednu od radnji administratora u 100% pokušaja. |
+| NF-2.1 | Prijava divljeg odlagališta se može napraviti u 2 koraka (učitavanje fotografije i odabir kategorije otpada, a lokacija se automatski učitava uz dopuštenje korisnika). | Srednji | Odobreni zadatak ("Građanin koristi klijentski dio aplikacije koji mora biti maksimalno intuitivan za rad na otvorenom.") | Provjera: Proces prijave divljeg odlagališta je moguće ispuniti u samo 2 koraka. |
+| NF-3.1 | Obavijesti o mijenjanju statusa prijave stiže građaninu unutar ?x? od promjene statusa. | Srednji | Odobreni zadatak ("Građani u realnom vremenu vide pomiče li se njihova prijava...") | Mjerenje: Promijeniti status ?x? puta i izmjeriti vrijeme do obavijesti koje svaki put mora biti manje od ?x?. |
+| NF-3.2 | Ako je neki od vanjskih servisa nedostupan u sučelju aplikacije se prikazuje poruka, a ostatak aplikacije koji ne ovisi o tome servisu ostaje funkcionalan. | Srednji | Odobreni zadatak ("...uspješno implementirati i dokumentirati sljedeće tri vanjske integracije...") | Testni scenarij: Simulacijom pokazati da se aplikacija neće potpuno srušiti ako su sva 3 API-a nedostupna i da će ostali dijelovi funkcionirati ako samo neki od ta 3 API-a ne rade. |
+| NF-3.3 | Mobilno sučelje radi na trenutnim verzijama Androida i ios-a, a web sučelje radi u trenutnim verzijama svih glavnih preglednika. | Srednji | Odobreni zadatak (" Sustav se sastoji od mobilnog sučelja prilagođenog radu na terenu (prijavljivanje i navigacija) te web sučelja namijenjenog administraciji i organizaciji događaja.") | Provjera: Pregledavanje funkcionalnosti na svim glavnim preglednicima i na ?x? mobilnih uređaja. |
 
 <details>
 <summary><strong>Odabir provjerljivih nefunkcijskih zahtjeva</strong></summary>
@@ -85,9 +111,13 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 
 **Cilj:** Utvrditi uloge koje utječu na zahtjeve i razlikovati dionike od aktera koji komuniciraju s aplikacijom.
 
-| ID uloge ili aktera | Odnos prema sustavu | Relevantni zahtjevi |
-| --- | --- | --- |
-|  |  |  |
+| ID uloge ili aktera | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
+| --- | --- | --- | --- |
+| A-01 | Građanin | Akter - koristi mobilno sučelje, prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
+| A-02 | Eko-udruga | Akter - koristi web i mobilno sučelje, pregledava prijave, organizira akcije te potvrđuje sanacije fotografiranjem | F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
+| A-03 | Administrator (komunalni redar) | Akter - koristi web sučelje, upravlja korisnicima, izdraje službene naloge, blokira korisnike, odobrava udruge, pregledava statistiku | F-002, F-003, F-009, F-018, F-019, F-020, F-021, F-022, NF-1.3, NF-1.4 |
+| D-01 | Ugovorena komunalna tvrtka | Dionik - ne koristi aplikaciju, ali prima službene naloge i sanira opasni i veliki otpad | F-019 |
+| D-02 | Agencija za zaštitu podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
 
 <details>
 <summary><strong>Povezivanje aktera sa zahtjevima</strong></summary>
@@ -113,10 +143,18 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 **Cilj:** Zabilježiti projektno specifične granice i pretpostavke koje utječu na zahtjeve ili oblikovanje, zajedno s njihovim izvorom i praktičnom posljedicom. Ovo je njihovo mjerodavno mjesto u dokumentaciji.
 
 | ID | Tip | Opis ograničenja ili pretpostavke | Izvor | Inženjerska posljedica / Provjera |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | C-01 | Ograničenje | [Fiksni tehnički ili procesni uvjet] | [Zadatak / Pravila] | [Utjecaj na arhitekturu i oblikovanje] |
 | AS-01 | Pretpostavka | [Očekivani uvjet (npr. o podacima ili okolini)] | [Procjena tima] | [Kako i kada će se provjeriti valjanost] |
-|  |  |  |  |
+| C-01 | Ograničenje | Aplikacija implementira 3 vanjske integracije: Google Maps API, Google Calendar API i OpenWeatherMap API. | Odobreni zadatak | Svaka integracija treba imati testni scenarij, a ako je servis nedostupan obrađuje se prema NF-3.2 |
+| C-02 | Ograničenje | Registracija i prijava korisnika se provodi s OAuth 2.0 | Odobreni zadatak | Prijava i registracija se dizajnira preko OAuth 2.0 |
+| C-03 | Ograničenje | Sustav ima mobilno sučelje za građane i web sučelje za eko-udruge i administratore. Administratori koriste samo web sučelje. | Odobreni zadatak | Ovlasti se provjeravaju na poslužitelju neovisno o kojem je sučelju riječ. |
+| C-04 | Ograničenje | Svaka prijava divljeg odlagališta mora imati fotografiju, lokaciju i kategoriju otpada. | Odobreni zadatak | Sva polja se trebaju provjeriti prilikom slanja prijave (F-004) i svi se podaci trebaju pohraniti u bazi. |
+| C-05 | Ograničenje | Obrada osobnih podataka mora biti usklađena s primjenjenim propisima. | Zahtjev dionika iz [1.2](./1-Projekt.md#1.2-Ciljani-korisnici-i-dionici) | Pristup podacima je ograničen prema propisanim ulogama, podaci koji se prikupljaju su isključivo nužni za rad aplikacije (NF-1.2) |
+| AS-01 | Pretpostavka | Građani se prijavljuju OAuth 2.0, a administrator ručno kreira druge račune. | Procjena tima | ?nejasno iz zadatka. što su drugi računi? samo redari ili i eko udruge, ako su oboje što se događa s F-020 (provjeravanjem eko udruge)? |
+| AS-02 | Pretpostavka | Građanin dopušta pristup lokaciji uređaja tijekom prijave divljeg odlagališta, a ako ne omogućuje mu se ručni unos lokacije na karti | Procjena tima | Ispitati ponašanje pri odbijanju dozvole na stvarnom uređaju (F-004). |
+| AS-03 | Pretpostavka | Područje regije aktivnosti eko-udruge je definirana unaprijed tj. eko-udruga ju je postavila pri stvaranju računa. | Procjena tima | Sukladno regiji eko-udruge testiranjem se provjerava jesu li se filtrirale pravilne prijave u F-010. |
+
 
 <details>
 <summary><strong>Ograničenja nasuprot pretpostavkama</strong></summary>
