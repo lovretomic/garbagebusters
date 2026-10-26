@@ -6,9 +6,14 @@ import ArrowLeft from "./assets/icons/arrow_left.svg?react";
 
 import StartButton from "./components/StartButton";
 import Button from "./components/Button";
-import Input from "./components/Input"
+import Input from "./components/Input";
+import PasswordTooltip from "./components/PasswordTooltip";
+import { useState } from "react";
+import { isPasswordValid } from "./components/PasswordTooltip/PasswordTooltipCheck";
 
 function App() {
+  const [password, setPassword] = useState("");
+  const valid = isPasswordValid(password);
   return (
     <>
       <div className="test-div">
@@ -28,7 +33,14 @@ function App() {
           <Button iconOnly icon={ArrowLeft} variant="secondary"></Button>
           <Button title="DALJE" icon={ArrowRight}></Button>
         </div>
-		<Input placeholder="Adresa e-pošte"/>
+        <Input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Lozinka"
+        />
+        <PasswordTooltip password={password} />
+        <Button title="DALJE" icon={ArrowRight} disabled={!valid} />
       </div>
     </>
   );
