@@ -39,7 +39,7 @@ function App() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Lozinka"
         />
-        <PasswordTooltip password={password} />
+        <PasswordTooltip password={password} passed = {valid}/>
         <Button title="DALJE" icon={ArrowRight} disabled={!valid} />
       </div>
     </>

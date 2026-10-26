@@ -5,17 +5,19 @@ import { passwordRules } from "./PasswordTooltipCheck";
 
 type PasswordTooltipProps = {
   password: string;
+  passed?: boolean;
   title?: string;
   className?: string;
 };
 
 const PasswordTooltip: React.FC<PasswordTooltipProps> = ({
   password,
-  title="Lozinka mora sadržavati:",
+  title = "Lozinka mora sadržavati:",
+  passed = false,
   className,
 }) => (
-  <div className={clsx(c.tooltip, className)}>
-	<span>{title}</span>
+  <div className={clsx(c.tooltip, className, passed && c.met)}>
+    <span className={clsx(passed && c.met)}>{title}</span>
     <ul className={c.list}>
       {passwordRules.map((rule) => (
         <li
