@@ -23,29 +23,36 @@ model App_User {
   profile_photo String?
 
   citizen Citizen?
+  admin Admin?
+  warden Warden?
+  eco_Association Eco_Association?
 }
 
 model Citizen {
   ID_User Int @id
 
   user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
-  volunteer_actions Action_Volunteer[]
+  volunteer_actions volunteers[]
+  reports Report[]
 }
 
 model Report {
-  ID_Report Int @id
+  ID_Report String @id
   GPS_coordinates String
-  photos_before String
-  photos_after String
-  category String
-  waste_volume Float
-  report_status String
-  Report_date DateTime
-  ID_Action Int
-  ID_User Int
-  ID_Warden Int
+  photos_before   String
+  photos_after    String
+  category        String
+  waste_volume    Float
+  report_status   String
+  Report_date     DateTime @db.Date
+  ID_Action       Int?
+  ID_User         Int
+  ID_Warden       Int?
 
-  cleanup_action Cleanup_Action @relation(fields: [ID_Action], references: [ID_Action])
+  cleanup_action Cleanup_Action? @relation(fields: [ID_Action], references: [ID_Action])
+  citizen        Citizen         @relation(fields: [ID_User], references: [ID_User])
+  warden         Warden?         @relation(fields: [ID_Warden], references: [ID_User])
+  order          Orders[]
 }
 
 model Cleanup_Action {
@@ -56,12 +63,14 @@ model Cleanup_Action {
   action_date    DateTime @db.Date
   action_time    DateTime @db.Time(0)
   action_location String
+  ID_User Int
 
   reports Report[]
-  volunteers Action_Volunteer[]
+  volunteers volunteers[]
+  organizer  Eco_Association @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
 }
 
-model Action_Volunteer {
+model volunteers {
   ID_User     Int
   ID_Action   Int
   signup_time DateTime @default(now())
@@ -70,6 +79,43 @@ model Action_Volunteer {
   action  Cleanup_Action @relation(fields: [ID_Action], references: [ID_Action], onDelete: Cascade)
 
   @@id([ID_User, ID_Action])
+}
+
+model Admin {
+  ID_User Int @id
+
+  user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
+}
+
+model Warden {
+  ID_User Int @id
+
+  user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
+  orders Orders[]
+  reports Report[]
+
+}
+
+model Eco_Association{
+  ID_User Int @id
+  is_approved Boolean
+  social_media String
+
+  user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
+  cleanup_actions Cleanup_Action[]
+  
+}
+
+model Orders {
+  ID_Order Int @id @default(autoincrement())
+  company_name String
+  order_status String
+  issue_date  DateTime @db.Date()
+  ID_Report Int
+  ID_Warden  Int
+
+  report Report @relation(fields: [ID_Report], references: [ID_Report], onDelete: Cascade)
+  warden Warden @relation(fields: [ID_Warden], references: [ID_User], onDelete: Cascade)
 }
 
 
