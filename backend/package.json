@@ -11,6 +11,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@prisma/client": "6",
     "@types/node": "^26.6.5",
     "express": "^5.3.0",
     "package": "^1.0.1",
@@ -19,7 +20,8 @@
     "yarn": "^1.22.22"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "prisma": "6"
   },
   "tsconfig": {
     "compilerOptions": {
