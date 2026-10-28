@@ -11,7 +11,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model App_User {
@@ -33,10 +32,8 @@ model Citizen {
   volunteer_actions Action_Volunteer[]
 }
 
-
-
 model Report {
-  ID_Report String @id
+  ID_Report Int @id
   GPS_coordinates String
   photos_before String
   photos_after String

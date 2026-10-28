@@ -84,3 +84,23 @@ export async function getActionsForVolunteers(userId: number) {
     }));
 }
 
+export async function unregisterVolunteer(userId: number, actionId: number) {
+    const registration = await prisma.action_Volunteer.findUnique({where:
+        {ID_User_ID_Action: {
+            ID_Action:actionId,
+            ID_User: userId
+        }}
+    });
+
+    if(!registration) 
+        throw new Error("REGISTRATION_NOT_FOUND")
+    
+
+    return prisma.action_Volunteer.delete({where: {
+        ID_User_ID_Action:{
+            ID_User: userId,
+            ID_Action: actionId
+        }
+    }})
+}
+
