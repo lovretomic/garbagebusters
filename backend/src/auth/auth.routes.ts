@@ -58,13 +58,25 @@ router.get("/google/callback", async (req, res) => {
     try {
         const oauth = req.session.oauth;
 
-        if (!oauth) {
-            return res.status(400).json({
-                error: "OAuth session not found"
-            });
-        }
+    if (!oauth) {
+    return res.status(400).json({
+        error: "OAuth session not found"
+        });
+    }
 
-        const client = await createGoogleClient();
+    delete req.session.oauth;
+
+    await new Promise<void>((resolve, reject) => {
+    req.session.save((error) => {
+        if (error) {
+            reject(error);
+        } else {
+            resolve();
+        }
+    });
+    });
+
+const client = await createGoogleClient();
 
         const params = client.callbackParams(req);
 
