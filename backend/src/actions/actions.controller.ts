@@ -9,9 +9,10 @@ export async function createAction(req: Request, res: Response) {
             max_volunteers: Number(req.body.max_volunteers),
             action_date: new Date(req.body.action_date),
             action_time: req.body.action_time,
+            action_location: req.body.action_location
         };
 
-        const reportId = req.body.ID_Report;
+        const reportId = req.body.ID_Action;
 
         const action = await createActionService(data, reportId);
         res.status(201).json(action);

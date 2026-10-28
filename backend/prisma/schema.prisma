@@ -14,25 +14,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model App_User {
+  ID_User       Int     @id @default(autoincrement())
+  name          String
+  surname       String?
+  username      String  @unique
+  email         String  @unique
+  password      String
+  profile_photo String?
+
+  citizen Citizen?
+}
+
+model Citizen {
+  ID_User Int @id
+
+  user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
+  volunteer_actions Action_Volunteer[]
+}
+
+
+
 model Report {
   ID_Report String @id
+  GPS_coordinates String
+  photos_before String
+  photos_after String
+  category String
+  waste_volume Float
+  report_status String
+  Report_date DateTime
+  ID_Action Int
+  ID_User Int
+  ID_Warden Int
 
-  //other, TODO: ADD
-
-  cleanup_action Cleanup_Action?
+  cleanup_action Cleanup_Action @relation(fields: [ID_Action], references: [ID_Action])
 }
 
 model Cleanup_Action {
-  ID_Report      String   @id
+  ID_Action Int @id @default(autoincrement())
   name           String
   description    String
   max_volunteers Int
-  action_date    DateTime
-  action_time    DateTime @db.Time
+  action_date    DateTime @db.Date
+  action_time    DateTime @db.Time(0)
+  action_location String
 
-  report Report @relation(fields: [ID_Report], references: [ID_Report])
+  reports Report[]
+  volunteers Action_Volunteer[]
 }
 
-//ovo je primjer kakav mora biti definiran sa svim atributima koji su i u bazi,
+model Action_Volunteer {
+  ID_User     Int
+  ID_Action   Int
+  signup_time DateTime @default(now())
+
+  citizen Citizen        @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
+  action  Cleanup_Action @relation(fields: [ID_Action], references: [ID_Action], onDelete: Cascade)
+
+  @@id([ID_User, ID_Action])
+}
+
+
+
+//ovako mora biti definiran svaki entitet sa svim atributima koji su i u bazi,
 // nakon dodavanja pokrenuti "yarn prisma generate" (validate za provjeru)
 //TODO: ovu poruku obrisati

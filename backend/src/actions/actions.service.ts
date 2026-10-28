@@ -4,9 +4,9 @@ export async function getActions() {
     return prisma.cleanup_Action.findMany();
 }
 
-export async function getActionById(id: string) {
+export async function getActionById(id: number) {
     return prisma.cleanup_Action.findUnique({
-        where: { ID_Report: id }
+        where: { ID_Action: id }
     });
 }
 
@@ -16,6 +16,7 @@ export async function createAction(data: {
     max_volunteers: number;
     action_date: Date;
     action_time: string;
+    action_location: string;
 }, reportId: string) {
     return await prisma.cleanup_Action.create({
         data: {
@@ -24,7 +25,8 @@ export async function createAction(data: {
             max_volunteers: data.max_volunteers,
             action_date: data.action_date,
             action_time: data.action_time,
-            report: {
+            action_location: data.action_location,
+            reports: {
                 connect: {
                     ID_Report: reportId,
                 },
@@ -33,8 +35,8 @@ export async function createAction(data: {
     });
 }
 
-export async function deleteAction(id: string) {
-    return prisma.cleanup_Action.delete({where: {ID_Report: id}})
+export async function deleteAction(id: number) {
+    return prisma.cleanup_Action.delete({where: {ID_Action: id}})
 }
 
 
