@@ -36,8 +36,10 @@ model Citizen {
   reports Report[]
 }
 
+
+
 model Report {
-  ID_Report String @id
+  ID_Report       Int      @id @default(autoincrement())
   GPS_coordinates String
   photos_before   String
   photos_after    String
@@ -120,6 +122,3 @@ model Orders {
 
 
 
-//ovako mora biti definiran svaki entitet sa svim atributima koji su i u bazi,
-// nakon dodavanja pokrenuti "yarn prisma generate" (validate za provjeru)
-//TODO: ovu poruku obrisati
