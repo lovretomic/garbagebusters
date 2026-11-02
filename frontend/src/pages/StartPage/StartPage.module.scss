@@ -1,10 +1,31 @@
-.testDiv{
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+.contentDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  height: 100vh;
 }
 
-.buttonDiv{
-	display:flex;
-	gap: 16px;
+.buttonDiv {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: $primary-white;
+  margin-top: 100px;
+}
+
+.subtitle{
+	font-weight: 400;
+	font-size: 20px;
 }
