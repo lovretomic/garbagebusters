@@ -7,6 +7,9 @@
   height: 100vh;
   padding-inline: 40px;
   box-sizing: border-box;
+  text-align: center;
+  padding-bottom: 80px;
+
   @media (min-width: $breakpoint-desktop) {
     height: 100%;
     border-radius: 24px;
@@ -47,7 +50,6 @@ body {
   flex-direction: column;
   width: 100%;
 
-  margin-bottom: 80px;
   @media (min-width: $breakpoint-desktop) {
     max-width: 600px;
     align-self: center;
@@ -57,7 +59,6 @@ body {
 .buttonDiv {
   display: flex;
   gap: 8px;
-  margin-bottom: 80px;
   max-width: 450px;
   width: 100%;
 
@@ -109,8 +110,8 @@ body {
 
 .mailboxIcon {
   align-self: center;
-  min-width: 100px;
-  min-height: 100px;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 .subtitle {
