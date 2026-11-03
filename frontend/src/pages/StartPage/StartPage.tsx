@@ -79,6 +79,33 @@ const StartPage = () => {
             </div>
           </div>
         )}
+        {stage == 3 && (
+          <div className={c.contentDiv}>
+            <div className={c.welcome}>
+              <FlowerWhiteIcon />
+              Dobro došli!
+              <span className={c.subtitle}>Kako Vam se možemo javiti?</span>
+            </div>
+            <div className={c.footerDiv}>
+              <div className={c.inputDiv}>
+                <Input placeholder="Adresa e-pošte" />
+              </div>
+              <div className={c.buttonDiv}>
+                <Button
+                  iconOnly
+                  icon={ArrowLeft}
+                  variant="secondary"
+                  onClick={() => decreaseStage()}
+                ></Button>
+                <Button
+                  title="DALJE"
+                  icon={ArrowRight}
+                  onClick={() => increaseStage()}
+                ></Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
