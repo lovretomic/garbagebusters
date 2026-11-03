@@ -16,51 +16,70 @@ import { isPasswordValid } from "../../components/PasswordTooltip/PasswordToolti
 const StartPage = () => {
   const [password, setPassword] = useState("");
   const [stage, setStage] = useState<number>(1);
-  function increaseStage() {
-    if (stage > 7) setStage(7);
-    setStage(stage + 1);
+
+  function increaseStage(step = 1) {
+    setStage(Math.min(stage + step, 7));
   }
-  function decreaseStage() {
-    if (stage < 1) setStage(1);
-    setStage(stage - 1);
+  function decreaseStage(step = 1) {
+    setStage(Math.max(stage - step, 1));
   }
   const valid = isPasswordValid(password);
   return (
     <>
-      {stage == 1 && (
-        <div className={c.page}>
-          <img src={FlowerImage} className={c.flowerImage} />
+      <div className={c.page}>
+        <img src={FlowerImage} className={c.flowerImage} />
+        {stage == 1 && (
           <div className={c.contentDiv}>
             <div className={c.welcome}>
               <FlowerWhiteIcon />
               Dobro došli!
               <span className={c.subtitle}>Imate li već EcoSentry račun?</span>
             </div>
-            <div className={c.buttonDiv}>
+            <div className={c.startButtonDiv}>
               <StartButton
                 title="Ne, ali želim se pridružiti!"
                 subtitle="Stvori račun"
                 icon={AddAccountIcon}
-                onClick={() => decreaseStage()}
+                onClick={() => increaseStage()}
               ></StartButton>
               <StartButton
                 title="Da, trebam se samo prijaviti!"
                 subtitle="Prijavi se"
                 icon={LoginIcon}
-                onClick={() => increaseStage()}
+                onClick={() => increaseStage(6)}
               ></StartButton>
             </div>
           </div>
-        </div>
-      )}
-      {stage == 2 && (
-        <StartButton
-          title="Ne, ali želim se pridružiti!"
-          subtitle="Stvori račun"
-          icon={AddAccountIcon}
-          onClick={() => decreaseStage()}
-        ></StartButton>
-      )}
+        )}
+        {stage == 2 && (
+          <div className={c.contentDiv}>
+            <div className={c.welcome}>
+              <FlowerWhiteIcon />
+              Dobro došli!
+              <span className={c.subtitle}>Kako se zovete?</span>
+            </div>
+            <div className={c.footerDiv}>
+              <div className={c.inputDiv}>
+                <Input placeholder="Ime" />
+                <Input placeholder="Prezime" />
+              </div>
+              <div className={c.buttonDiv}>
+                <Button
+                  iconOnly
+                  icon={ArrowLeft}
+                  variant="secondary"
+                  onClick={() => decreaseStage()}
+                ></Button>
+                <Button
+                  title="DALJE"
+                  icon={ArrowRight}
+                  onClick={() => increaseStage()}
+                ></Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };
