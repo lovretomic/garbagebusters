@@ -106,6 +106,42 @@ const StartPage = () => {
             </div>
           </div>
         )}
+        {stage == 4 && (
+          <div className={c.contentDiv}>
+            <div className={c.welcome}>
+              <FlowerWhiteIcon />
+              Dobro došli!
+              <span className={c.subtitle}>Molimo stvorite lozinku</span>
+            </div>
+            <div className={c.tooltipDiv}>
+              <PasswordTooltip password={password} passed={valid} />
+            </div>
+            <div className={c.footerDiv}>
+              <div className={c.inputDiv}>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Lozinka"
+                />
+              </div>
+              <div className={c.buttonDiv}>
+                <Button
+                  iconOnly
+                  icon={ArrowLeft}
+                  variant="secondary"
+                  onClick={() => decreaseStage()}
+                ></Button>
+                <Button
+                  title="DALJE"
+                  icon={ArrowRight}
+                  onClick={() => increaseStage()}
+                  disabled={!valid}
+                ></Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
