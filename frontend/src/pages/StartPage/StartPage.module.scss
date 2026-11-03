@@ -1,9 +1,36 @@
 .contentDiv {
+  background-color: $primary-red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
   height: 100vh;
+  padding-inline: 40px;
+  box-sizing: border-box;
+  @media (min-width: $breakpoint-desktop) {
+    height: 100%;
+    border-radius: 24px;
+	flex: 1;
+	min-width: 0;
+  }
+}
+
+body {
+  @media (min-width: $breakpoint-desktop) {
+    background-color: $primary-white;
+	padding: 0;
+  }
+}
+
+.page {
+  @media (min-width: $breakpoint-desktop) {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 12px;
+  }
 }
 
 .buttonDiv {
@@ -11,6 +38,11 @@
   gap: 8px;
   flex-direction: column;
   margin-bottom: 80px;
+  @media (min-width: $breakpoint-desktop) {
+    width: 100%;
+	max-width: 600px;
+	align-self: center;
+  }
 }
 
 .welcome {
@@ -25,7 +57,19 @@
   margin-top: 100px;
 }
 
-.subtitle{
-	font-weight: 400;
-	font-size: 20px;
+.flowerImage {
+  display: none;
+
+  @media (min-width: $breakpoint-desktop) {
+    display: block;
+    flex: 1;
+    object-fit: cover;
+    min-width: 0;
+    border-radius: 24px;
+  }
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 20px;
 }

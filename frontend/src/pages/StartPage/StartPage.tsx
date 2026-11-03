@@ -4,6 +4,7 @@ import ArrowRight from "../../assets/icons/arrow_right.svg?react";
 import ArrowLeft from "../../assets/icons/arrow_left.svg?react";
 import c from "./StartPage.module.scss";
 import FlowerWhiteIcon from "../../assets/icons/flower_white.svg?react";
+import FlowerImage from "../../assets/images/flower.png";
 
 import StartButton from "../../components/StartButton";
 import Button from "../../components/Button";
@@ -27,25 +28,28 @@ const StartPage = () => {
   return (
     <>
       {stage == 1 && (
-        <div className={c.contentDiv}>
-          <div className={c.welcome}>
-            <FlowerWhiteIcon />
-            Dobro došli!
-			<span className={c.subtitle}>Imate li već EcoSentry račun?</span>
-          </div>
-          <div className={c.buttonDiv}>
-            <StartButton
-              title="Ne, ali želim se pridružiti!"
-              subtitle="Stvori račun"
-              icon={AddAccountIcon}
-              onClick={() => decreaseStage()}
-            ></StartButton>
-            <StartButton
-              title="Da, trebam se samo prijaviti!"
-              subtitle="Prijavi se"
-              icon={LoginIcon}
-              onClick={() => increaseStage()}
-            ></StartButton>
+        <div className={c.page}>
+          <img src={FlowerImage} className={c.flowerImage} />
+          <div className={c.contentDiv}>
+            <div className={c.welcome}>
+              <FlowerWhiteIcon />
+              Dobro došli!
+              <span className={c.subtitle}>Imate li već EcoSentry račun?</span>
+            </div>
+            <div className={c.buttonDiv}>
+              <StartButton
+                title="Ne, ali želim se pridružiti!"
+                subtitle="Stvori račun"
+                icon={AddAccountIcon}
+                onClick={() => decreaseStage()}
+              ></StartButton>
+              <StartButton
+                title="Da, trebam se samo prijaviti!"
+                subtitle="Prijavi se"
+                icon={LoginIcon}
+                onClick={() => increaseStage()}
+              ></StartButton>
+            </div>
           </div>
         </div>
       )}
