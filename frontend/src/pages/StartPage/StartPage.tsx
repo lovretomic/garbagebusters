@@ -15,15 +15,16 @@ import { isPasswordValid } from "../../components/PasswordTooltip/PasswordToolti
 
 const StartPage = () => {
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
   const [stage, setStage] = useState<number>(1);
 
   function increaseStage(step = 1) {
-    setStage(Math.min(stage + step, 7));
+    setStage(Math.min(stage + step, 6));
   }
   function decreaseStage(step = 1) {
     setStage(Math.max(stage - step, 1));
   }
-  const valid = isPasswordValid(password);
+  const valid = isPasswordValid(password) && password2==password;
   return (
     <>
       <div className={c.page}>
@@ -46,7 +47,7 @@ const StartPage = () => {
                 title="Da, trebam se samo prijaviti!"
                 subtitle="Prijavi se"
                 icon={LoginIcon}
-                onClick={() => increaseStage(6)}
+                onClick={() => increaseStage(5)}
               ></StartButton>
             </div>
           </div>
@@ -122,7 +123,13 @@ const StartPage = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Lozinka"
+                  placeholder="Stvorite lozinku"
+                />
+                <Input
+                  type="password"
+                  value={password2}
+                  onChange={(e) => setPassword2(e.target.value)}
+                  placeholder="Ponovite lozinku"
                 />
               </div>
               <div className={c.buttonDiv}>
