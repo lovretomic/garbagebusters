@@ -5,6 +5,9 @@ import ArrowLeft from "../../assets/icons/arrow_left.svg?react";
 import c from "./StartPage.module.scss";
 import FlowerWhiteIcon from "../../assets/icons/flower_white.svg?react";
 import FlowerImage from "../../assets/images/flower.png";
+import MailboxIcon from "../../assets/icons/mailbox_icon.svg?react";
+import SendIcon from "../../assets/icons/send_icon.svg?react";
+import RefreshIcon from "../../assets/icons/refresh_icon.svg?react";
 
 import StartButton from "../../components/StartButton";
 import Button from "../../components/Button";
@@ -24,7 +27,7 @@ const StartPage = () => {
   function decreaseStage(step = 1) {
     setStage(Math.max(stage - step, 1));
   }
-  const valid = isPasswordValid(password) && password2==password;
+  const valid = isPasswordValid(password) && password2 == password;
   return (
     <>
       <div className={c.page}>
@@ -144,6 +147,36 @@ const StartPage = () => {
                   icon={ArrowRight}
                   onClick={() => increaseStage()}
                   disabled={!valid}
+                ></Button>
+              </div>
+            </div>
+          </div>
+        )}
+        {stage == 5 && (
+          <div className={c.contentDiv}>
+            <div className={c.welcome}>
+              <FlowerWhiteIcon />
+              Provjerite inbox.
+              <span className={c.subtitle}>
+                Pratite upute koje smo poslali na Vašu e-mail adresu za
+                aktivaciju računa.
+              </span>
+            </div>
+
+            <MailboxIcon className={c.mailboxIcon} />
+
+            <div className={c.footerDiv}>
+              <div className={c.startButtonDiv}>
+                <Button
+                  title="POŠALJI PONOVNO"
+                  icon={SendIcon}
+                  variant="secondary"
+                  onClick={() => {}}
+                ></Button>
+                <Button
+                  title="PROVJERI"
+                  icon={RefreshIcon}
+                  onClick={() => {}}
                 ></Button>
               </div>
             </div>
