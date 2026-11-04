@@ -1,0 +1,36 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  background-color: $primary-white;
+  padding: 16px 32px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: $primary-black;
+    text-decoration: none;
+    font-weight: 500;
+
+    .label {
+      display: none;
+
+      @media (min-width: $breakpoint-desktop) {
+        display: block;
+      }
+    }
+  }
+
+  .addButton {
+    background-color: $primary-red;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  }
+}
