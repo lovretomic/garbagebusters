@@ -1,5 +1,17 @@
 body {
   background-color: $primary-red;
+  padding: 0 16px;
+}
+
+.test-div{
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.button-div{
+	display:flex;
+	gap: 16px;
 }
 
 * {
