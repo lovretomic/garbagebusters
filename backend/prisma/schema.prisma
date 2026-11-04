@@ -32,7 +32,7 @@ model Citizen {
   ID_User Int @id
 
   user App_User @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
-  volunteer_actions volunteers[]
+  volunteer_actions Volunteers[]
   reports Report[]
 }
 
@@ -68,11 +68,11 @@ model Cleanup_Action {
   ID_User Int
 
   reports Report[]
-  volunteers volunteers[]
+  volunteers Volunteers[]
   organizer  Eco_Association @relation(fields: [ID_User], references: [ID_User], onDelete: Cascade)
 }
 
-model volunteers {
+model Volunteers {
   ID_User     Int
   ID_Action   Int
   signup_time DateTime @default(now())
