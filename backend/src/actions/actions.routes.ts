@@ -1,9 +1,17 @@
-import express from 'express';
+
+import express from "express";
+import {
+    getActions,
+    getActionById,
+    createAction,
+    deleteAction
+} from "./actions.controller";
 
 const router = express.Router();
 
-router.get("/", (req, res) => 
-    res.json("Actions module is working")
-);
+router.get("/", getActions);
+router.get("/:id", getActionById);
+router.post("/", createAction);
+router.delete("/:id", deleteAction);
 
 export default router;
