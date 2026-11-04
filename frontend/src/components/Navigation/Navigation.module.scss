@@ -2,7 +2,15 @@
   display: flex;
   justify-content: space-between;
   background-color: $primary-white;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
   padding: 16px 32px;
+
+  @media (min-width: $breakpoint-desktop) {
+    border-top: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    gap: 24px;
+  }
 
   .item {
     display: flex;
@@ -11,6 +19,12 @@
     color: $primary-black;
     text-decoration: none;
     font-weight: 500;
+
+    gap: 8px;
+
+    @media (min-width: $breakpoint-desktop) {
+      padding: 8px 16px;
+    }
 
     .label {
       display: none;
@@ -22,7 +36,14 @@
   }
 
   .addButton {
-    background-color: $primary-red;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 100%
+      ),
+      $primary-red;
+
     outline: none;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 100%;
@@ -32,5 +53,6 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
   }
 }
