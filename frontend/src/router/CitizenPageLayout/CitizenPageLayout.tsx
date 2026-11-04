@@ -14,9 +14,9 @@ const CitizenPageLayout = () => {
       </div>
       <Navigation
         items={[
-          { label: "Item 1", href: "/item1", icon: HouseIcon },
-          { label: "Item 2", href: "/item2", icon: NotificationIcon },
-          { label: "Item 3", href: "/item3", icon: MapIcon },
+          { label: "Item 1", href: "/home", icon: HouseIcon },
+          { label: "Item 2", href: "/notifications", icon: NotificationIcon },
+          { label: "Item 3", href: "/map", icon: MapIcon },
         ]}
       />
     </div>
