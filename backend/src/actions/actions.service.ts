@@ -17,7 +17,7 @@ export async function createAction(data: {
     action_date: Date;
     action_time: string;
     action_location: string;
-}, reportId: string) {
+}, reportId: number, organizer: number) {
     return await prisma.cleanup_Action.create({
         data: {
             name: data.name,
@@ -31,6 +31,11 @@ export async function createAction(data: {
                     ID_Report: reportId,
                 },
             },
+            organizer:{
+                connect:{
+                    ID_User: organizer,
+                }
+            }
         },
     });
 }
