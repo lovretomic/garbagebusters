@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { generators } from "openid-client";
+import { randomBytes, scryptSync } from "node:crypto";
 import { createGoogleClient } from "./auth.config";
+import { prisma } from "../lib/prisma";
 
 const router = Router();
 
+// Provjera radi li autentifikacijski modul
 router.get("/health", (req, res) => {
     res.json({
         status: "ok",
@@ -11,6 +14,7 @@ router.get("/health", (req, res) => {
     });
 });
 
+// Pokretanje Google OAuth prijave
 router.get("/google", async (req, res) => {
     try {
         const client = await createGoogleClient();
@@ -38,6 +42,7 @@ router.get("/google", async (req, res) => {
         req.session.save((error) => {
             if (error) {
                 console.error("Failed to save OAuth session:", error);
+
                 return res.status(500).json({
                     error: "Failed to initialize Google login"
                 });
@@ -45,6 +50,7 @@ router.get("/google", async (req, res) => {
 
             res.redirect(authorizationUrl);
         });
+
     } catch (error) {
         console.error("Google login error:", error);
 
@@ -54,30 +60,30 @@ router.get("/google", async (req, res) => {
     }
 });
 
+
 router.get("/google/callback", async (req, res) => {
     try {
         const oauth = req.session.oauth;
 
-    if (!oauth) {
-    return res.status(400).json({
-        error: "OAuth session not found"
-        });
-    }
-
-    delete req.session.oauth;
-
-    await new Promise<void>((resolve, reject) => {
-    req.session.save((error) => {
-        if (error) {
-            reject(error);
-        } else {
-            resolve();
+        if (!oauth) {
+            return res.status(400).json({
+                error: "OAuth session not found"
+            });
         }
-    });
-    });
 
-const client = await createGoogleClient();
+        delete req.session.oauth;
 
+        await new Promise<void>((resolve, reject) => {
+            req.session.save((error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+        const client = await createGoogleClient();
         const params = client.callbackParams(req);
 
         const tokenSet = await client.callback(
@@ -98,6 +104,78 @@ const client = await createGoogleClient();
             });
         }
 
+        const email = claims.email;
+        const googleUsername = `google_${claims.sub}`;
+
+        let user = await prisma.app_User.findUnique({
+            where: {
+                username: googleUsername
+            }
+        });
+
+
+        if (!user) {
+            const existingEmail = await prisma.app_User.findUnique({
+                where: {
+                    email
+                }
+            });
+
+            if (existingEmail) {
+                return res.status(409).json({
+                    error: "Email is already associated with another account"
+                });
+            }
+
+            const randomPassword = randomBytes(32).toString("hex");
+            const salt = randomBytes(16);
+
+            const passwordHash = [
+                "scrypt",
+                salt.toString("hex"),
+                scryptSync(randomPassword, salt, 64).toString("hex")
+            ].join(":");
+
+
+            user = await prisma.app_User.create({
+                data: {
+                    name: claims.given_name || claims.name || "Google User",
+                    surname: claims.family_name || null,
+                    username: googleUsername,
+                    email,
+                    password: passwordHash,
+                    profile_photo: claims.picture || null,
+
+                    citizen: {
+                        create: {}
+                    }
+                }
+            });
+
+        } else if (user.email !== email) {
+
+            const emailOwner = await prisma.app_User.findUnique({
+                where: {
+                    email
+                }
+            });
+
+            if (emailOwner) {
+                return res.status(409).json({
+                    error: "Email is already associated with another account"
+                });
+            }
+
+            user = await prisma.app_User.update({
+                where: {
+                    ID_User: user.ID_User
+                },
+                data: {
+                    email
+                }
+            });
+        }
+
         req.session.regenerate((error) => {
             if (error) {
                 return res.status(500).json({
@@ -106,9 +184,9 @@ const client = await createGoogleClient();
             }
 
             req.session.user = {
-                id: claims.sub,
-                email: claims.email!,
-                name: claims.name
+                id: user.ID_User,
+                email: user.email,
+                name: user.name
             };
 
             req.session.save((saveError) => {
@@ -128,7 +206,17 @@ const client = await createGoogleClient();
     } catch (error) {
         console.error("Google callback error:", error);
 
-        res.status(500).json({
+        if (
+            error instanceof Error &&
+            error.name === "RPError" &&
+            error.message.includes("state mismatch")
+        ) {
+            return res.status(400).json({
+                error: "Invalid OAuth state"
+            });
+        }
+
+        return res.status(500).json({
             error: "Google authentication failed"
         });
     }

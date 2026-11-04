@@ -9,7 +9,7 @@ declare module "express-session" {
         };
 
         user?: {
-            id: string;
+            id: number;
             email: string;
             name?: string;
         };
