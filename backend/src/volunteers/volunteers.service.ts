@@ -24,7 +24,7 @@ export async function registerVolunteer(actionId:number, userId:number) {
         throw new Error('ACTION_FULL')
     }
 
-    return prisma.action_Volunteer.create(
+    return prisma.volunteers.create(
         {data: {
              ID_User: userId,
              ID_Action: actionId
@@ -85,7 +85,7 @@ export async function getActionsForVolunteers(userId: number) {
 }
 
 export async function unregisterVolunteer(userId: number, actionId: number) {
-    const registration = await prisma.action_Volunteer.findUnique({where:
+    const registration = await prisma.volunteers.findUnique({where:
         {ID_User_ID_Action: {
             ID_Action:actionId,
             ID_User: userId
@@ -96,7 +96,7 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
         throw new Error("REGISTRATION_NOT_FOUND")
     
 
-    return prisma.action_Volunteer.delete({where: {
+    return prisma.volunteers.delete({where: {
         ID_User_ID_Action:{
             ID_User: userId,
             ID_Action: actionId
