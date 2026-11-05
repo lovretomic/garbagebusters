@@ -6,7 +6,7 @@ komentare s uputama i ogledne <details> blokove te prije predaje izbrišite ovu
 napomenu. Nemojte kopirati nastavni primjer kao rezultat svojeg projekta.
 -->
 
-# [Naziv aplikacije]
+# EcoSentry
 
 <details>
 <summary>Zašto je ovaj odjeljak važan</summary>
@@ -15,7 +15,7 @@ Započnite README nazivom svojeg projekta i sažetim opisom njegove svrhe. Naziv
 
 </details>
 
-[U jednoj rečenici navedite što aplikacija omogućuje svojim korisnicima.]
+Aplikacija Ecosentry omogućuje prijavljivanje divljih odlagališta i povezuje građane, eko-udruge te komunalne redare kako bi olakšala proces prijave, organizacije čišćenja i uklanjanje otpada.
 
 **Projekt na kolegiju:** Ovu je aplikaciju razvio studentski tim u sklopu kolegija [Programsko inženjerstvo](https://www.fer.unizg.hr/predmet/proinz) na Fakultetu elektrotehnike i računarstva Sveučilišta u Zagrebu (FER).
 
@@ -95,8 +95,12 @@ Navedite nekoliko tehnologija i vanjskih usluga koje bitno određuju kako vaša 
 
 | Član | Glavna uloga ili doprinos |
 | --- | --- |
-| [Ime] | [Uloga ili doprinos] |
-| [Ime] | [Uloga ili doprinos] |
+| Lovre Tomić | Dizajn i razvoj frontenda |
+| Mak Terbovc | Razvoj frontenda |
+| Luka Žeruk | Razvoj backenda |
+| Borna Zigo | Razvoj backenda |
+| Fran Vlahović | Baza podataka i pisanje dokumentacije |
+| Lovre Kolanović | Pisanje dokumentacije |
 
 Uloge se tijekom projekta mogu mijenjati. Repozitorij i dogovoreni alat za praćenje zadataka (engl. task tracker) služe kao dodatni dokazi timskog rada.
 
