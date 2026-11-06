@@ -58,7 +58,7 @@ const StartPage = () => {
               Dobro došli!
               <span className={c.subtitle}>Imate li već EcoSentry račun?</span>
             </div>
-            <div className={c.startButtonDiv}>
+            <div className={c.startButtonsDiv}>
               <StartButton
                 title="Ne, ali želim se pridružiti!"
                 subtitle="Stvori račun"
@@ -202,7 +202,7 @@ const StartPage = () => {
             <MailboxIcon className={c.mailboxIcon} />
 
             <div className={c.footerDiv}>
-              <div className={c.startButtonDiv}>
+              <div className={c.startButtonsDiv}>
                 <Button
                   title="POŠALJI PONOVNO"
                   icon={SendIcon}
