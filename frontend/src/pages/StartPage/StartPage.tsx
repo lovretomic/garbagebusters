@@ -23,6 +23,8 @@ const StartPage = () => {
     email: "",
     password: "",
     password2: "",
+    loginEmail: "",
+    loginPassword: "",
   });
   const [stage, setStage] = useState<number>(1);
 
@@ -38,11 +40,16 @@ const StartPage = () => {
 
   const valid =
     isPasswordValid(form.password) && form.password2 == form.password;
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
+  const isNameValid =
+    form.firstName.trim().length >= 3 && form.lastName.trim().length >= 3;
+  const isLoginEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.loginEmail);
+  const isLoginValid = isLoginEmailValid && form.loginPassword.length > 0;
   return (
     <>
       <div className={c.page}>
         <div className={c.imageWrap}>
-          <img src={FlowerImage} className={c.flowerImage} />
+          <img src={FlowerImage} className={c.flowerImage} alt="" />
         </div>
         {stage == 1 && (
           <div className={c.contentDiv}>
@@ -78,11 +85,13 @@ const StartPage = () => {
               <div className={c.inputDiv}>
                 <Input
                   placeholder="Ime"
+                  type="text"
                   onChange={(e) => updateForm("firstName", e.target.value)}
                   value={form.firstName}
                 />
                 <Input
                   placeholder="Prezime"
+                  type="text"
                   onChange={(e) => updateForm("lastName", e.target.value)}
                   value={form.lastName}
                 />
@@ -98,6 +107,7 @@ const StartPage = () => {
                   title="DALJE"
                   icon={ArrowRight}
                   onClick={() => increaseStage()}
+                  disabled={!isNameValid}
                 ></Button>
               </div>
             </div>
@@ -114,6 +124,7 @@ const StartPage = () => {
               <div className={c.inputDiv}>
                 <Input
                   placeholder="Adresa e-pošte"
+                  type="email"
                   onChange={(e) => updateForm("email", e.target.value)}
                   value={form.email}
                 />
@@ -129,6 +140,7 @@ const StartPage = () => {
                   title="DALJE"
                   icon={ArrowRight}
                   onClick={() => increaseStage()}
+                  disabled={!isEmailValid}
                 ></Button>
               </div>
             </div>
@@ -215,15 +227,16 @@ const StartPage = () => {
             <div className={c.footerDiv}>
               <div className={c.inputDiv}>
                 <Input
+                  type="email"
                   placeholder="Adresa e-pošte"
-                  onChange={(e) => updateForm("email", e.target.value)}
-                  value={form.email}
+                  onChange={(e) => updateForm("loginEmail", e.target.value)}
+                  value={form.loginEmail}
                 />
                 <Input
                   placeholder="Lozinka"
                   type="password"
-                  onChange={(e) => updateForm("password", e.target.value)}
-                  value={form.password}
+                  onChange={(e) => updateForm("loginPassword", e.target.value)}
+                  value={form.loginPassword}
                 />
               </div>
               <div className={c.buttonDiv}>
@@ -239,6 +252,7 @@ const StartPage = () => {
                   title="PRIJAVITE SE"
                   icon={ArrowRight}
                   onClick={() => {}}
+                  disabled={!isLoginValid}
                 ></Button>
               </div>
             </div>
