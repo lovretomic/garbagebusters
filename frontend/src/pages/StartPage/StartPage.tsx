@@ -17,8 +17,13 @@ import { useState } from "react";
 import { isPasswordValid } from "../../components/PasswordTooltip/PasswordTooltipCheck";
 
 const StartPage = () => {
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
   const [stage, setStage] = useState<number>(1);
 
   function increaseStage(step = 1) {
@@ -27,7 +32,12 @@ const StartPage = () => {
   function decreaseStage(step = 1) {
     setStage(Math.max(stage - step, 1));
   }
-  const valid = isPasswordValid(password) && password2 == password;
+  function updateForm(field: keyof typeof form, value: string) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  const valid =
+    isPasswordValid(form.password) && form.password2 == form.password;
   return (
     <>
       <div className={c.page}>
@@ -66,8 +76,16 @@ const StartPage = () => {
             </div>
             <div className={c.footerDiv}>
               <div className={c.inputDiv}>
-                <Input placeholder="Ime" />
-                <Input placeholder="Prezime" />
+                <Input
+                  placeholder="Ime"
+                  onChange={(e) => updateForm("firstName", e.target.value)}
+                  value={form.firstName}
+                />
+                <Input
+                  placeholder="Prezime"
+                  onChange={(e) => updateForm("lastName", e.target.value)}
+                  value={form.lastName}
+                />
               </div>
               <div className={c.buttonDiv}>
                 <Button
@@ -94,7 +112,11 @@ const StartPage = () => {
             </div>
             <div className={c.footerDiv}>
               <div className={c.inputDiv}>
-                <Input placeholder="Adresa e-pošte" />
+                <Input
+                  placeholder="Adresa e-pošte"
+                  onChange={(e) => updateForm("email", e.target.value)}
+                  value={form.email}
+                />
               </div>
               <div className={c.buttonDiv}>
                 <Button
@@ -120,20 +142,20 @@ const StartPage = () => {
               <span className={c.subtitle}>Molimo stvorite lozinku</span>
             </div>
             <div className={c.tooltipDiv}>
-              <PasswordTooltip password={password} passed={valid} />
+              <PasswordTooltip password={form.password} passed={valid} />
             </div>
             <div className={c.footerDiv}>
               <div className={c.inputDiv}>
                 <Input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={form.password}
+                  onChange={(e) => updateForm("password", e.target.value)}
                   placeholder="Stvorite lozinku"
                 />
                 <Input
                   type="password"
-                  value={password2}
-                  onChange={(e) => setPassword2(e.target.value)}
+                  value={form.password2}
+                  onChange={(e) => updateForm("password2", e.target.value)}
                   placeholder="Ponovite lozinku"
                 />
               </div>
@@ -192,8 +214,17 @@ const StartPage = () => {
             </div>
             <div className={c.footerDiv}>
               <div className={c.inputDiv}>
-                <Input placeholder="Adresa e-pošte" />
-                <Input placeholder="Lozinka" />
+                <Input
+                  placeholder="Adresa e-pošte"
+                  onChange={(e) => updateForm("email", e.target.value)}
+                  value={form.email}
+                />
+                <Input
+                  placeholder="Lozinka"
+                  type="password"
+                  onChange={(e) => updateForm("password", e.target.value)}
+                  value={form.password}
+                />
               </div>
               <div className={c.buttonDiv}>
                 <Button
