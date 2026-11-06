@@ -31,7 +31,9 @@ const StartPage = () => {
   return (
     <>
       <div className={c.page}>
-        <img src={FlowerImage} className={c.flowerImage} />
+        <div className={c.imageWrap}>
+          <img src={FlowerImage} className={c.flowerImage} />
+        </div>
         {stage == 1 && (
           <div className={c.contentDiv}>
             <div className={c.welcome}>
@@ -198,7 +200,9 @@ const StartPage = () => {
                   iconOnly
                   icon={ArrowLeft}
                   variant="secondary"
-                  onClick={() =>  {decreaseStage(5)}}
+                  onClick={() => {
+                    decreaseStage(5);
+                  }}
                 ></Button>
                 <Button
                   title="PRIJAVITE SE"
