@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { generators } from "openid-client";
-import { randomBytes, scryptSync } from "node:crypto";
+import { randomBytes, scrypt } from "node:crypto";
 import { createGoogleClient } from "./auth.config";
 import { prisma } from "../lib/prisma";
 
@@ -130,10 +130,17 @@ router.get("/google/callback", async (req, res) => {
             const randomPassword = randomBytes(32).toString("hex");
             const salt = randomBytes(16);
 
+            const derivedKey = await new Promise<Buffer>((resolve, reject) => {
+                scrypt(randomPassword, salt, 64, (error, key) => {
+                    if (error) reject(error);
+                    else resolve(key);
+                });
+            });
+            
             const passwordHash = [
                 "scrypt",
                 salt.toString("hex"),
-                scryptSync(randomPassword, salt, 64).toString("hex")
+                derivedKey.toString("hex")
             ].join(":");
 
 
