@@ -2,6 +2,7 @@ import express from "express";
 import actionsRoutes from "./src/actions/actions.routes";
 import authRoutes from "./src/auth/auth.routes";
 import session from "express-session";
+import reportsRoutes from "./src/reports/reports.routes";
 
 import "dotenv/config";
 import connectPgSimple from "connect-pg-simple";
@@ -50,12 +51,14 @@ app.use(
     })
 );
 
+
 app.get("/", (_req, res) => {
     res.json("Server works!");
 });
 
 app.use("/actions", actionsRoutes);
 app.use("/auth", authRoutes);
+app.use("/reports", reportsRoutes);
 
 const PORT = Number(process.env.PORT || 3001);
 
