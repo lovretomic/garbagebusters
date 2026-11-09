@@ -2,6 +2,7 @@ import express from "express";
 import actionsRoutes from "./src/actions/actions.routes";
 import authRoutes from "./src/auth/auth.routes";
 import session from "express-session";
+
 import "dotenv/config";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
@@ -49,9 +50,7 @@ app.use(
     })
 );
 
-
-
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.json("Server works!");
 });
 

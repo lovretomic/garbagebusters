@@ -6,15 +6,13 @@ import { prisma } from "../lib/prisma";
 
 const router = Router();
 
-// Provjera radi li autentifikacijski modul
-router.get("/health", (req, res) => {
+router.get("/health", (_req, res) => {
     res.json({
         status: "ok",
         message: "Authentication module is running"
     });
 });
 
-// Pokretanje Google OAuth prijave
 router.get("/google", async (req, res) => {
     try {
         const client = await createGoogleClient();
