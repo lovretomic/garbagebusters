@@ -51,7 +51,6 @@ app.use(
     })
 );
 
-
 app.get("/", (_req, res) => {
     res.json("Server works!");
 });
