@@ -8,6 +8,7 @@ import FlowerImage from "../../assets/images/flower.png";
 import MailboxIcon from "../../assets/icons/mailbox_icon.svg?react";
 import SendIcon from "../../assets/icons/send_icon.svg?react";
 import RefreshIcon from "../../assets/icons/refresh_icon.svg?react";
+import GoogleIcon from "../../assets/icons/google_icon.svg?react"
 
 import StartButton from "../../components/StartButton";
 import Button from "../../components/Button";
@@ -71,6 +72,8 @@ const StartPage = () => {
                 icon={LoginIcon}
                 onClick={() => increaseStage(5)}
               ></StartButton>
+			  <span className={c.or}>ili</span>
+			  <Button title="PRIJAVITE SE S GOOGLEOM" icon = {GoogleIcon} iconPosition="left" variant="ternary"></Button>
             </div>
           </div>
         )}
@@ -264,32 +267,3 @@ const StartPage = () => {
 };
 
 export default StartPage;
-
-/*<div className={c.testDiv}>
-        <p>hi</p>
-        <LoginIcon />
-        <StartButton
-          title="Ne, ali želim se pridružiti!"
-          subtitle="Stvori račun"
-          icon={AddAccountIcon}
-		  onClick = {()=>decreaseStage()}
-        ></StartButton>
-        <StartButton
-          title="Da, trebam se samo prijaviti!"
-          subtitle="Prijavi se"
-          icon={LoginIcon}
-          onClick={() => increaseStage()}
-        ></StartButton>
-        <div className={c.buttonDiv}>
-          <Button iconOnly icon={ArrowLeft} variant="secondary"></Button>
-          <Button title="DALJE" icon={ArrowRight}></Button>
-        </div>
-        <Input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Lozinka"
-        />
-        <PasswordTooltip password={password} passed={valid} />
-        <Button title="DALJE" icon={ArrowRight} disabled={!valid} />
-      </div> */

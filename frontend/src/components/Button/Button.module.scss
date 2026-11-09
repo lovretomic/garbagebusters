@@ -4,6 +4,8 @@
   justify-content: flex-start;
   gap: 8px;
   width: 100%;
+  max-width: 600px;
+  align-self: center;
   padding: 18px 24px;
   border: none;
   font-style: normal;
@@ -17,7 +19,7 @@
     opacity: 0.2;
     cursor: default;
   }
-    border: 2px solid rgba($primary-black, 0.25);
+  border: 2px solid rgba($primary-black, 0.25);
 }
 
 .primary {
@@ -51,6 +53,26 @@
   }
 }
 
+.ternary {
+  background-color: $primary-white;
+  justify-content: center;
+  color: $primary-black;
+
+  &:hover:enabled {
+    background-color: rgba($primary-white, 0.9);
+  }
+
+  &:active:enabled {
+    background-color: rgba($primary-white, 0.7);
+  }
+
+  &.iconOnly {
+    width: auto;
+    padding: 18px 24px;
+    justify-content: center;
+  }
+}
+
 .icon {
   display: flex;
   align-items: center;
@@ -62,7 +84,7 @@
   svg {
     width: 100%;
     height: 100%;
-	overflow: visible;
+    overflow: visible;
   }
 }
 
