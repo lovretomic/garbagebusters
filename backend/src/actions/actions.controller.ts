@@ -7,7 +7,7 @@ import {
     deleteAction as deleteActionService
 } from "./actions.service";
 
-export async function getActions(req: Request, res: Response) {
+export async function getActions(_req: Request, res: Response) {
     try {
         const actions = await getActionsService();
         res.status(200).json(actions);
@@ -54,6 +54,7 @@ export async function createAction(req: Request, res: Response) {
         };
 
         const reportId = req.body.ID_Report;
+        const organizer = req.body.ID_User;
 
         if (
             !data.name ||
@@ -63,7 +64,7 @@ export async function createAction(req: Request, res: Response) {
             !Number.isFinite(data.action_date.getTime()) ||
             !data.action_time ||
             !data.action_location ||
-            typeof reportId !== "string" ||
+            typeof reportId !== "number" ||
             !reportId
         ) {
             res.status(400).json({
@@ -72,7 +73,7 @@ export async function createAction(req: Request, res: Response) {
             return;
         }
 
-        const action = await createActionService(data, reportId);
+        const action = await createActionService(data, reportId, organizer);
         res.status(201).json(action);
     } catch {
         res.status(500).json({
