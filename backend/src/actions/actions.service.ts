@@ -41,7 +41,7 @@ export async function createAction(data: {
 }
 
 export async function deleteAction(id: number) {
-    return prisma.cleanup_Action.delete({where: {ID_Action: id}})
+    return prisma.cleanup_Action.delete({where: {ID_Action: id}});
 }
 
 

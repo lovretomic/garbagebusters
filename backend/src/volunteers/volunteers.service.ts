@@ -14,14 +14,14 @@ export async function registerVolunteer(actionId:number, userId:number) {
         include: {
             volunteers: true
         }
-    })
+    });
 
     if(!action){
          throw new Error('ACTION_NOT_FOUND');
     }
 
     if(action.volunteers.length >= action.max_volunteers){
-        throw new Error('ACTION_FULL')
+        throw new Error('ACTION_FULL');
     }
 
     return prisma.volunteers.create(
@@ -93,7 +93,7 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
     });
 
     if(!registration) 
-        throw new Error("REGISTRATION_NOT_FOUND")
+        throw new Error("REGISTRATION_NOT_FOUND");
     
 
     return prisma.volunteers.delete({where: {
@@ -101,6 +101,6 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
             ID_User: userId,
             ID_Action: actionId
         }
-    }})
+    }});
 }
 

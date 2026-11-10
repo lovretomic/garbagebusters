@@ -17,7 +17,7 @@ export async function registerVolunteer(req: Request, res: Response) {
  } catch {
     res.status(500).json({
             message: "ERROR: Can't register volunteer."
-        })
+        });
  }
 }
 
@@ -60,6 +60,6 @@ export async function unregisterVolunteer(req:Request, res: Response) {
     } catch {
         res.status(500).json({
             message: "ERROR: Can't unregister volunteer."
-        })
+        });
 }
 }
