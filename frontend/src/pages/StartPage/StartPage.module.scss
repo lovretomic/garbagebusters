@@ -1,11 +1,18 @@
 .contentDiv {
-  background-color: $primary-red;
+  background:
+    linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0) 40.87%
+    ),
+    $primary-red;
   display: flex;
+  border-radius: 0;
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
   min-height: 100vh;
-  padding-inline: 40px;
+  padding-inline: 16px;
   box-sizing: border-box;
   text-align: center;
   padding-bottom: 80px;
@@ -17,14 +24,14 @@
     padding-bottom: 32px;
     min-height: 0;
     min-width: 0;
-	overflow-y: auto;
+    overflow-y: auto;
   }
 }
 
 body {
+	padding: 0;
   @media (min-width: $breakpoint-desktop) {
     background-color: $primary-white;
-    padding: 0;
   }
 }
 
