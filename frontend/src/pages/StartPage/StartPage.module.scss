@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  min-height: 100vh;
+  height: 100vh;
   padding-inline: 16px;
   box-sizing: border-box;
   text-align: center;
@@ -20,16 +20,16 @@
   @media (min-width: $breakpoint-desktop) {
     border-radius: 24px;
     flex: 1;
-    padding-inline: 24px;
-    padding-bottom: 32px;
+    padding: 24px;
     min-height: 0;
     min-width: 0;
     overflow-y: auto;
+    height: 100%;
   }
 }
 
 body {
-	padding: 0;
+  padding: 0;
   @media (min-width: $breakpoint-desktop) {
     background-color: $primary-white;
   }
@@ -117,7 +117,7 @@ body {
   font-size: 40px;
   font-weight: 700;
   color: $primary-white;
-  margin-top: 100px;
+  margin-top: 80px;
 
   @media (min-width: $breakpoint-desktop) {
     gap: 16px;
