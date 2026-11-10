@@ -13,8 +13,11 @@
   @media (min-width: $breakpoint-desktop) {
     border-radius: 24px;
     flex: 1;
+    padding-inline: 24px;
+    padding-bottom: 32px;
     min-height: 0;
     min-width: 0;
+	overflow-y: auto;
   }
 }
 
@@ -27,12 +30,13 @@ body {
 
 .page {
   @media (min-width: $breakpoint-desktop) {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
-    min-height: 100vh;
+    height: 100dvh;
     box-sizing: border-box;
     padding: 12px;
+    overflow: hidden;
   }
 }
 
@@ -56,13 +60,17 @@ body {
   }
 }
 
-.or{
-	color: $primary-white;
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 20px;
+.or {
+  color: $primary-white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  @media (min-width: $breakpoint-desktop) and (max-height: $breakpoint-short) {
+    padding: 8px;
+  }
 }
 
 .buttonDiv {
@@ -103,6 +111,18 @@ body {
   font-weight: 700;
   color: $primary-white;
   margin-top: 100px;
+
+  @media (min-width: $breakpoint-desktop) {
+    gap: 16px;
+    font-size: 32px;
+    margin-top: 48px;
+  }
+
+  @media (min-width: $breakpoint-desktop) and (max-height: $breakpoint-short) {
+    gap: 12px;
+    font-size: 28px;
+    margin-top: 24px;
+  }
 }
 
 .imageWrap {
@@ -110,8 +130,6 @@ body {
 
   @media (min-width: $breakpoint-desktop) {
     display: block;
-    flex: 1;
-    min-width: 0;
     position: relative;
   }
 }
