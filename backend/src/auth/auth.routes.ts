@@ -1,19 +1,19 @@
-import { Router } from 'express';
-import { generators } from 'openid-client';
-import { randomBytes, scrypt } from 'node:crypto';
-import { createGoogleClient } from './auth.config';
-import { prisma } from '../lib/prisma';
+import { Router } from "express";
+import { generators } from "openid-client";
+import { randomBytes, scrypt } from "node:crypto";
+import { createGoogleClient } from "./auth.config";
+import { prisma } from "../lib/prisma";
 
 const router = Router();
 
-router.get('/health', (_req, res) => {
+router.get("/health", (_req, res) => {
   res.json({
-    status: 'ok',
-    message: 'Authentication module is running',
+    status: "ok",
+    message: "Authentication module is running",
   });
 });
 
-router.get('/google', async (req, res) => {
+router.get("/google", async (req, res) => {
   try {
     const client = await createGoogleClient();
 
@@ -29,41 +29,41 @@ router.get('/google', async (req, res) => {
     };
 
     const authorizationUrl = client.authorizationUrl({
-      scope: 'openid email profile',
-      response_type: 'code',
+      scope: "openid email profile",
+      response_type: "code",
       state,
       nonce,
       code_challenge: codeChallenge,
-      code_challenge_method: 'S256',
+      code_challenge_method: "S256",
     });
 
     req.session.save((error) => {
       if (error) {
-        console.error('Failed to save OAuth session:', error);
+        console.error("Failed to save OAuth session:", error);
 
         return res.status(500).json({
-          error: 'Failed to initialize Google login',
+          error: "Failed to initialize Google login",
         });
       }
 
       res.redirect(authorizationUrl);
     });
   } catch (error) {
-    console.error('Google login error:', error);
+    console.error("Google login error:", error);
 
     res.status(500).json({
-      error: 'Failed to initialize Google login',
+      error: "Failed to initialize Google login",
     });
   }
 });
 
-router.get('/google/callback', async (req, res) => {
+router.get("/google/callback", async (req, res) => {
   try {
     const oauth = req.session.oauth;
 
     if (!oauth) {
       return res.status(400).json({
-        error: 'OAuth session not found',
+        error: "OAuth session not found",
       });
     }
 
@@ -92,7 +92,7 @@ router.get('/google/callback', async (req, res) => {
 
     if (!claims.email || !claims.email_verified) {
       return res.status(403).json({
-        error: 'Google email is not verified',
+        error: "Google email is not verified",
       });
     }
 
@@ -114,11 +114,11 @@ router.get('/google/callback', async (req, res) => {
 
       if (existingEmail) {
         return res.status(409).json({
-          error: 'Email is already associated with another account',
+          error: "Email is already associated with another account",
         });
       }
 
-      const randomPassword = randomBytes(32).toString('hex');
+      const randomPassword = randomBytes(32).toString("hex");
       const salt = randomBytes(16);
 
       const derivedKey = await new Promise<Buffer>((resolve, reject) => {
@@ -128,11 +128,11 @@ router.get('/google/callback', async (req, res) => {
         });
       });
 
-      const passwordHash = ['scrypt', salt.toString('hex'), derivedKey.toString('hex')].join(':');
+      const passwordHash = ["scrypt", salt.toString("hex"), derivedKey.toString("hex")].join(":");
 
       user = await prisma.app_User.create({
         data: {
-          name: claims.given_name || claims.name || 'Google User',
+          name: claims.given_name || claims.name || "Google User",
           surname: claims.family_name || null,
           username: googleUsername,
           email,
@@ -153,7 +153,7 @@ router.get('/google/callback', async (req, res) => {
 
       if (emailOwner) {
         return res.status(409).json({
-          error: 'Email is already associated with another account',
+          error: "Email is already associated with another account",
         });
       }
 
@@ -170,7 +170,7 @@ router.get('/google/callback', async (req, res) => {
     req.session.regenerate((error) => {
       if (error) {
         return res.status(500).json({
-          error: 'Failed to create session',
+          error: "Failed to create session",
         });
       }
 
@@ -183,39 +183,39 @@ router.get('/google/callback', async (req, res) => {
       req.session.save((saveError) => {
         if (saveError) {
           return res.status(500).json({
-            error: 'Failed to save session',
+            error: "Failed to save session",
           });
         }
 
         res.json({
-          message: 'Google login successful',
+          message: "Google login successful",
           user: req.session.user,
         });
       });
     });
   } catch (error) {
-    console.error('Google callback error:', error);
+    console.error("Google callback error:", error);
 
     if (
       error instanceof Error &&
-      error.name === 'RPError' &&
-      error.message.includes('state mismatch')
+      error.name === "RPError" &&
+      error.message.includes("state mismatch")
     ) {
       return res.status(400).json({
-        error: 'Invalid OAuth state',
+        error: "Invalid OAuth state",
       });
     }
 
     return res.status(500).json({
-      error: 'Google authentication failed',
+      error: "Google authentication failed",
     });
   }
 });
 
-router.get('/me', (req, res) => {
+router.get("/me", (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({
-      error: 'Not authenticated',
+      error: "Not authenticated",
     });
   }
 
@@ -224,18 +224,18 @@ router.get('/me', (req, res) => {
   });
 });
 
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   req.session.destroy((error) => {
     if (error) {
       return res.status(500).json({
-        error: 'Logout failed',
+        error: "Logout failed",
       });
     }
 
-    res.clearCookie('connect.sid');
+    res.clearCookie("connect.sid");
 
     res.json({
-      message: 'Logout successful',
+      message: "Logout successful",
     });
   });
 });

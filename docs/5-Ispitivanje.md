@@ -75,34 +75,34 @@ Scenarij određuje funkcionalnost koja se ispituje. Opaženi rezultat i **Prošl
 **WebDriver fragment (JavaScript):**
 
 ```js
-const { Builder, By, until } = require('selenium-webdriver');
-const assert = require('assert');
+const { Builder, By, until } = require("selenium-webdriver");
+const assert = require("assert");
 
 (async () => {
-  const driver = await new Builder().forBrowser('chrome').build();
+  const driver = await new Builder().forBrowser("chrome").build();
 
   try {
-    await driver.get(baseUrl + '/reports/new');
-    await driver.findElement(By.id('incidentType')).sendKeys('Flood');
-    await driver.findElement(By.id('severity')).sendKeys('High');
-    await driver.findElement(By.id('locationInput')).sendKeys('45.82, 16.00');
-    await driver.findElement(By.id('description')).sendKeys('Flooding in the city center');
-    await driver.findElement(By.id('submitReport')).click();
+    await driver.get(baseUrl + "/reports/new");
+    await driver.findElement(By.id("incidentType")).sendKeys("Flood");
+    await driver.findElement(By.id("severity")).sendKeys("High");
+    await driver.findElement(By.id("locationInput")).sendKeys("45.82, 16.00");
+    await driver.findElement(By.id("description")).sendKeys("Flooding in the city center");
+    await driver.findElement(By.id("submitReport")).click();
 
     const confirmation = await driver.wait(
-      until.elementLocated(By.id('reportConfirmation')),
+      until.elementLocated(By.id("reportConfirmation")),
       10000,
     );
 
-    assert((await confirmation.getText()).includes('Report'));
+    assert((await confirmation.getText()).includes("Report"));
 
-    const reportUrl = await driver.findElement(By.id('createdReportLink')).getAttribute('href');
+    const reportUrl = await driver.findElement(By.id("createdReportLink")).getAttribute("href");
 
     await driver.get(reportUrl);
 
     assert(
-      (await driver.findElement(By.id('reportDetails')).getText()).includes(
-        'Flooding in the city center',
+      (await driver.findElement(By.id("reportDetails")).getText()).includes(
+        "Flooding in the city center",
       ),
     );
   } finally {

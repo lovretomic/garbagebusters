@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import {
   registerVolunteer as registerVolunteerService,
   getVolunteersForAction as getVolunteersForActionService,
   getActionsForVolunteers as getActionsForVolunteerService,
   unregisterVolunteer as unregisterVolunteerService,
-} from './volunteers.service';
+} from "./volunteers.service";
 
 export async function registerVolunteer(req: Request, res: Response) {
   try {

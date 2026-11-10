@@ -1,6 +1,6 @@
-import c from './StartButton.module.scss';
-import React from 'react';
-import clsx from 'clsx';
+import c from "./StartButton.module.scss";
+import React from "react";
+import clsx from "clsx";
 
 type StartButtonProps = {
   title?: React.ReactNode;

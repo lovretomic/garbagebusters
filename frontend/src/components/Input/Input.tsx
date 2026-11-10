@@ -1,6 +1,6 @@
-import React from 'react';
-import c from './Input.module.scss';
-import clsx from 'clsx';
+import React from "react";
+import c from "./Input.module.scss";
+import clsx from "clsx";
 
 type InputProps = {
   className?: string;

@@ -1,10 +1,10 @@
-import { prisma } from '../lib/prisma';
+import { prisma } from "../lib/prisma";
 
 export async function registerVolunteer(actionId: number, userId: number) {
   const citizen = prisma.citizen.findUnique({ where: { ID_User: userId } });
 
   if (!citizen) {
-    throw new Error('CITIZEN_NOT_FOUND');
+    throw new Error("CITIZEN_NOT_FOUND");
   }
 
   const action = await prisma.cleanup_Action.findUnique({
@@ -15,11 +15,11 @@ export async function registerVolunteer(actionId: number, userId: number) {
   });
 
   if (!action) {
-    throw new Error('ACTION_NOT_FOUND');
+    throw new Error("ACTION_NOT_FOUND");
   }
 
   if (action.volunteers.length >= action.max_volunteers) {
-    throw new Error('ACTION_FULL');
+    throw new Error("ACTION_FULL");
   }
 
   return prisma.volunteers.create({
@@ -47,7 +47,7 @@ export async function getVolunteersForAction(actoinId: number) {
   });
 
   if (!action) {
-    throw new Error('ACTION_NOT_FOUND');
+    throw new Error("ACTION_NOT_FOUND");
   }
 
   return action.volunteers.map((registration) => ({
@@ -73,7 +73,7 @@ export async function getActionsForVolunteers(userId: number) {
   });
 
   if (!citizen) {
-    throw new Error('CITIZEN_NOT_FOUND');
+    throw new Error("CITIZEN_NOT_FOUND");
   }
 
   return citizen.volunteer_actions.map((registration) => ({
@@ -94,7 +94,7 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
     },
   });
 
-  if (!registration) throw new Error('REGISTRATION_NOT_FOUND');
+  if (!registration) throw new Error("REGISTRATION_NOT_FOUND");
 
   return prisma.volunteers.delete({
     where: {

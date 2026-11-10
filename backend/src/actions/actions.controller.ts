@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import {
   getActions as getActionsService,
   getActionById as getActionByIdService,
   createAction as createActionService,
   deleteAction as deleteActionService,
-} from './actions.service';
+} from "./actions.service";
 
 export async function getActions(_req: Request, res: Response) {
   try {
@@ -22,14 +22,14 @@ export async function getActionById(req: Request, res: Response) {
     const id = Number(req.params.id);
 
     if (!Number.isInteger(id) || id <= 0) {
-      res.status(400).json({ message: 'Invalid action ID.' });
+      res.status(400).json({ message: "Invalid action ID." });
       return;
     }
 
     const action = await getActionByIdService(id);
 
     if (!action) {
-      res.status(404).json({ message: 'Action not found.' });
+      res.status(404).json({ message: "Action not found." });
       return;
     }
 
@@ -63,11 +63,11 @@ export async function createAction(req: Request, res: Response) {
       !Number.isFinite(data.action_date.getTime()) ||
       !data.action_time ||
       !data.action_location ||
-      typeof reportId !== 'number' ||
+      typeof reportId !== "number" ||
       !reportId
     ) {
       res.status(400).json({
-        message: 'Invalid or missing action data.',
+        message: "Invalid or missing action data.",
       });
       return;
     }
@@ -86,7 +86,7 @@ export async function deleteAction(req: Request, res: Response) {
     const id = Number(req.params.id);
 
     if (!Number.isInteger(id) || id <= 0) {
-      res.status(400).json({ message: 'Invalid action ID.' });
+      res.status(400).json({ message: "Invalid action ID." });
       return;
     }
 

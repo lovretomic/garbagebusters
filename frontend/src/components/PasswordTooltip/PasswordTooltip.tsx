@@ -1,7 +1,7 @@
-import React from 'react';
-import clsx from 'clsx';
-import c from './PasswordTooltip.module.scss';
-import { passwordRules } from './PasswordTooltipCheck';
+import React from "react";
+import clsx from "clsx";
+import c from "./PasswordTooltip.module.scss";
+import { passwordRules } from "./PasswordTooltipCheck";
 
 type PasswordTooltipProps = {
   password: string;
@@ -12,7 +12,7 @@ type PasswordTooltipProps = {
 
 const PasswordTooltip: React.FC<PasswordTooltipProps> = ({
   password,
-  title = 'Lozinka mora sadržavati:',
+  title = "Lozinka mora sadržavati:",
   passed = false,
   className,
 }) => (

@@ -1,18 +1,18 @@
-import './App.scss';
-import LoginIcon from './assets/icons/login_icon.svg?react';
-import AddAccountIcon from './assets/icons/add_account_icon.svg?react';
-import ArrowRight from './assets/icons/arrow_right.svg?react';
-import ArrowLeft from './assets/icons/arrow_left.svg?react';
+import "./App.scss";
+import LoginIcon from "./assets/icons/login_icon.svg?react";
+import AddAccountIcon from "./assets/icons/add_account_icon.svg?react";
+import ArrowRight from "./assets/icons/arrow_right.svg?react";
+import ArrowLeft from "./assets/icons/arrow_left.svg?react";
 
-import StartButton from './components/StartButton';
-import Button from './components/Button';
-import Input from './components/Input';
-import PasswordTooltip from './components/PasswordTooltip';
-import { useState } from 'react';
-import { isPasswordValid } from './components/PasswordTooltip/PasswordTooltipCheck';
+import StartButton from "./components/StartButton";
+import Button from "./components/Button";
+import Input from "./components/Input";
+import PasswordTooltip from "./components/PasswordTooltip";
+import { useState } from "react";
+import { isPasswordValid } from "./components/PasswordTooltip/PasswordTooltipCheck";
 
 function App() {
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const valid = isPasswordValid(password);
   return (
     <>
