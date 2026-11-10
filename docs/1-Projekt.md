@@ -21,22 +21,22 @@ Divlja odlagališta otpada predstavljaju ekološki problem koji građani ne mogu
 
 **Cilj:** Utvrditi osobe, uloge i organizacije čije potrebe i interesi određuju projektni zadatak.
 
-| Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
-| --- | --- |
-| Građanin | Prijaviti divlje odlagalište otpada, pratiti tijek prijava, praćenje povijesti vlastitih prijava i prijava kao volonter za sudjelovanje u čišćenjima. |
-| Eko-udruga | Pregledavanje prijavljenih odlagališta otpada, organiziranje akcija čišćenja, koordiniranje volontera i slanje zahtjeva za zatvaranje prijave. |
+| Skupina korisnika ili dionika   | Potreba ili interes relevantan za ovaj projekt                                                                                                        |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Građanin                        | Prijaviti divlje odlagalište otpada, pratiti tijek prijava, praćenje povijesti vlastitih prijava i prijava kao volonter za sudjelovanje u čišćenjima. |
+| Eko-udruga                      | Pregledavanje prijavljenih odlagališta otpada, organiziranje akcija čišćenja, koordiniranje volontera i slanje zahtjeva za zatvaranje prijave.        |
 | Komunalni redar (administrator) | Pregledavanje i upravljanje korisnicima, kontrola prijava otpada, izdavanje službenih naloga komunalnim tvrtkama te pregledavanje statistike prijava. |
-| Agencija za zaštitu podataka | Zahtijeva zaštitu njihovih osobnih podataka s primjenjivim propisima, ne koristi aplikaciju. |
+| Agencija za zaštitu podataka    | Zahtijeva zaštitu njihovih osobnih podataka s primjenjivim propisima, ne koristi aplikaciju.                                                          |
 
 <details>
 <summary><strong>Korisnici, dionici i neobavezna persona</strong></summary>
 
 **Primjer — CrisisMap:**
 
-| Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
-| --- | --- |
-| Građanin | Pronaći informacije o obližnjim kriznim događajima i podnijeti prijavu kriznog događaja s lokacijom. |
-| Koordinator pomoći | Pregledati prijave relevantne za područje i dostupne resurse, ako je koordinacija unutar odobrenog opsega. |
+| Skupina korisnika ili dionika                              | Potreba ili interes relevantan za ovaj projekt                                                                                                                                |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Građanin                                                   | Pronaći informacije o obližnjim kriznim događajima i podnijeti prijavu kriznog događaja s lokacijom.                                                                          |
+| Koordinator pomoći                                         | Pregledati prijave relevantne za područje i dostupne resurse, ako je koordinacija unutar odobrenog opsega.                                                                    |
 | Regulatorno tijelo / Agencija za zaštitu podataka (Dionik) | Zahtijeva osiguravanje anonimnosti prijavitelja i zaštitu osobnih podataka (npr. usklađenost s GDPR-om). Ovaj dionik ne koristi aplikaciju, ali definira ograničenja sustava. |
 
 Riječ je o dvjema različitim potrebama, a ne o dvjema izmišljenim biografijama. Akter komunicira s aplikacijom; demonstrator na kolegiju kojem je rezultat zanimljiv ne mora biti akter aplikacije. Koristite uloge i ovlasti iz svojeg odobrenog zadatka. Persona je neobavezna i korisna je kada pomaže riješiti konkretno projektno pitanje.
@@ -51,14 +51,15 @@ Riječ je o dvjema različitim potrebama, a ne o dvjema izmišljenim biografijam
 
 **Uključeno:** Prijava divljih odlagališta otpada fotografiranjem i pridruživanjem lokacije, praćenje statusa prijava, organiziranje akcija čišćenja uz prijavu volontera, moderiranje prijava te izdavanje službenih naloga komunalnim tvrtkama.
 
-**Izvan opsega ili odgođeno:** 
+**Izvan opsega ili odgođeno:**
+
 - Stvarno izvršavanje službenih sanacija; sustav samo šalje nalog komunalnoj tvrtci i nije povezan s njenim podatkovnim sustavom.
 - Automatsko prepoznavanje i kategorizacija otpada na fotografijama prijave; zahtijeva veliki skup podataka i količinu vremena koju ova verzija aplikacije ne može ispuniti.
 
+**Vanjske ovisnosti:**
 
-**Vanjske ovisnosti:** 
 - Google Maps API za prikaz karte, postavljanje markera, geokodiranje i prikaz lokacije akcije čišćenja s uputama za dolazak.
-- Google Calendar API za automatsko generiranje događaja u korisnikovome Google kalendaru s točnim terminom, poveznicom na lokaciju i automatske podsjetnike. 
+- Google Calendar API za automatsko generiranje događaja u korisnikovome Google kalendaru s točnim terminom, poveznicom na lokaciju i automatske podsjetnike.
 - OpenWeatherMap API za vremensku prognozu na lokaciji tijekom akcije čišćenja s upozorenjima na nevrijeme.
 - OAuth 2.0 za registraciju i prijavu korisnika.
 - Aplikacija ostaje odgovorna za vlastite podatke o prijavama, korisnicima i statusima.
@@ -98,4 +99,4 @@ Ako je postojeće rješenje stvarno utjecalo na projekt, usporedite samo relevan
 
 ---
 
->**Završna provjera:** Opis problema, cilj projekta, korisnici i dionici, granice opsega te postojeći pristupi međusobno su usklađeni. Navedene koristi ne predstavljaju neprovjerene tvrdnje, a uključene i izostavljene funkcionalnosti odgovaraju odobrenom projektnom zadatku.
+> **Završna provjera:** Opis problema, cilj projekta, korisnici i dionici, granice opsega te postojeći pristupi međusobno su usklađeni. Navedene koristi ne predstavljaju neprovjerene tvrdnje, a uključene i izostavljene funkcionalnosti odgovaraju odobrenom projektnom zadatku.

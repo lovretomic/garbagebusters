@@ -1,10 +1,10 @@
 import express from "express";
 
 import {
-    registerVolunteer,
-    getVolunteersForAction,
-    getActionsForVolunteers,
-    unregisterVolunteer
+  registerVolunteer,
+  getVolunteersForAction,
+  getActionsForVolunteers,
+  unregisterVolunteer,
 } from "./volunteers.controller";
 
 const router = express.Router();

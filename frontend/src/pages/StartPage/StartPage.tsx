@@ -8,7 +8,7 @@ import FlowerImage from "../../assets/images/flower.png";
 import MailboxIcon from "../../assets/icons/mailbox_icon.svg?react";
 import SendIcon from "../../assets/icons/send_icon.svg?react";
 import RefreshIcon from "../../assets/icons/refresh_icon.svg?react";
-import GoogleIcon from "../../assets/icons/google_icon.svg?react"
+import GoogleIcon from "../../assets/icons/google_icon.svg?react";
 
 import StartButton from "../../components/StartButton";
 import Button from "../../components/Button";
@@ -39,11 +39,9 @@ const StartPage = () => {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  const valid =
-    isPasswordValid(form.password) && form.password2 == form.password;
+  const valid = isPasswordValid(form.password) && form.password2 == form.password;
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email);
-  const isNameValid =
-    form.firstName.trim().length >= 3 && form.lastName.trim().length >= 3;
+  const isNameValid = form.firstName.trim().length >= 3 && form.lastName.trim().length >= 3;
   const isLoginEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.loginEmail);
   const isLoginValid = isLoginEmailValid && form.loginPassword.length > 0;
   return (
@@ -72,8 +70,13 @@ const StartPage = () => {
                 icon={LoginIcon}
                 onClick={() => increaseStage(5)}
               ></StartButton>
-			  <span className={c.or}>ili</span>
-			  <Button title="PRIJAVITE SE S GOOGLEOM" icon = {GoogleIcon} iconPosition="left" variant="ternary"></Button>
+              <span className={c.or}>ili</span>
+              <Button
+                title="PRIJAVITE SE S GOOGLEOM"
+                icon={GoogleIcon}
+                iconPosition="left"
+                variant="ternary"
+              ></Button>
             </div>
           </div>
         )}
@@ -197,8 +200,7 @@ const StartPage = () => {
               <FlowerWhiteIcon />
               Provjerite inbox.
               <span className={c.subtitle}>
-                Pratite upute koje smo poslali na Vašu e-mail adresu za
-                aktivaciju računa.
+                Pratite upute koje smo poslali na Vašu e-mail adresu za aktivaciju računa.
               </span>
             </div>
 
@@ -212,11 +214,7 @@ const StartPage = () => {
                   variant="secondary"
                   onClick={() => {}}
                 ></Button>
-                <Button
-                  title="PROVJERI"
-                  icon={RefreshIcon}
-                  onClick={() => {}}
-                ></Button>
+                <Button title="PROVJERI" icon={RefreshIcon} onClick={() => {}}></Button>
               </div>
             </div>
           </div>

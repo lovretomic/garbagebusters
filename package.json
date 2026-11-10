@@ -1,0 +1,33 @@
+{
+  "name": "ecosentry",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"yarn --cwd frontend dev\" \"yarn --cwd backend dev\"",
+    "lint": "eslint frontend backend",
+    "lint:fix": "eslint frontend backend --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:check:frontend": "prettier --check frontend",
+    "format:check:backend": "prettier --check backend",
+    "lint:frontend": "eslint frontend",
+    "lint:backend": "eslint backend",
+    "check:frontend": "yarn format:check:frontend && yarn lint:frontend",
+    "check:backend": "yarn format:check:backend && yarn lint:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10",
+    "typescript": "5",
+    "typescript-eslint": "^8.72.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  }
+}

@@ -1,11 +1,5 @@
-
 import express from "express";
-import {
-    getActions,
-    getActionById,
-    createAction,
-    deleteAction
-} from "./actions.controller";
+import { getActions, getActionById, createAction, deleteAction } from "./actions.controller";
 
 const router = express.Router();
 

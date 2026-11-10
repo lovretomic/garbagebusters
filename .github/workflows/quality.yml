@@ -1,0 +1,67 @@
+name: Code Quality & Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  frontend:
+    name: Frontend Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Yarn
+        run: corepack enable
+
+      - name: Install root dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install frontend dependencies
+        run: yarn --cwd frontend install --frozen-lockfile
+
+      - name: Check formatting
+        run: yarn format:check:frontend
+
+      - name: Run ESLint
+        run: yarn lint:frontend
+
+      - name: Build frontend
+        run: yarn --cwd frontend build
+
+  backend:
+    name: Backend Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Enable Yarn
+        run: corepack enable
+
+      - name: Install root dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install backend dependencies
+        run: yarn --cwd backend install --frozen-lockfile --production=false
+
+      - name: Check formatting
+        run: yarn format:check:backend
+
+      - name: Run ESLint
+        run: yarn lint:backend
