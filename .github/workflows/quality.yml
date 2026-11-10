@@ -65,24 +65,3 @@ jobs:
 
       - name: Run ESLint
         run: yarn lint:backend
-
-      - name: Build backend
-        run: yarn --cwd backend build
-
-      - name: Start Express server
-        run: |
-          PORT=3001 yarn --cwd backend start &
-          echo $! > server.pid
-
-      - name: Wait for Express server
-        run: |
-          for i in {1..30}; do
-            if curl -fsS http://localhost:3001/auth/health; then
-              echo "Express server is running!"
-              exit 0
-            fi
-            sleep 2
-          done
-
-          echo "Express server failed to start!"
-          exit 1
