@@ -1,11 +1,11 @@
-import c from "./Button.module.scss";
-import React from "react";
-import clsx from "clsx";
+import c from './Button.module.scss';
+import React from 'react';
+import clsx from 'clsx';
 
 type ButtonProps = {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: 'primary' | 'secondary';
   iconOnly?: boolean;
   icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -13,17 +13,14 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({
   title,
   subtitle,
-  variant = "primary",
+  variant = 'primary',
   iconOnly = false,
   className,
   icon: Icon,
   ...handlers
 }) => {
   return (
-    <button
-      className={clsx(c.button, className, c[variant], iconOnly && c.iconOnly)}
-      {...handlers}
-    >
+    <button className={clsx(c.button, className, c[variant], iconOnly && c.iconOnly)} {...handlers}>
       {!iconOnly && (
         <span className={c.text}>
           {title ? <span className={c.title}>{title}</span> : null}

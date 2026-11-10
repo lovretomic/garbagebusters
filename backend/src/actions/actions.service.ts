@@ -1,47 +1,49 @@
 import { prisma } from '../lib/prisma';
 
 export async function getActions() {
-    return prisma.cleanup_Action.findMany();
+  return prisma.cleanup_Action.findMany();
 }
 
 export async function getActionById(id: number) {
-    return prisma.cleanup_Action.findUnique({
-        where: { ID_Action: id }
-    });
+  return prisma.cleanup_Action.findUnique({
+    where: { ID_Action: id },
+  });
 }
 
-export async function createAction(data: {
+export async function createAction(
+  data: {
     name: string;
     description: string;
     max_volunteers: number;
     action_date: Date;
     action_time: string;
     action_location: string;
-}, reportId: number, organizer: number) {
-    return await prisma.cleanup_Action.create({
-        data: {
-            name: data.name,
-            description: data.description,
-            max_volunteers: data.max_volunteers,
-            action_date: data.action_date,
-            action_time: data.action_time,
-            action_location: data.action_location,
-            reports: {
-                connect: {
-                    ID_Report: reportId,
-                },
-            },
-            organizer:{
-                connect:{
-                    ID_User: organizer,
-                }
-            }
+  },
+  reportId: number,
+  organizer: number,
+) {
+  return await prisma.cleanup_Action.create({
+    data: {
+      name: data.name,
+      description: data.description,
+      max_volunteers: data.max_volunteers,
+      action_date: data.action_date,
+      action_time: data.action_time,
+      action_location: data.action_location,
+      reports: {
+        connect: {
+          ID_Report: reportId,
         },
-    });
+      },
+      organizer: {
+        connect: {
+          ID_User: organizer,
+        },
+      },
+    },
+  });
 }
 
 export async function deleteAction(id: number) {
-    return prisma.cleanup_Action.delete({where: {ID_Action: id}});
+  return prisma.cleanup_Action.delete({ where: { ID_Action: id } });
 }
-
-
