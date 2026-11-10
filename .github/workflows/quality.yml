@@ -1,0 +1,80 @@
+name: Code Quality & Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  frontend:
+    name: Frontend Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          yarn install --frozen-lockfile
+
+      - name: Check formatting
+        run: yarn format:check:frontend
+
+      - name: Run ESLint
+        run: yarn lint:frontend
+
+      - name: Build frontend
+        run: yarn --cwd frontend build
+
+  backend:
+    name: Backend Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          corepack enable
+          yarn install --frozen-lockfile
+
+      - name: Check formatting
+        run: yarn format:check:backend
+
+      - name: Run ESLint
+        run: yarn lint:backend
+
+      - name: Build backend
+        run: yarn --cwd backend build
+
+      - name: Start Express server
+        run: |
+          PORT=3001 yarn --cwd backend start &
+          echo $! > server.pid
+
+      - name: Wait for Express server
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:3001/auth/health; then
+              echo "Express server is running!"
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Express server failed to start!"
+          exit 1

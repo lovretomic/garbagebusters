@@ -8,7 +8,13 @@
     "lint:fix": "eslint frontend backend --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format:check:frontend": "prettier --check frontend",
+    "format:check:backend": "prettier --check backend",
+    "lint:frontend": "eslint frontend",
+    "lint:backend": "eslint backend",
+    "check:frontend": "yarn format:check:frontend && yarn lint:frontend",
+    "check:backend": "yarn format:check:backend && yarn lint:backend"
   },
   "devDependencies": {
     "concurrently": "^10.0.7",
