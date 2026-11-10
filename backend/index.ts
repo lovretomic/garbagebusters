@@ -9,6 +9,7 @@ import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
 
 const app = express();
+app.use(express.json());
 
 const sessionSecret = process.env.SESSION_SECRET;
 
