@@ -8,7 +8,6 @@
     "lint:fix": "eslint frontend backend --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky",
     "format:check:frontend": "prettier --check frontend",
     "format:check:backend": "prettier --check backend",
     "lint:frontend": "eslint frontend",
