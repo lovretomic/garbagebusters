@@ -1,0 +1,10 @@
+{
+  "name": "ecosentry",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"yarn --cwd frontend dev\" \"yarn --cwd backend dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7"
+  }
+}
