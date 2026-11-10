@@ -104,3 +104,50 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
     }})
 }
 
+export async function getActionCapacity(actionId: number) {
+    const action = await prisma.cleanup_Action.findUnique({
+        where: {ID_Action: actionId},
+        include: {
+            _count: {
+                select: {
+                    volunteers: true
+                }
+            }
+        }
+    });
+
+    if(!action) {
+        throw new Error("ACTION_NOT_FOUND");
+    }
+
+    const currentVolunteers = action._count.volunteers;
+
+    return {
+        ID_Action: action.ID_Action,
+        max_volunteers: action.max_volunteers,
+        current_volunteers: currentVolunteers,
+        available_spots: Math.max(0, action.max_volunteers - currentVolunteers),
+        is_full: currentVolunteers >= action.max_volunteers
+    };
+}
+
+export async function getAllActionsCapacity() {
+   const actions = await prisma.cleanup_Action.findMany({
+    include: {
+        _count:{
+            select:{
+                volunteers: true
+            }
+        }
+    }
+});
+
+return actions.map((action) => ({
+        ID_Action: action.ID_Action,
+        max_volunteers: action.max_volunteers,
+        current_volunteers: action._count.volunteers,
+        available_spots: Math.max(0, action.max_volunteers - action._count.volunteers),
+        is_full: action._count.volunteers >= action.max_volunteers
+}))
+}
+
