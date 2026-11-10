@@ -87,3 +87,22 @@ export async function deleteReport(userId: number, reportId: number): Promise<bo
 
   return result.count === 1;
 }
+
+export async function getMyReportById(userId: number, reportId: number) {
+  return prisma.report.findFirst({
+    where: {
+      ID_Report: reportId,
+      ID_User: userId,
+    },
+    select: {
+      ID_Report: true,
+      GPS_coordinates: true,
+      photos_before: true,
+      photos_after: true,
+      category: true,
+      waste_volume: true,
+      report_status: true,
+      Report_date: true,
+    },
+  });
+}

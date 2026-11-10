@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getMyReportsController,
+  getMyReportByIdController,
   createReportController,
   updateReportController,
   deleteReportController,
@@ -9,6 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/my", getMyReportsController);
+router.get("/:id", getMyReportByIdController);
 router.post("/", createReportController);
 router.patch("/:id", updateReportController);
 router.delete("/:id", deleteReportController);

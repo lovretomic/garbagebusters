@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   getMyReports,
+  getMyReportById,
   createReport,
   updateReport,
   deleteReport,
@@ -201,6 +202,45 @@ export async function deleteReportController(req: Request, res: Response): Promi
 
     res.status(500).json({
       message: "Failed to delete report.",
+    });
+  }
+}
+
+export async function getMyReportByIdController(req: Request, res: Response): Promise<void> {
+  const userId = req.session.user?.id;
+
+  if (!userId) {
+    res.status(401).json({
+      message: "Authentication required.",
+    });
+    return;
+  }
+
+  const reportId = Number(req.params.id);
+
+  if (!Number.isSafeInteger(reportId) || reportId <= 0) {
+    res.status(400).json({
+      message: "Invalid report ID.",
+    });
+    return;
+  }
+
+  try {
+    const report = await getMyReportById(userId, reportId);
+
+    if (!report) {
+      res.status(404).json({
+        message: "Report not found.",
+      });
+      return;
+    }
+
+    res.status(200).json(report);
+  } catch (error) {
+    console.error("Failed to fetch report:", error);
+
+    res.status(500).json({
+      message: "Failed to fetch report.",
     });
   }
 }
