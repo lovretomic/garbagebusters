@@ -1,10 +1,23 @@
+
+
 .reportCardDiv{
-	display: flex;
-	gap: 8px;
-	flex-direction: column;
-	padding: 24px;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+	max-width: 400px;
+	margin: auto;
+	@media(min-width: $breakpoint-desktop){
+		grid-template-columns: 1fr 1fr;
+		max-width: 800px;
+	}
+}
+
+.title{
+	@media(min-width: $breakpoint-desktop){
+		display: none;
+	}
 }
 
 body{
 	background-color: $primary-white;
-}
+}	

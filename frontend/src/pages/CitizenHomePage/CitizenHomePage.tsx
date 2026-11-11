@@ -5,9 +5,11 @@ const CitizenHomePage = () => {
   return (
     <>
       <h1>Citizen Home Page</h1>
+      <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
       <div className={c.reportCardDiv}>
-        <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
-        <ReportCard name="Odlagalište PPK Velebit" area="Gospić" />
+        <ReportCard name="Odlagalište PPK Velebit" area="Gospić" status="checked"/>
+        <ReportCard name="Odlagalište PPK Velebit" area="Gospić" status="in_progress"/>
+        <ReportCard name="Odlagalište PPK Velebit" area="Gospić" status="marked"/>
       </div>
     </>
   );
