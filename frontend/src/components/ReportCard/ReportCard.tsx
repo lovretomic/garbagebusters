@@ -17,7 +17,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
   name,
   area,
   imageUrl,
-  status = "todo",
+  status = "in_progress",
   className,
   ...handlers
 }) => {
