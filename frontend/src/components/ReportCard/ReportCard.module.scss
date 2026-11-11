@@ -42,17 +42,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 6px 8px;
 
   border-radius: 10px;
-  background-color: #A44EB7;
-
   color: $primary-white;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
 }
+
+.statusInProgress { background-color: #a44eb7; }
+.statusMarked     { background-color: #8b8b8b; }
+.statusChecked    { background-color: #5e5e5e; }
+
+
 
 .statusIcon {
   width: 18px;

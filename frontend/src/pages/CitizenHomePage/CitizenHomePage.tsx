@@ -6,8 +6,8 @@ const CitizenHomePage = () => {
     <>
       <h1>Citizen Home Page</h1>
       <div className={c.reportCardDiv}>
-        <h2 className={c.title}>Odlagališta koje ste prijavili</h2>
-        <ReportCard name="bla" area="bla" />
+        <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
+        <ReportCard name="Odlagalište PPK Velebit" area="Gospić" />
       </div>
     </>
   );
