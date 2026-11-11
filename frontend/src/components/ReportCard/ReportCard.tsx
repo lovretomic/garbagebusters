@@ -2,6 +2,7 @@ import c from "./ReportCard.module.scss";
 import React from "react";
 import clsx from "clsx";
 import GearIcon from "../../assets/icons/gear_icon.svg?react";
+import DefaultImage from "../../assets/images/default_image.png";
 
 export type ReportStatus = "todo" | "in_progress";
 
@@ -15,19 +16,16 @@ type ReportCardProps = {
 const ReportCard: React.FC<ReportCardProps> = ({
   name,
   area,
-  imageUrl = "../../assets/images/default_image.png",
+  imageUrl,
   status = "todo",
   className,
   ...handlers
 }) => {
+  const resolvedImageUrl = imageUrl || DefaultImage;
   return (
     <div className={clsx(c.cardDiv, className)} {...handlers}>
       <div className={c.imageWrap}>
-        {imageUrl ? (
-          <img src={imageUrl} alt="" className={c.backgroundImage} />
-        ) : (
-          <div className={c.placeholderImage} />
-        )}
+        <img src={resolvedImageUrl} alt="" className={c.backgroundImage} />
         <div className={c.gradientOverlay} />
       </div>
 
