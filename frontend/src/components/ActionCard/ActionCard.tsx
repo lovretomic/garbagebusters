@@ -18,7 +18,7 @@ const dateFormat = new Intl.DateTimeFormat("hr-HR", {
 const weekdayFormat = new Intl.DateTimeFormat("hr-HR", { weekday: "long" });
 
 const ActionCard: FC<ActionCardProps> = ({
-  name="Volontersko čišćenje",
+  name = "Volontersko čišćenje",
   landfill,
   county,
   date,
@@ -42,7 +42,9 @@ const ActionCard: FC<ActionCardProps> = ({
         </div>
         <div className={c.info}>
           <span>Broj prijava</span>
-          <span className={c.dot} /> {numberOfRegistrations}
+          <div className={c.numberDiv}>
+            <span className={c.dot} /> {numberOfRegistrations}
+          </div>
         </div>
       </div>
     </div>
