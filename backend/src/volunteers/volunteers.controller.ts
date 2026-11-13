@@ -11,12 +11,11 @@ import {
 
 export async function registerVolunteer(req: Request, res: Response) {
     try{
-        const userId = Number(req.body.ID_User);
+        const userId = req.session.user!.id;
         const actionId = Number(req.body.ID_Action);
 
-        if (!Number.isInteger(userId) || userId <= 0 ||
-            !Number.isInteger(actionId) || actionId <= 0) {
-            res.status(400).json({ message: "Invalid user or action ID." });
+        if (!Number.isInteger(actionId) || actionId <= 0) {
+            res.status(400).json({ message: "Invalid action ID." });
             return;
         }
 
@@ -56,7 +55,11 @@ export async function getVolunteersForAction(req: Request, res: Response) {
         const volunteers = await getVolunteersForActionService(actionId);
         res.status(200).json(volunteers);
 
-    } catch {
+    } catch (error) {
+        if (error instanceof Error && error.message === "ACTION_NOT_FOUND") {
+        res.status(404).json({ message: "Action not found." });
+        return;
+    }
        res.status(500).json({
           message: "ERROR: Can't get volunteers."
         });
@@ -65,7 +68,7 @@ export async function getVolunteersForAction(req: Request, res: Response) {
 
 export async function getActionsForVolunteers(req:Request, res: Response) {
     try{
-        const userId = Number(req.params.userId);
+        const userId = req.session.user!.id;
 
         if (!Number.isInteger(userId) || userId <= 0) {
             res.status(400).json({ message: "Invalid user ID." });
@@ -74,7 +77,11 @@ export async function getActionsForVolunteers(req:Request, res: Response) {
 
         const actions = await getActionsForVolunteerService(userId);
         res.status(200).json(actions);
-    } catch {
+    } catch (error) {
+        if (error instanceof Error && error.message === "CITIZEN_NOT_FOUND") {
+        res.status(404).json({ message: "Citizen not found." });
+        return;
+    }
         res.status(500).json({
             message: "ERROR: Can't get actions."
         });
@@ -85,7 +92,7 @@ export async function getActionsForVolunteers(req:Request, res: Response) {
 
 export async function unregisterVolunteer(req:Request, res: Response) {
     try {
-        const userId = Number(req.params.userId);
+        const userId = req.session.user!.id;
         const actionId = Number(req.params.actionId);
 
         if (!Number.isInteger(userId) || userId <= 0 ||
@@ -98,8 +105,12 @@ export async function unregisterVolunteer(req:Request, res: Response) {
 
         await unregisterVolunteerService(userId, actionId);
         res.status(204).send();
-        
-    } catch {
+
+    } catch (error) {
+        if (error instanceof Error && error.message === "REGISTRATION_NOT_FOUND") {
+        res.status(404).json({ message: "Registration not found." });
+        return;
+    }
         res.status(500).json({
             message: "ERROR: Can't unregister volunteer."
         })

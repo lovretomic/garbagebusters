@@ -51,13 +51,16 @@ app.use(
     })
 );
 
+app.use(express.json());
+
+
 app.get("/", (_req, res) => {
     res.json("Server works!");
 });
 
 app.use("/actions", actionsRoutes);
 app.use("/auth", authRoutes);
-app.use("/volunteer", volunteerRoutes)
+app.use("/volunteers", volunteerRoutes)
 
 const PORT = Number(process.env.PORT || 3001);
 
