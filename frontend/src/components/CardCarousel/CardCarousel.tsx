@@ -25,7 +25,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ children }) => {
 
 		track.addEventListener("scroll", onScroll, {passive:true});
 		return ()=>track.removeEventListener("scroll", onScroll);
-	})
+	}, [count]);
 
   return (
     
