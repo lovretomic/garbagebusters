@@ -1,24 +1,23 @@
+.page {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 24px 16px;
 
-
-.reportCardDiv{
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 16px;
-	max-width: 400px;
-	margin: auto;
-	padding: 24px;
-	@media(min-width: $breakpoint-desktop){
-		grid-template-columns: 1fr 1fr;
-		max-width: 800px;
-	}
+  @media (min-width: $breakpoint-desktop) {
+    max-width: 560px;
+  }
 }
 
-.title{
-	@media(min-width: $breakpoint-desktop){
-		display: none;
-	}
+.section {
+  margin-top: 32px;
 }
 
-body{
-	background-color: $primary-white;
-}	
+.title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+
+  @media (min-width: $breakpoint-desktop) {
+    display: none;
+  }
+}
