@@ -6,7 +6,7 @@
 
 **Cilj:** Jasno razgraničiti problem koji se rješava od predloženog rješenja i stvarne koristi za korisnika.
 
-[Problem, cilj i očekivana korist vlastitim riječima tima.]
+Divlja odlagališta otpada predstavljaju ekološki problem koji građani ne mogu na jednostavan način prijaviti i pratiti što se dalje događa s prijavom. Aplikacija Ecosentry omogućuje prijavljivanje divljih odlagališta i povezuje građane, eko-udruge te komunalne redare kako bi olakšala proces prijave, organizacije čišćenja i uklanjanje otpada.
 
 <details>
 <summary><strong>Očekivane koristi i potkrepljujući dokazi</strong></summary>
@@ -23,7 +23,10 @@
 
 | Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
 | --- | --- |
-|  |  |
+| Građanin | Prijaviti divlje odlagalište otpada, pratiti tijek prijava, praćenje povijesti vlastitih prijava i prijava kao volonter za sudjelovanje u čišćenjima. |
+| Eko-udruga | Pregledavanje prijavljenih odlagališta otpada, organiziranje akcija čišćenja, koordiniranje volontera i slanje zahtjeva za zatvaranje prijave. |
+| Komunalni redar (administrator) | Pregledavanje i upravljanje korisnicima, kontrola prijava otpada, izdavanje službenih naloga komunalnim tvrtkama te pregledavanje statistike prijava. |
+| Agencija za zaštitu podataka | Zahtijeva zaštitu njihovih osobnih podataka s primjenjivim propisima, ne koristi aplikaciju. |
 
 <details>
 <summary><strong>Korisnici, dionici i neobavezna persona</strong></summary>
@@ -46,9 +49,19 @@ Riječ je o dvjema različitim potrebama, a ne o dvjema izmišljenim biografijam
 
 **Cilj:** Jasno definirati granice sustava — što je obuhvaćeno odobrenim zadatkom, što je svjesno izostavljeno ili odgođeno te o kojim vanjskim uslugama sustav izravno ovisi.
 
-**Uključeno:** [Glavne mogućnosti.]  
-**Izvan opsega ili odgođeno:** [Navedite funkcionalnosti koje su namjerno izostavljene ili prebačene u buduće verzije, uz kratko inženjersko ili vremensko obrazloženje.] 
-**Vanjske ovisnosti:** [Navedite nužne vanjske usluge, API-je, baze podataka ili izvore informacija bez kojih sustav ne može funkcionirati (npr. Google Maps, platni pristupnici, vanjski pružatelj identiteta (OAuth)).]
+**Uključeno:** Prijava divljih odlagališta otpada fotografiranjem i pridruživanjem lokacije, praćenje statusa prijava, organiziranje akcija čišćenja uz prijavu volontera, moderiranje prijava te izdavanje službenih naloga komunalnim tvrtkama.
+
+**Izvan opsega ili odgođeno:** 
+- Stvarno izvršavanje službenih sanacija; sustav samo šalje nalog komunalnoj tvrtci i nije povezan s njenim podatkovnim sustavom.
+- Automatsko prepoznavanje i kategorizacija otpada na fotografijama prijave; zahtijeva veliki skup podataka i količinu vremena koju ova verzija aplikacije ne može ispuniti.
+
+
+**Vanjske ovisnosti:** 
+- Google Maps API za prikaz karte, postavljanje markera, geokodiranje i prikaz lokacije akcije čišćenja s uputama za dolazak.
+- Google Calendar API za automatsko generiranje događaja u korisnikovome Google kalendaru s točnim terminom, poveznicom na lokaciju i automatske podsjetnike. 
+- OpenWeatherMap API za vremensku prognozu na lokaciji tijekom akcije čišćenja s upozorenjima na nevrijeme.
+- OAuth 2.0 za registraciju i prijavu korisnika.
+- Aplikacija ostaje odgovorna za vlastite podatke o prijavama, korisnicima i statusima.
 
 <details>
 <summary><strong>Definiranje početne granice projekta</strong></summary>
@@ -72,7 +85,7 @@ Ovaj pregled zadržite na razini opsega: navedite glavnu mogućnost i njezinu gr
 
 **Cilj:** Objasniti kako korisnici trenutačno rješavaju problem i koja preostala potreba opravdava odobreni projekt.
 
-[U dvije do četiri rečenice opišite jedan postojeći postupak ili relevantno rješenje, što ono već omogućuje i koja konkretna potreba motivira ovaj projekt. Činjenične tvrdnje o vanjskim proizvodima ili praksama potkrijepite izvorom.]
+U Hrvatskoj postoji aplikacija [ELOO](https://eloo.haop.hr/public/o-projektu) koja građanima omogućuje prijavu divljih odlagališta otpada i [prijavu tih odlagališta nadležnim komunalnim redarima](https://mzozt.gov.hr/o-ministarstvu-1065/djelokrug/uprava-za-procjenu-utjecaja-na-okolis-i-odrzivo-gospodarenje-otpadom-1271/gospodarenje-otpadom/prijava-nezakonitog-odbacivanja-otpada-u-okolis/10418). Ecosentry dodatno omogućuje uključivanje eko-udruga i volontera kako bi se sanacija manjih odlagališta otpada mogla lakše koordinirati. EcoSentry ne zamjenjuje službene kanale prijave.
 
 <details>
 <summary><strong>Postojeći pristupi i opravdanost projekta</strong></summary>

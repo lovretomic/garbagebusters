@@ -7,7 +7,7 @@ import {
     deleteAction as deleteActionService
 } from "./actions.service";
 
-export async function getActions(req: Request, res: Response) {
+export async function getActions(_req: Request, res: Response) {
     try {
         const actions = await getActionsService();
         res.status(200).json(actions);
