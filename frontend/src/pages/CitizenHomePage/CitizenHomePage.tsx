@@ -8,7 +8,7 @@ const CitizenHomePage = () => {
     <>
       <h1>Citizen Home Page</h1>
       <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
-      <div className={c.reportCardDiv}>
+      <div>
         <CardCarousel>
           <ReportCard
             name="Odlagalište PPK Velebit"
