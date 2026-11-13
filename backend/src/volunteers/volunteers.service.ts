@@ -1,56 +1,99 @@
 import { prisma } from "../lib/prisma";
 
-export async function registerVolunteer(actionId:number, userId:number) {
-    const citizen = prisma.citizen.findUnique(
-        {where: {ID_User: userId}}
-    );
 
-    if(!citizen){
-         throw new Error('CITIZEN_NOT_FOUND');
+export async function registerVolunteer(actionId: number, userId: number) {
+    
+    for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+            return await prisma.$transaction(async (tx) => {
+                const citizen = await tx.citizen.findUnique({
+                    where: { ID_User: userId }
+                });
+
+                if (!citizen) {
+                    throw new Error("CITIZEN_NOT_FOUND");
+                }
+
+                const action = await tx.cleanup_Action.findUnique({
+                    where: { ID_Action: actionId },
+                    include: {
+                        _count: {
+                            select: {
+                                volunteers: true
+                            }
+                        }
+                    }
+                });
+
+                if (!action) {
+                    throw new Error("ACTION_NOT_FOUND");
+                }
+
+                if (action._count.volunteers >= action.max_volunteers) {
+                    throw new Error("ACTION_FULL");
+                }
+
+                return await tx.volunteers.create({
+                    data: {
+                        ID_User: userId,
+                        ID_Action: actionId
+                    }
+                });
+            }, {
+                isolationLevel: "Serializable"
+            });
+
+        } catch (error) {
+            const code = (error as { code?: string }).code;
+
+            
+            if (code === "P2002") {
+                throw new Error("ALREADY_REGISTERED");
+            }
+
+           
+            if (code === "P2034" && attempt < 2) {
+                continue;
+            }
+
+            if (code === "P2034") {
+                throw new Error("REGISTRATION_CONFLICT");
+            }
+
+            throw error;
+        }
     }
 
-    const action = await prisma.cleanup_Action.findUnique({
-        where: {ID_Action: actionId},
-        include: {
-            volunteers: true
-        }
-    })
-
-    if(!action){
-         throw new Error('ACTION_NOT_FOUND');
-    }
-
-    if(action.volunteers.length >= action.max_volunteers){
-        throw new Error('ACTION_FULL')
-    }
-
-    return prisma.volunteers.create(
-        {data: {
-             ID_User: userId,
-             ID_Action: actionId
-        }
-        }
-    );
+    throw new Error("REGISTRATION_CONFLICT");
 }
 
-export async function getVolunteersForAction(actoinId: number) {
-    const action = await prisma.cleanup_Action.findUnique({where: {ID_Action: actoinId},
+
+export async function getVolunteersForAction(actionId: number) {
+    const action = await prisma.cleanup_Action.findUnique({
+        where: { ID_Action: actionId },
         include: {
             volunteers: {
                 include: {
                     citizen: {
                         include: {
-                            user: true
+                            user: {
+                                select: {
+                                    ID_User: true,
+                                    name: true,
+                                    surname: true,
+                                    username: true,
+                                    profile_photo: true
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
     });
 
-    if(!action){
-         throw new Error('ACTION_NOT_FOUND');
+    if (!action) {
+        throw new Error("ACTION_NOT_FOUND");
     }
 
     return action.volunteers.map((registration) => ({
@@ -103,4 +146,52 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
         }
     }})
 }
+
+export async function getActionCapacity(actionId: number) {
+    const action = await prisma.cleanup_Action.findUnique({
+        where: {ID_Action: actionId},
+        include: {
+            _count: {
+                select: {
+                    volunteers: true
+                }
+            }
+        }
+    });
+
+    if(!action) {
+        throw new Error("ACTION_NOT_FOUND");
+    }
+
+    const currentVolunteers = action._count.volunteers;
+
+    return {
+        ID_Action: action.ID_Action,
+        max_volunteers: action.max_volunteers,
+        current_volunteers: currentVolunteers,
+        available_spots: Math.max(0, action.max_volunteers - currentVolunteers),
+        is_full: currentVolunteers >= action.max_volunteers
+    };
+}
+
+export async function getAllActionsCapacity() {
+   const actions = await prisma.cleanup_Action.findMany({
+    include: {
+        _count:{
+            select:{
+                volunteers: true
+            }
+        }
+    }
+});
+
+return actions.map((action) => ({
+        ID_Action: action.ID_Action,
+        max_volunteers: action.max_volunteers,
+        current_volunteers: action._count.volunteers,
+        available_spots: Math.max(0, action.max_volunteers - action._count.volunteers),
+        is_full: action._count.volunteers >= action.max_volunteers
+}))
+}
+    
 
