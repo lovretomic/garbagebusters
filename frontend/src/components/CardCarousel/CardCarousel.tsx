@@ -1,5 +1,5 @@
 import { Children, useEffect, useRef, useState } from "react";
-import type { FC, ReactNode } from "react";
+import type { ReactNode } from "react";
 import c from "./CardCarousel.module.scss";
 
 type CardCarouselProps = {
