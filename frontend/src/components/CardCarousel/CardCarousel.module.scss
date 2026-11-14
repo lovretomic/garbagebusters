@@ -6,7 +6,7 @@
   scrollbar-width: none;
   @media (min-width: $breakpoint-desktop) {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     overflow: visible;
     scroll-snap-type: none;
   }
