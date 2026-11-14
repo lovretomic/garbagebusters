@@ -1,15 +1,45 @@
 .layout {
-  height: 100vh;
+  height: 100dvh;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: 100%;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "content"
+    "nav";
 
   @media (min-width: $breakpoint-desktop) {
-    display: grid;
-    grid-auto-flow: dense;
-    transform: scaleY(-1);
-
-    > * {
-      transform: scaleY(-1);
-    }
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "nav"
+      "content";
   }
+}
+
+.content {
+  grid-area: content;
+  min-height: 0;
+  overflow-y: auto;
+  position: relative;
+  isolation: isolate; 
+
+ &::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(100%, 640px);
+  height: 220px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    ellipse 50% 100% at 50% 0%, 
+    rgba($primary-red, 0.3),
+    transparent
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+}
+
+.nav {
+  grid-area: nav;
 }
