@@ -83,14 +83,13 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **Cilj:** Prikazati važne pohranjene entitete, njihove identifikatore i veze te dovoljno atributa za razumijevanje podataka aplikacije. ER dijagram odvojen je od reprezentativnog UML dijagrama razreda u nastavku.
 
-**ER dijagram:** [Ugradite čitljiv dijagram projekta.]  
-**Izvor dijagrama:** [Poveznica na njegov izvor.]  
-**Implementacija:** [Navedite gdje je odgovarajući model podataka definiran u projektu.]
+ 
+**Implementacija:** Pristup bazi podataka implementiran je pomoću Prisme. Model podataka definiran je u [Prisma shemi](../backend/prisma/schema.prisma).
 
 <details>
 <summary><strong>Jedna prijava poplave i povezani podaci</strong></summary>
 
-**Primjer — CrisisMap:** Ana putem svojeg korisničkog računa podnosi prijavu poplave `R-104`. Odabire lokaciju na karti i označava razinu ozbiljnosti kao visoku. Građanin može podnijeti više prijava; svaka prijava pripada jednoj kategoriji kriznog događaja, primjerice *Poplava*. Aplikacija pohranjuje prijavu i njezine koordinate. Kartografske pločice dolaze od vanjskog pružatelja i nisu entiteti u modelu podataka aplikacije.
+**Primjer — CrisisMap:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
 
 ![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-crisismap-data-ERD.svg)
 
@@ -98,7 +97,7 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **PlantUML izvor:** [izvor](./puml/4-2-crisismap-data-ERD.puml)
 
-**Analiza primjera:** `R-104` ima jednog autora i jednu kategoriju; Ana i kategorija *Poplava* mogu biti povezane s više prijava. Dijagram prikazuje veze bez prepisivanja svih stupaca baze podataka ili pisanja drugog tabličnog opisa za svaki entitet. Ako aplikacija prihvaća i **anonimne** prijave, tu mogućnost prikažite u vezi s entitetom `Citizen`. Ako su kategorije fiksne vrijednosti, a ne pohranjeni zapisi, nemojte izmišljati tablicu kategorija. Završni ER dijagram usporedite s modelom trajne pohrane i objasnite samo razlike važne za razumijevanje projekta.
+**Analiza primjera:** Prijava 'R-22' ima jednog autora u ovom slučaju Petra. Jedan redar provjerava njegovu prijavu te prijava definira jednu akciju čišćenja. Petar može podnijeti više prijava te se u više akcija prijaviti, dok jedna akcija može obuhvatiti više prijava
 
 </details>
 
