@@ -20,17 +20,18 @@ Za svaki UML dijagram čuvajte čitljivu sliku i PlantUML izvor, kako je opisano
 
 **Cilj:** Objasniti nekoliko arhitekturnih odluka koje najviše utječu na rješenje i navesti njihove projektno specifične razloge.
 
-| Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
-| --- | --- | --- |
-| Pristup bazi podataka preko Prisme | Ručno pisani SQL upiti  | Prisma omogućuje povezivanje backend dijela aplikacije s bazom preko definiranih modela. TypeScript tipovi automatski se generiraju te se time smanjuje mogućnost pogreške. Uz to Prisma olakšava ažuriranje baze podataka bez potrebe za ručnim mijenjanjem SQL koda  |
-|Izrada frontenda pomoću Reacta| Izrada frontenda HTML-om, CSS-om i JavaScriptom |React je biblioteka koja se koristi za izradu korisničkih sučelja web-stranica i aplikacija. Koristimo baš njega jer omogućuje jednostavnu, brzu i učinkovitu izradu modernih web aplikacija. Njegova najveća prednost je komponentna struktura koja olakšava organizaciju koda, ponovno korištenje elemenata i održavanje aplikacije. Uz veliku zajednicu i bogat ekosustav biblioteka, React je fleksibilan, pouzdan i odličan za razvoj skalabilnih aplikacija|
-|Korištenje TypeScripta|Korištenje JavaScripta|TypeScript je napredniji i bolje strukturiran od JavaScripta jer ima ono što JavaScriptu nedostaje. Kod njega možemo vidjeti greške tijekom pisanja koda te nam je tako lakše i raditi|
+
 
 Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako važna odluka ima ADR, dovoljno je u tablici navesti njegov ID.
 
 <details>
 <summary><strong>Objašnjenje odabira</strong></summary>
 
+| Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
+| --- | --- | --- |
+| Pristup bazi podataka preko Prisme | Ručno pisani SQL upiti  | Prisma omogućuje povezivanje backend dijela aplikacije s bazom preko definiranih modela. TypeScript tipovi automatski se generiraju te se time smanjuje mogućnost pogreške. Uz to Prisma olakšava ažuriranje baze podataka bez potrebe za ručnim mijenjanjem SQL koda  |
+|Izrada frontenda pomoću Reacta| Izrada frontenda HTML-om, CSS-om i JavaScriptom |React je biblioteka koja se koristi za izradu korisničkih sučelja web-stranica i aplikacija. Koristimo baš njega jer omogućuje jednostavnu, brzu i učinkovitu izradu modernih web aplikacija. Njegova najveća prednost je komponentna struktura koja olakšava organizaciju koda, ponovno korištenje elemenata i održavanje aplikacije. Uz veliku zajednicu i bogat ekosustav biblioteka, React je fleksibilan, pouzdan i odličan za razvoj skalabilnih aplikacija|
+|Korištenje TypeScripta|Korištenje JavaScripta|TypeScript je napredniji i bolje strukturiran od JavaScripta jer ima ono što JavaScriptu nedostaje. Kod njega možemo vidjeti greške tijekom pisanja koda te nam je tako lakše i raditi|
 
 </details>
 
