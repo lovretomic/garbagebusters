@@ -106,7 +106,7 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 <details>
 <summary><strong>Oblikovanje odgovornosti prijave i dopuštenih promjena</strong></summary>
 
-**Primjer — CrisisMap:** Prijava sadrži pravila za promjenu vlastitog statusa. Razred tijeka rada koordinira podnošenje i pregled, dok sučelje repozitorija opisuje potrebne operacije trajne pohrane. Dijagram predlaže te odgovornosti prije implementacije.
+**Primjer — CrisisMap:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
 
 ![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-crisismap-domain-CD.svg)
 
