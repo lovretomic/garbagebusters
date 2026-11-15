@@ -45,12 +45,10 @@ entity Report{
    *waste_volume: decimal
    *report_status: enum
    *Report_date: datetime
-
-
 }
 
 entity Orders {
-   *ID_Order: ID <<PK>>
+    *ID_Order: ID <<PK>>
     --
     *ID_Report: ID <<FK>>
     *ID_Warden: ID <<FK>>
