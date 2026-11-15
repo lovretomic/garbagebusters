@@ -22,7 +22,7 @@ Za svaki UML dijagram čuvajte čitljivu sliku i PlantUML izvor, kako je opisano
 
 | Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
 | --- | --- | --- |
-|  |  |  |
+| Pristup bazi podataka preko Prisme | Ručno pisani SQL upiti  | Prisma omogućuje povezivanje backend dijela aplikacije s bazom preko definiranih modela. TypeScript tipovi automatski se generiraju te se time smanjuje mogućnost pogreške. Uz to Prisma olakšava ažuriranje baze podataka bez potrebe za ručnim mijenjanjem SQL koda  |
 
 Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako važna odluka ima ADR, dovoljno je u tablici navesti njegov ID.
 
