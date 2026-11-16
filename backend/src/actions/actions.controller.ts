@@ -11,7 +11,9 @@ export async function getActions(_req: Request, res: Response) {
     try {
         const actions = await getActionsService();
         res.status(200).json(actions);
-    } catch {
+    } catch (error) {
+        console.error("Failed to get actions:", error);
+
         res.status(500).json({
             message: "ERROR: Can't get actions."
         });

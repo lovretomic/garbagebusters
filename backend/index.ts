@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import volunteerRoutes from "./src/volunteers/volunteers.routes";
 import actionsRoutes from "./src/actions/actions.routes";
@@ -6,7 +7,6 @@ import session from "express-session";
 import reportsRoutes from "./src/reports/reports.routes";
 import associationRoutes from "./src/associations/associations.routes";
 
-import "dotenv/config";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
 
