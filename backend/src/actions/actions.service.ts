@@ -18,7 +18,6 @@ export async function createAction(data: {
     action_time: string;
     action_location: string;
 }, reportId: number, organizer: number) {
-}, reportId: number, organizer: number) {
     return await prisma.cleanup_Action.create({
         data: {
             name: data.name,
