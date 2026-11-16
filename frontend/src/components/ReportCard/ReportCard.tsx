@@ -6,8 +6,6 @@ import DefaultImage from "../../assets/images/default_image.png";
 import PersonCheckedIcon from "../../assets/icons/person_check_icon.svg?react";
 import FlagIcon from "../../assets/icons/flag_icon.svg?react";
 
-export type ReportStatus = "marked" | "checked" | "in_progress";
-
 const STATUS = {
   in_progress: {
     Icon: GearIcon,
@@ -30,7 +28,7 @@ type ReportCardProps = {
   name?: React.ReactNode;
   area?: React.ReactNode;
   imageUrl?: string;
-  status?: ReportStatus;
+  status?: keyof typeof STATUS;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const ReportCard: React.FC<ReportCardProps> = ({
