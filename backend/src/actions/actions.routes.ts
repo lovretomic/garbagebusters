@@ -6,12 +6,13 @@ import {
     createAction,
     deleteAction
 } from "./actions.controller";
+import { requireApprovedAssociation } from "../auth/association.middleware";
 
 const router = express.Router();
 
 router.get("/", getActions);
 router.get("/:id", getActionById);
-router.post("/", createAction);
+router.post("/", requireApprovedAssociation, createAction);
 router.delete("/:id", deleteAction);
 
 export default router;

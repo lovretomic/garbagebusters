@@ -54,7 +54,14 @@ export async function createAction(req: Request, res: Response) {
         };
 
         const reportId = req.body.ID_Report;
-        const organizer = req.body.ID_User;
+        const organizer = req.session.user?.id;
+
+        if (!organizer) {
+            res.status(401).json({
+                message: "Authentication required."
+            });
+            return;
+        }
 
         if (
             !data.name ||
