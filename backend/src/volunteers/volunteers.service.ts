@@ -11,7 +11,7 @@ export async function registerVolunteer(actionId: number, userId: number) {
                 });
 
                 if (!citizen) {
-                    throw new Error("CITIZEN_NOT_FOUND");
+                    throw new Error("Citizen not found.");
                 }
 
                 const action = await tx.cleanup_Action.findUnique({
@@ -26,11 +26,24 @@ export async function registerVolunteer(actionId: number, userId: number) {
                 });
 
                 if (!action) {
-                    throw new Error("ACTION_NOT_FOUND");
+                    throw new Error("Action not found.");
+                }
+
+                const actionDateTime = new Date(action.action_date);
+
+                actionDateTime.setHours(
+                    action.action_time.getHours(),
+                    action.action_time.getMinutes(),
+                    0,
+                    0
+                );
+
+                if (actionDateTime <= new Date()) {
+                    throw new Error("Action already passed.");
                 }
 
                 if (action._count.volunteers >= action.max_volunteers) {
-                    throw new Error("ACTION_FULL");
+                    throw new Error("Action full.");
                 }
 
                 return await tx.volunteers.create({
@@ -48,7 +61,7 @@ export async function registerVolunteer(actionId: number, userId: number) {
 
             
             if (code === "P2002") {
-                throw new Error("ALREADY_REGISTERED");
+                throw new Error("Already registered.");
             }
 
            
@@ -57,52 +70,16 @@ export async function registerVolunteer(actionId: number, userId: number) {
             }
 
             if (code === "P2034") {
-                throw new Error("REGISTRATION_CONFLICT");
+                throw new Error("Registration conflict.");
             }
 
             throw error;
         }
     }
 
-    throw new Error("REGISTRATION_CONFLICT");
+    throw new Error("Registration conflict.");
 }
 
-
-export async function getVolunteersForAction(actionId: number) {
-    const action = await prisma.cleanup_Action.findUnique({
-        where: { ID_Action: actionId },
-        include: {
-            volunteers: {
-                include: {
-                    citizen: {
-                        include: {
-                            user: {
-                                select: {
-                                    ID_User: true,
-                                    name: true,
-                                    surname: true,
-                                    username: true,
-                                    profile_photo: true
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    if (!action) {
-        throw new Error("ACTION_NOT_FOUND");
-    }
-
-    return action.volunteers.map((registration) => ({
-        ID_User: registration.ID_User,
-        ID_Action: registration.ID_Action,
-        signup_time: registration.signup_time,
-        citizen: registration.citizen.user
-    }));
-}
 
 export async function getActionsForVolunteers(userId: number) {
     const citizen = await prisma.citizen.findUnique({where: {
@@ -116,11 +93,11 @@ export async function getActionsForVolunteers(userId: number) {
     }});
 
     if(!citizen){
-         throw new Error('CITIZEN_NOT_FOUND');
+         throw new Error('Citizen not found.');
     }
 
     return citizen.volunteer_actions.map((registration) => ({
-    id_user: registration.ID_User,
+        ID_User: registration.ID_User,
         ID_Action: registration.ID_Action,
         signup_time: registration.signup_time,
         action: registration.action
@@ -136,7 +113,7 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
     });
 
     if(!registration) 
-        throw new Error("REGISTRATION_NOT_FOUND")
+        throw new Error("Registration not found.")
     
 
     return prisma.volunteers.delete({where: {
@@ -145,53 +122,6 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
             ID_Action: actionId
         }
     }})
-}
-
-export async function getActionCapacity(actionId: number) {
-    const action = await prisma.cleanup_Action.findUnique({
-        where: {ID_Action: actionId},
-        include: {
-            _count: {
-                select: {
-                    volunteers: true
-                }
-            }
-        }
-    });
-
-    if(!action) {
-        throw new Error("ACTION_NOT_FOUND");
-    }
-
-    const currentVolunteers = action._count.volunteers;
-
-    return {
-        ID_Action: action.ID_Action,
-        max_volunteers: action.max_volunteers,
-        current_volunteers: currentVolunteers,
-        available_spots: Math.max(0, action.max_volunteers - currentVolunteers),
-        is_full: currentVolunteers >= action.max_volunteers
-    };
-}
-
-export async function getAllActionsCapacity() {
-   const actions = await prisma.cleanup_Action.findMany({
-    include: {
-        _count:{
-            select:{
-                volunteers: true
-            }
-        }
-    }
-});
-
-return actions.map((action) => ({
-        ID_Action: action.ID_Action,
-        max_volunteers: action.max_volunteers,
-        current_volunteers: action._count.volunteers,
-        available_spots: Math.max(0, action.max_volunteers - action._count.volunteers),
-        is_full: action._count.volunteers >= action.max_volunteers
-}))
 }
     
 

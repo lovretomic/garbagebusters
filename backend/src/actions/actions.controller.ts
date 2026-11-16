@@ -4,7 +4,10 @@ import {
     getActions as getActionsService,
     getActionById as getActionByIdService,
     createAction as createActionService,
-    deleteAction as deleteActionService
+    deleteAction as deleteActionService,
+    getVolunteersForAction as getVolunteersForActionService,
+    getActionCapacity as getActionCapacityService,
+    getAllActionsCapacity as getAllActionsCapacityService
 } from "./actions.service";
 
 export async function getActions(_req: Request, res: Response) {
@@ -15,7 +18,7 @@ export async function getActions(_req: Request, res: Response) {
         console.error("Failed to get actions:", error);
 
         res.status(500).json({
-            message: "ERROR: Can't get actions."
+            message: "Can't get actions."
         });
     }
 }
@@ -39,7 +42,7 @@ export async function getActionById(req: Request, res: Response) {
         res.status(200).json(action);
     } catch {
         res.status(500).json({
-            message: "ERROR: Can't get action."
+            message: "Can't get action."
         });
     }
 }
@@ -86,7 +89,7 @@ export async function createAction(req: Request, res: Response) {
         res.status(201).json(action);
     } catch {
         res.status(500).json({
-            message: "ERROR: Can't create action."
+            message: "Can't create action."
         });
     }
 }
@@ -126,6 +129,63 @@ export async function deleteAction(req: Request, res: Response) {
 
         res.status(500).json({
             message: "Failed to delete action."
+        });
+    }
+}
+
+export async function getVolunteersForAction(req: Request, res: Response) {
+    try{
+        const actionId = Number(req.params.actionId);
+        
+        if (!Number.isInteger(actionId) || actionId <= 0) {
+            res.status(400).json({ message: "Invalid action ID." });
+            return;
+        }
+
+        const volunteers = await getVolunteersForActionService(actionId);
+        res.status(200).json(volunteers);
+
+    } catch (error) {
+        if (error instanceof Error && error.message === "Action not found.") {
+        res.status(404).json({ message: "Action not found." });
+        return;
+    }
+       res.status(500).json({
+          message: "Can't get volunteers."
+        });
+    }
+}
+
+export async function getActionCapacity(req: Request, res: Response) {
+    try{
+        const actionId = Number(req.params.actionId);
+
+        if(!Number.isInteger(actionId) || actionId <= 0) {
+            res.status(400).json({message: "Invalid action ID."});
+            return;
+        }
+
+        const capacity = await getActionCapacityService(actionId);
+        res.status(200).json(capacity);
+    } catch (error) {
+        if(error instanceof Error && error.message === "Action not found.") {
+            res.status(404).json({message: "Action not found."});
+            return;
+        }
+
+        res.status(500).json({
+            message: "Can't get action capacity."
+        });
+    }  
+}
+
+export async function getAllActionsCapacity(req: Request, res: Response) {
+    try {
+        const capacities = await getAllActionsCapacityService();
+        res.status(200).json(capacities);
+    } catch {
+        res.status(500).json({
+            message: "Can't get actions capacity."
         });
     }
 }
