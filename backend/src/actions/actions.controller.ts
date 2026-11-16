@@ -11,7 +11,9 @@ export async function getActions(_req: Request, res: Response) {
     try {
         const actions = await getActionsService();
         res.status(200).json(actions);
-    } catch {
+    } catch (error) {
+        console.error("Failed to get actions:", error);
+
         res.status(500).json({
             message: "ERROR: Can't get actions."
         });
@@ -54,7 +56,14 @@ export async function createAction(req: Request, res: Response) {
         };
 
         const reportId = req.body.ID_Report;
-        const organizer = req.body.ID_User;
+        const organizer = req.session.user?.id;
+
+        if (!organizer) {
+            res.status(401).json({
+                message: "Authentication required."
+            });
+            return;
+        }
 
         if (
             !data.name ||
@@ -84,18 +93,39 @@ export async function createAction(req: Request, res: Response) {
 
 export async function deleteAction(req: Request, res: Response) {
     try {
-        const id = Number(req.params.id);
+        const organizerId = req.session.user?.id;
 
-        if (!Number.isInteger(id) || id <= 0) {
-            res.status(400).json({ message: "Invalid action ID." });
+        if (!organizerId) {
+            res.status(401).json({
+                message: "Authentication required."
+            });
             return;
         }
 
-        await deleteActionService(id);
+        const id = Number(req.params.id);
+
+        if (!Number.isInteger(id) || id <= 0) {
+            res.status(400).json({
+                message: "Invalid action ID."
+            });
+            return;
+        }
+
+        const result = await deleteActionService(id, organizerId);
+
+        if (result.count === 0) {
+            res.status(404).json({
+                message: "Action not found."
+            });
+            return;
+        }
+
         res.status(204).send();
-    } catch {
+    } catch (error) {
+        console.error("Failed to delete action:", error);
+
         res.status(500).json({
-            message: "ERROR: Can't delete action."
+            message: "Failed to delete action."
         });
     }
 }
