@@ -28,7 +28,7 @@ const ActionCard: FC<ActionCardProps> = ({
 
   return (
     <div className={c.card}>
-      <CalendarIcon />
+      <CalendarIcon className={c.icon} />
       <h3 className={c.name}>{name}</h3>
       <p className={c.location}>
         {landfill}
