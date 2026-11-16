@@ -14,6 +14,8 @@
   text-align: left;
   cursor: pointer;
   transition: all 0.2s ease;
+  max-width: 600px;
+  margin: auto;
 
   &:hover:enabled {
     background-color: #d6d6d6;

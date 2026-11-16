@@ -1,0 +1,15 @@
+.layout {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  @media (min-width: $breakpoint-desktop) {
+    display: grid;
+    grid-auto-flow: dense;
+    transform: scaleY(-1);
+
+    > * {
+      transform: scaleY(-1);
+    }
+  }
+}
