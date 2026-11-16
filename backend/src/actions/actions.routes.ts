@@ -13,6 +13,6 @@ const router = express.Router();
 router.get("/", getActions);
 router.get("/:id", getActionById);
 router.post("/", requireApprovedAssociation, createAction);
-router.delete("/:id", deleteAction);
+router.delete("/:id", requireApprovedAssociation, deleteAction);
 
 export default router;
