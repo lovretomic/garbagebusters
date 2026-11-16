@@ -98,7 +98,7 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 **Cilj:** Prije implementacije reprezentativnog dijela sustava modelirati i prikazati razrede ili sučelja potrebna za dodjelu odgovornosti, operacija i veza. Oblikovanje ažurirajte kada se te odluke promijene.
 
  
-**Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.]
+**Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.](../backend/src/actions/actions.routes.ts)
 
 <details>
 <summary><strong>Oblikovanje odgovornosti prijave i dopuštenih promjena</strong></summary>
