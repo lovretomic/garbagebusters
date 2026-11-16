@@ -120,7 +120,7 @@ export async function getActionsForVolunteers(userId: number) {
     }
 
     return citizen.volunteer_actions.map((registration) => ({
-        ID_User: registration.ID_User,
+    id_user: registration.ID_User,
         ID_Action: registration.ID_Action,
         signup_time: registration.signup_time,
         action: registration.action
