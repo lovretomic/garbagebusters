@@ -1,10 +1,13 @@
-.marker {
-  $marker-color: #cb4b31;
+$marker-color: #cb4b31;
 
+.marker:hover {
+  opacity: 0.5;
+}
+
+.pinMarker {
   position: relative;
   display: flex;
   justify-content: center;
-  fill: $marker-color;
 
   .icon {
     > * {
@@ -24,7 +27,7 @@
     transform: translateY(50%);
   }
 
-  .name {
+  .nameContainer {
     position: absolute;
     bottom: -80%;
     font-weight: 500;
@@ -32,5 +35,15 @@
     background-color: $marker-color;
     padding: 8px;
     border-radius: 8px;
+    display: flex;
+    width: max-content;
   }
+}
+
+.dotMarker {
+  background-color: $marker-color;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  outline: 2px solid rgba($marker-color, 0.5);
 }
