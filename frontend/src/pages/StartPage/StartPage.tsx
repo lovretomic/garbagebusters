@@ -76,6 +76,7 @@ const StartPage = () => {
                 icon={GoogleIcon}
                 iconPosition="left"
                 variant="ternary"
+                onClick={() => window.location.assign("/auth/google")}
               ></Button>
             </div>
           </div>
