@@ -1,0 +1,59 @@
+.greeting {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    width: 320px;
+    height: 160px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      ellipse at center,
+      rgba($primary-red, 0.25),
+      transparent 70%
+    );
+    z-index: -1; 
+    pointer-events: none;
+  }
+}
+
+.avatar {
+  padding: 4px; 
+  border: 4px solid $primary-red;
+  border-radius: 12px;
+
+  @media (min-width: $breakpoint-desktop) {
+    border-radius: 50%;
+  }
+}
+
+.image {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+
+  @media (min-width: $breakpoint-desktop) {
+    border-radius: 50%;
+  }
+}
+
+.title {
+  margin: 8px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: rgba($primary-black, 0.5);
+}
