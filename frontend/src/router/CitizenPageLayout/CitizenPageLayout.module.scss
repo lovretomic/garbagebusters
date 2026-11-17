@@ -33,11 +33,7 @@
     margin: 0 auto;
     width: min(100%, 640px);
     height: 220px;
-    background: radial-gradient(
-      ellipse 50% 100% at 50% 0%,
-      rgba($primary-red, 0.3),
-      transparent
-    );
+    background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba($primary-red, 0.3), transparent);
     z-index: -1;
     pointer-events: none;
   }

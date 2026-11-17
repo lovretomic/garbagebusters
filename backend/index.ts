@@ -56,14 +56,13 @@ app.use(
 
 app.use(express.json());
 
-
 app.get("/", (_req, res) => {
   res.json("Server works!");
 });
 
 app.use("/actions", actionsRoutes);
 app.use("/auth", authRoutes);
-app.use("/volunteers", volunteerRoutes)
+app.use("/volunteers", volunteerRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/associations", associationRoutes);
 

@@ -39,10 +39,7 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ children }) => {
       {count > 1 && (
         <div className={c.dots} aria-hidden="true">
           {items.map((_, i) => (
-            <div
-              key={i}
-              className={`${c.dot} ${i === activeIndex ? c.active : ""}`}
-            />
+            <div key={i} className={`${c.dot} ${i === activeIndex ? c.active : ""}`} />
           ))}
         </div>
       )}
