@@ -1,7 +1,11 @@
 $marker-color: #cb4b31;
 
+.marker {
+  transition: opacity 100ms ease-in-out;
+}
+
 .marker:hover {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .pinMarker {

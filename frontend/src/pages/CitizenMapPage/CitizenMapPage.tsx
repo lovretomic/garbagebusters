@@ -26,6 +26,7 @@ const CitizenMapPage = () => {
       defaultZoom={7}
       gestureHandling="greedy"
       disableDefaultUI
+      clickableIcons={false}
       mapId="6ef6bf669e1fc32d2bf34c06"
       onZoomChanged={(event) => {
         setZoom(event.detail.zoom);

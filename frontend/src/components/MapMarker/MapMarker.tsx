@@ -17,7 +17,7 @@ const ZOOM_THRESHOLD = 15;
 
 const MapMarker = ({ position, name, zoom }: MapMarkerProps) => {
   return (
-    <AdvancedMarker position={position}>
+    <AdvancedMarker position={position} clickable>
       {zoom >= ZOOM_THRESHOLD && (
         <div className={clsx(c.marker, c.pinMarker)}>
           <MapPinIcon className={c.icon} />
