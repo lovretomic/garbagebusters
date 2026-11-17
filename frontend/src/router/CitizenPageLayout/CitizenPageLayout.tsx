@@ -12,13 +12,15 @@ const CitizenPageLayout = () => {
       <div className={c.content}>
         <Outlet />
       </div>
-      <Navigation
-        items={[
-          { label: "Item 1", href: "/home", icon: HouseIcon },
-          { label: "Item 2", href: "/notifications", icon: NotificationIcon },
-          { label: "Item 3", href: "/map", icon: MapIcon },
-        ]}
-      />
+      <div className={c.nav}>
+        <Navigation
+          items={[
+            { label: "Item 1", href: "/home", icon: HouseIcon },
+            { label: "Item 2", href: "/notifications", icon: NotificationIcon },
+            { label: "Item 3", href: "/map", icon: MapIcon },
+          ]}
+        />
+      </div>
     </div>
   );
 };

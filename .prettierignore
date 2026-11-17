@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+.next
+.vite
+package-lock.json
+yarn.lock
+/docs/**

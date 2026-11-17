@@ -1,10 +1,12 @@
+import "dotenv/config";
 import express from "express";
+import volunteerRoutes from "./src/volunteers/volunteers.routes";
 import actionsRoutes from "./src/actions/actions.routes";
 import authRoutes from "./src/auth/auth.routes";
 import session from "express-session";
 import reportsRoutes from "./src/reports/reports.routes";
+import associationRoutes from "./src/associations/associations.routes";
 
-import "dotenv/config";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
 
@@ -51,6 +53,8 @@ app.use(
     },
   }),
 );
+
+app.use(express.json());
 
 app.get("/", (_req, res) => {
   res.json("Server works!");
@@ -103,6 +107,9 @@ app.get("/", (_req, res) => {
 
 app.use("/actions", actionsRoutes);
 app.use("/auth", authRoutes);
+app.use("/volunteers", volunteerRoutes);
+app.use("/reports", reportsRoutes);
+app.use("/associations", associationRoutes);
 
 const PORT = Number(process.env.PORT || 3001);
 

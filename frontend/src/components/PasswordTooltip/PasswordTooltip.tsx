@@ -20,10 +20,7 @@ const PasswordTooltip: React.FC<PasswordTooltipProps> = ({
     <span className={clsx(passed && c.met)}>{title}</span>
     <ul className={c.list}>
       {passwordRules.map((rule) => (
-        <li
-          key={rule.id}
-          className={clsx(c.rule, rule.test(password) && c.met)}
-        >
+        <li key={rule.id} className={clsx(c.rule, rule.test(password) && c.met)}>
           <div className={clsx(c.dot, rule.test(password) && c.dotMet)}></div>
           {rule.label}
         </li>
