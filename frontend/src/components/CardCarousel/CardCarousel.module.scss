@@ -1,0 +1,43 @@
+.track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  @media (min-width: $breakpoint-desktop) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+}
+
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  @media (min-width: $breakpoint-desktop) {
+    display: none;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  cursor: pointer;
+}
+
+.active {
+  background: $primary-red;
+}

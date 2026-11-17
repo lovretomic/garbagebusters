@@ -5,3 +5,9 @@ node_modules
 /src/generated/prisma
 
 dist
+
+.postman
+
+migrations
+
+postman

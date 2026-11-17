@@ -1,18 +1,49 @@
 import { Request, Response } from "express";
 import {
   getActions as getActionsService,
+  getActionsByUserId as getActionsByUserIdService,
   getActionById as getActionByIdService,
   createAction as createActionService,
   deleteAction as deleteActionService,
+  getVolunteersForAction as getVolunteersForActionService,
+  getActionCapacity as getActionCapacityService,
+  getAllActionsCapacity as getAllActionsCapacityService,
 } from "./actions.service";
+import { AppError } from "../error-handling/app.error";
 
 export async function getActions(_req: Request, res: Response) {
   try {
     const actions = await getActionsService();
     res.status(200).json(actions);
+  } catch (error) {
+    console.error("Failed to get actions:", error);
+
+    res.status(500).json({
+      message: "Can't get actions.",
+    });
+  }
+}
+
+export async function getActionsByUserId(req: Request, res: Response) {
+  try {
+    const id = Number(req.params.userid);
+
+    if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({ message: "Invalid action ID." });
+      return;
+    }
+
+    const actions = await getActionsByUserIdService(id);
+
+    if (actions.length === 0) {
+      res.status(404).json({ message: "Action not found." });
+      return;
+    }
+
+    res.status(200).json(actions);
   } catch {
     res.status(500).json({
-      message: "ERROR: Can't get actions.",
+      message: "Can't get actions.",
     });
   }
 }
@@ -36,7 +67,7 @@ export async function getActionById(req: Request, res: Response) {
     res.status(200).json(action);
   } catch {
     res.status(500).json({
-      message: "ERROR: Can't get action.",
+      message: "Can't get actions.",
     });
   }
 }
@@ -53,7 +84,14 @@ export async function createAction(req: Request, res: Response) {
     };
 
     const reportId = req.body.ID_Report;
-    const organizer = req.body.ID_User;
+    const organizer = req.session.user?.id;
+
+    if (!organizer) {
+      res.status(401).json({
+        message: "Authentication required.",
+      });
+      return;
+    }
 
     if (
       !data.name ||
@@ -76,25 +114,104 @@ export async function createAction(req: Request, res: Response) {
     res.status(201).json(action);
   } catch {
     res.status(500).json({
-      message: "ERROR: Can't create action.",
+      message: "Can't create action.",
     });
   }
 }
 
 export async function deleteAction(req: Request, res: Response) {
   try {
+    const organizerId = req.session.user?.id;
+
+    if (!organizerId) {
+      res.status(401).json({
+        message: "Authentication required.",
+      });
+      return;
+    }
+
     const id = Number(req.params.id);
 
     if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({
+        message: "Invalid action ID.",
+      });
+      return;
+    }
+
+    const result = await deleteActionService(id, organizerId);
+
+    if (result.count === 0) {
+      res.status(404).json({
+        message: "Action not found.",
+      });
+      return;
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Failed to delete action:", error);
+
+    res.status(500).json({
+      message: "Failed to delete action.",
+    });
+  }
+}
+
+export async function getVolunteersForAction(req: Request, res: Response) {
+  try {
+    const actionId = Number(req.params.actionId);
+
+    if (!Number.isInteger(actionId) || actionId <= 0) {
       res.status(400).json({ message: "Invalid action ID." });
       return;
     }
 
-    await deleteActionService(id);
-    res.status(204).send();
+    const volunteers = await getVolunteersForActionService(actionId);
+    res.status(200).json(volunteers);
+  } catch (error) {
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({
+        message: error.message,
+      });
+    }
+    res.status(500).json({
+      message: "Can't get volunteers.",
+    });
+  }
+}
+
+export async function getActionCapacity(req: Request, res: Response) {
+  try {
+    const actionId = Number(req.params.actionId);
+
+    if (!Number.isInteger(actionId) || actionId <= 0) {
+      res.status(400).json({ message: "Invalid action ID." });
+      return;
+    }
+
+    const capacity = await getActionCapacityService(actionId);
+    res.status(200).json(capacity);
+  } catch (error) {
+    if (error instanceof AppError) {
+      return res.status(error.statusCode).json({
+        message: error.message,
+      });
+    }
+
+    res.status(500).json({
+      message: "Can't get action capacity.",
+    });
+  }
+}
+
+export async function getAllActionsCapacity(req: Request, res: Response) {
+  try {
+    const capacities = await getAllActionsCapacityService();
+    res.status(200).json(capacities);
   } catch {
     res.status(500).json({
-      message: "ERROR: Can't delete action.",
+      message: "Can't get actions capacity.",
     });
   }
 }
