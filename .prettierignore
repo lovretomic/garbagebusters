@@ -6,3 +6,4 @@ coverage
 .vite
 package-lock.json
 yarn.lock
+/docs/**
