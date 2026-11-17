@@ -47,7 +47,7 @@ export async function getActionsByUserId(id: number) {
 }
 
 export async function getActionById(id: number) {
-    const action = await prisma.cleanup_Action.findMany({
+    const action = await prisma.cleanup_Action.findUnique({
         where: {
                 ID_Action: id
         },
