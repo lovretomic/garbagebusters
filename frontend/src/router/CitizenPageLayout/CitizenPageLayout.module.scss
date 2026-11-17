@@ -18,28 +18,27 @@
 .content {
   grid-area: content;
   min-height: 0;
+  min-width: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
-  isolation: isolate; 
+  isolation: isolate;
 
- &::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(100%, 640px);
-  height: 220px;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    ellipse 50% 100% at 50% 0%, 
-    rgba($primary-red, 0.3),
-    transparent
-  );
-  z-index: -1;
-  pointer-events: none;
-}
-}
-
-.nav {
-  grid-area: nav;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: min(100%, 640px);
+    height: 220px;
+    background: radial-gradient(
+      ellipse 50% 100% at 50% 0%,
+      rgba($primary-red, 0.3),
+      transparent
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
 }
