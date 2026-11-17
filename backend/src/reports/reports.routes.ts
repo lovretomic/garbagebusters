@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/my", getMyReportsController);
+router.get("/me", getMyReportsController);
 router.get("/:id", getMyReportByIdController);
 router.post("/", createReportController);
 router.patch("/:id", updateReportController);
