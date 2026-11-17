@@ -1,0 +1,36 @@
+.marker {
+  $marker-color: #cb4b31;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  fill: $marker-color;
+
+  .icon {
+    > * {
+      fill: $marker-color;
+    }
+  }
+
+  .circle {
+    background-color: $marker-color;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    outline: 8px solid rgba($marker-color, 0.5);
+    opacity: 0.2;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+  }
+
+  .name {
+    position: absolute;
+    bottom: -80%;
+    font-weight: 500;
+    color: $primary-white;
+    background-color: $marker-color;
+    padding: 8px;
+    border-radius: 8px;
+  }
+}
