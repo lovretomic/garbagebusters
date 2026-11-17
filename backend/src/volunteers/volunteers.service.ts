@@ -1,4 +1,5 @@
 import { prisma } from "../lib/prisma";
+import { AppError } from "../error-handling/app.error";
 
 
 export async function registerVolunteer(actionId: number, userId: number) {
@@ -11,7 +12,7 @@ export async function registerVolunteer(actionId: number, userId: number) {
                 });
 
                 if (!citizen) {
-                    throw new Error("Citizen not found.");
+                    throw new AppError("Citizen not found.", 404);
                 }
 
                 const action = await tx.cleanup_Action.findUnique({
@@ -26,7 +27,7 @@ export async function registerVolunteer(actionId: number, userId: number) {
                 });
 
                 if (!action) {
-                    throw new Error("Action not found.");
+                    throw new AppError("Action not found.", 404);
                 }
 
                 const actionDateTime = new Date(action.action_date);
@@ -39,11 +40,11 @@ export async function registerVolunteer(actionId: number, userId: number) {
                 );
 
                 if (actionDateTime <= new Date()) {
-                    throw new Error("Action already passed.");
+                    throw new AppError("Action already passed.", 400);
                 }
 
                 if (action._count.volunteers >= action.max_volunteers) {
-                    throw new Error("Action full.");
+                    throw new AppError("Action full.", 409);
                 }
 
                 return await tx.volunteers.create({
@@ -61,7 +62,7 @@ export async function registerVolunteer(actionId: number, userId: number) {
 
             
             if (code === "P2002") {
-                throw new Error("Already registered.");
+                throw new AppError("Already registered.", 409);
             }
 
            
@@ -70,14 +71,14 @@ export async function registerVolunteer(actionId: number, userId: number) {
             }
 
             if (code === "P2034") {
-                throw new Error("Registration conflict.");
+                throw new AppError("Registration conflict.", 409);
             }
 
             throw error;
         }
     }
 
-    throw new Error("Registration conflict.");
+    throw new AppError("Registration conflict.", 409);
 }
 
 
@@ -93,7 +94,7 @@ export async function getActionsForVolunteers(userId: number) {
     }});
 
     if(!citizen){
-         throw new Error('Citizen not found.');
+         throw new AppError('Citizen not found.', 404);
     }
 
     return citizen.volunteer_actions.map((registration) => ({
@@ -113,7 +114,7 @@ export async function unregisterVolunteer(userId: number, actionId: number) {
     });
 
     if(!registration) 
-        throw new Error("Registration not found.")
+        throw new AppError("Registration not found.", 404)
     
 
     return prisma.volunteers.delete({where: {

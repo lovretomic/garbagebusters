@@ -2,6 +2,7 @@
 import express from "express";
 import {
     getActions,
+    getActionsByUserId,
     getActionById,
     createAction,
     deleteAction,
@@ -14,7 +15,8 @@ import { requireApprovedAssociation } from "../auth/association.middleware";
 const router = express.Router();
 
 router.get("/", getActions);
-router.get("/:EcoAid", getActionById);
+router.get("/:userid", getActionsByUserId);
+router.get("/:id", getActionById);
 router.get("/:id/volunteers", getVolunteersForAction);
 router.get("/capacity", getAllActionsCapacity);
 router.get("/:id/capacity", getActionCapacity);

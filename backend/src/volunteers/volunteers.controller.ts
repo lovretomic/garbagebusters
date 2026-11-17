@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../error-handling/app.error";
 import {
     registerVolunteer as registerVolunteerService,
     getActionsForVolunteers as getActionsForVolunteerService,
@@ -18,34 +19,19 @@ export async function registerVolunteer(req: Request, res: Response) {
 
         const volunteer =  await registerVolunteerService(actionId, userId);
         res.status(201).json(volunteer);
-  } catch (error) {
-        if (error instanceof Error) {
-            if (error.message === "Citizen not found." ||
-                error.message === "Action not found.") {
-                res.status(404).json({ message: error.message });
-                return;
-            }
 
-            if (error.message === "Action full." ||
-                error.message === "Already registered." ||
-                error.message === "Registration conflict.") {
-                res.status(409).json({ message: error.message });
-                return;
-            }
-        }
-
-        if (error instanceof Error && error.message === "Action already passed.") {
-            return res.status(400).json({
-                message: "Registration is not possible because the action has already passed."
-            });
-        }
-
+    } catch (error) {
+    if (error instanceof AppError) {
+        return res.status(error.statusCode).json({
+            message: error.message
+        });
+    }
         res.status(500).json({
             message: "Can't register volunteer."
         });
+    
     }
 }
-
 export async function getActionsForVolunteers(req:Request, res: Response) {
     try{
         const userId = req.session.user!.id;
@@ -58,17 +44,17 @@ export async function getActionsForVolunteers(req:Request, res: Response) {
         const actions = await getActionsForVolunteerService(userId);
         res.status(200).json(actions);
     } catch (error) {
-        if (error instanceof Error && error.message === "Citizen not found.") {
-        res.status(404).json({ message: "Citizen not found." });
+        if (error instanceof AppError) {
+        return res.status(error.statusCode).json({
+            message: error.message
+        });
+    }
         return;
     }
         res.status(500).json({
             message: "Can't get actions."
         });
     }
-
-
-}
 
 export async function unregisterVolunteer(req:Request, res: Response) {
     try {
@@ -87,12 +73,14 @@ export async function unregisterVolunteer(req:Request, res: Response) {
         res.status(204).send();
 
     } catch (error) {
-        if (error instanceof Error && error.message === "Registration not found.") {
-        res.status(404).json({ message: "Registration not found." });
-        return;
+       if (error instanceof AppError) {
+        return res.status(error.statusCode).json({
+            message: error.message
+        });
+    }
     }
         res.status(500).json({
             message: "Can't unregister volunteer."
         })
 }
-}
+

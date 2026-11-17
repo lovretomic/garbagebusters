@@ -1,7 +1,7 @@
-
 import { Request, Response } from "express";
 import {
     getActions as getActionsService,
+    getActionsByUserId as getActionsByUserIdService,
     getActionById as getActionByIdService,
     createAction as createActionService,
     deleteAction as deleteActionService,
@@ -9,6 +9,7 @@ import {
     getActionCapacity as getActionCapacityService,
     getAllActionsCapacity as getAllActionsCapacityService
 } from "./actions.service";
+import { AppError } from "../error-handling/app.error";
 
 export async function getActions(_req: Request, res: Response) {
     try {
@@ -17,6 +18,30 @@ export async function getActions(_req: Request, res: Response) {
     } catch (error) {
         console.error("Failed to get actions:", error);
 
+        res.status(500).json({
+            message: "Can't get actions."
+        });
+    }
+}
+
+export async function getActionsByUserId(req: Request, res: Response) {
+    try {
+        const id = Number(req.params.id);
+
+        if (!Number.isInteger(id) || id <= 0) {
+            res.status(400).json({ message: "Invalid action ID." });
+            return;
+        }
+
+        const actions = await getActionsByUserIdService(id);
+
+        if (actions.length === 0) {
+            res.status(404).json({ message: "Action not found." });
+            return;
+        }
+
+        res.status(200).json(actions);
+    } catch {
         res.status(500).json({
             message: "Can't get actions."
         });
@@ -42,7 +67,7 @@ export async function getActionById(req: Request, res: Response) {
         res.status(200).json(action);
     } catch {
         res.status(500).json({
-            message: "Can't get action."
+            message: "Can't get actions."
         });
     }
 }
@@ -146,9 +171,10 @@ export async function getVolunteersForAction(req: Request, res: Response) {
         res.status(200).json(volunteers);
 
     } catch (error) {
-        if (error instanceof Error && error.message === "Action not found.") {
-        res.status(404).json({ message: "Action not found." });
-        return;
+        if (error instanceof AppError) {
+         return res.status(error.statusCode).json({
+            message: error.message
+        });
     }
        res.status(500).json({
           message: "Can't get volunteers."
@@ -168,9 +194,10 @@ export async function getActionCapacity(req: Request, res: Response) {
         const capacity = await getActionCapacityService(actionId);
         res.status(200).json(capacity);
     } catch (error) {
-        if(error instanceof Error && error.message === "Action not found.") {
-            res.status(404).json({message: "Action not found."});
-            return;
+        if(error instanceof AppError) {
+             return res.status(error.statusCode).json({
+             message: error.message
+        });
         }
 
         res.status(500).json({

@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma';
+import { AppError } from "../error-handling/app.error";
 
 export async function getActions() {
     const actions = await prisma.cleanup_Action.findMany({
@@ -12,16 +13,15 @@ export async function getActions() {
     });
 
     if(actions.length === 0) {
-        throw new Error("Action not found.");
+        throw new AppError("Action not found.", 404);
     }
 
     return actions.map((action) => ({
-        ...action,
-        currentVolunteers: action._count.volunteers
+        ...action
     }));
 }
 
-export async function getActionById(id: number) {
+export async function getActionsByUserId(id: number) {
     const actions = await prisma.cleanup_Action.findMany({
         where: {
              organizer: {
@@ -38,13 +38,33 @@ export async function getActionById(id: number) {
     });
 
     if (actions.length === 0) {
-        throw new Error("Action not found.");
+        throw new AppError("Action not found.", 404);
     }
 
     return actions.map((action) => ({
         ...action,
-        currentVolunteers: action._count.volunteers
     }));
+}
+
+export async function getActionById(id: number) {
+    const action = await prisma.cleanup_Action.findMany({
+        where: {
+                ID_Action: id
+        },
+        include: {
+            _count: {
+                select: {
+                    volunteers: true
+                }
+            }
+        }
+    });
+
+    if (!action) {
+        throw new AppError("Action not found.", 404);
+    }
+
+    return action;
 }
 
 export async function createAction(data: {
@@ -111,7 +131,7 @@ export async function getVolunteersForAction(actionId: number) {
     });
 
     if (!action) {
-        throw new Error("Action not found.");
+        throw new AppError("Action not found.", 404);
     }
 
     return action.volunteers.map((registration) => ({
@@ -135,7 +155,7 @@ export async function getActionCapacity(actionId: number) {
     });
 
     if(!action) {
-        throw new Error("Action not found.");
+        throw new AppError("Action not found.", 404);
     }
 
     const currentVolunteers = action._count.volunteers;
