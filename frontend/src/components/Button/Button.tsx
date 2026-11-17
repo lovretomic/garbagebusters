@@ -22,10 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   ...handlers
 }) => {
   return (
-    <button
-      className={clsx(c.button, className, c[variant], iconOnly && c.iconOnly)}
-      {...handlers}
-    >
+    <button className={clsx(c.button, className, c[variant], iconOnly && c.iconOnly)} {...handlers}>
       {iconPosition == "right" && (
         <>
           {!iconOnly && (

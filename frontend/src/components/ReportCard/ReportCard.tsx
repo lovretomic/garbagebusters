@@ -53,7 +53,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
           <badge.Icon className={c.statusIcon} />
           <span>{badge.label}</span>
         </div>
-      )}	
+      )}
 
       <div className={c.content}>
         {name ? <span className={c.name}>{name}</span> : null}

@@ -2,9 +2,9 @@ import express from "express";
 import { requireAuth } from "../auth/auth.middleware";
 
 import {
-    registerVolunteer,
-    getActionsForVolunteers,
-    unregisterVolunteer,
+  registerVolunteer,
+  getActionsForVolunteers,
+  unregisterVolunteer,
 } from "./volunteers.controller";
 
 const router = express.Router();
