@@ -212,6 +212,13 @@
     "@eslint/core" "^1.2.1"
     levn "^0.4.1"
 
+"@googlemaps/js-api-loader@^2.1.1":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-2.1.3.tgz#a7b00331d5f89f4f7254bed53564b2eb03dd4a45"
+  integrity sha512-1t6umwRufEGzIPjHPjPeuuY1dCal0zU2bZeomkf4OA0MprFdlKCnXY3zeFkzDaCvKjwbFubeapm61P5+EbrAoA==
+  dependencies:
+    "@types/google.maps" "^3.65.3"
+
 "@humanfs/core@^0.19.2":
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.2.tgz#a8272ca03b2acf492670222b2320b6c421bfde60"
@@ -560,6 +567,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.9.tgz#cf3f0e876d7bee15a93ab925b82bf570a3904a24"
   integrity sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==
 
+"@types/google.maps@^3.65.3", "@types/google.maps@^3.65.5":
+  version "3.66.10"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.66.10.tgz#dcc3ef863788d993b596d46105b2daf548f2b1bd"
+  integrity sha512-LEB9EgUn6w1tbLfHtqXyiJQnugugTXvwimYCQAiMstMv69Hk3LymTugitvXArpWAIP6Uzh47iqZbz4rJ2ln0xQ==
+
 "@types/json-schema@^7.0.15":
   version "7.0.15"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
@@ -679,6 +691,15 @@
   dependencies:
     "@typescript-eslint/types" "8.72.0"
     eslint-visitor-keys "^5.0.0"
+
+"@vis.gl/react-google-maps@^1.10.2":
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/@vis.gl/react-google-maps/-/react-google-maps-1.10.2.tgz#1652b9ab100862ab2bb68dff9be644943d530b79"
+  integrity sha512-2cVOoaum3UDBDWhQwDGg8YxhFBIZ/B9YmRJxuHPZcCPMEf9VfqEw3ZRgD5GUXC9OA/0cbYx250obvZGPmBOIkw==
+  dependencies:
+    "@googlemaps/js-api-loader" "^2.1.1"
+    "@types/google.maps" "^3.65.5"
+    fast-equals "^6.0.2"
 
 "@vitejs/plugin-react@^6.1.2":
   version "6.1.2"
@@ -978,6 +999,11 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
+
+fast-equals@^6.0.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/fast-equals/-/fast-equals-6.2.2.tgz#c98d89a2b1372e4b00df325ad0f3cb3221a26bed"
+  integrity sha512-n+XqoarWCgcar0O3om3DeNYx6xTuLWGTUF1bRZ9iuO00tsPepzP1L4V7rqtxxZ4PEya34UCESReimFvxmEVwIA==
 
 fast-json-stable-stringify@^2.0.0:
   version "2.1.0"
