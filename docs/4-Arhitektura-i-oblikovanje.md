@@ -40,31 +40,28 @@ Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako va�
 
 **Cilj:** Prikazati logičku podjelu programa na komponente, njihova sučelja i vanjske integracije. Dijagram komponenata prikazuje logičku organizaciju, dok dijagram razmještaja prikazuje fizičko izvođenje. Ovaj pogled ažurirajte kako sustav poprima konačan oblik.
 
-**Dijagram komponenata:** [Ugradite čitljiv UML dijagram komponenata.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]
 
-| Komponenta | Odgovornost | Razlog za ovu granicu |
-| --- | --- | --- |
-|  |  |  |
 
 Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dijelove s različitim odgovornostima; planiranu bazu podataka aplikacije smjestite unutar granice, a usluge trećih strana izvan nje. Važne veze označite podatkom ili uslugom koja njima prolazi. Logička komponenta može biti modul unutar jedne poslužiteljske aplikacije: zaseban pravokutnik ne znači zasebno postavljenu uslugu. Tijekom implementacije ažurirajte dijagram kada se promijene odgovornosti ili veze. U završnoj inačici čitatelj treba moći povezati njegove dijelove s kodom. Dijagram razmještaja odgovara na pitanje gdje se ti dijelovi stvarno izvode.
 
 <details>
 <summary><strong>Granica sustava, odgovornosti i vanjske ovisnosti</strong></summary>
 
-**Primjer — CrisisMap:** Predložena arhitektura podržava podnošenje prijava kriznih događaja, prikaz na karti i obavijesti o potvrđenim prijavama.
 
-![Dijagram komponenata sustava CrisisMap](./assets/diagrams/4-1-crisismap-system-CMP.svg)
-
-**Slika 4.1. Dijagram komponenata sustava CrisisMap**
-
-**PlantUML izvor:** [izvor](./puml/4-1-crisismap-system-CMP.puml)
 
 | Dio | Odgovornost | Razlog za ovu granicu |
 | --- | --- | --- |
+|Web Klijent(fronted)|Prikazuje interaktivnu kartu, omogućuje unos novih prijava te pregled akcija|Odvajanje korisničkog sučelja od obrade podataka i pohrane|
+|Prisma Client|Služi kao prevoditelj(ORM sloj) između programskog koda u TypeScriptu i baze podataka|Omogućuje da moduli ne moraju pisati SQL upite za bazu, već da rade s podacima na isti način preko jednog zajedničkog mjesta|
+|Modul za autentifikaciju (src/auth)|Provjerava identitet korisnika prilikom prijave i upravlja korisničkim ulogama|Provjera lozinki i prava pristupa su smještena na jednom mjestu, odvojena od ostatka sustava|
+|Modul za prijave odlagališta(src/reports)|Obrađivanje zaprimljenih prijava otpada, provjera valjanosti te promjena statusa lokacije|Sve prijave i pravila njihove obrade nalaze se na jednom mjestu|
+|Modul za akcije(src/actions)|Omogućuje udrugama kreiranje akcija čišćenja. Pomaže u određivanju datuma i lokacija akcija te dodavanju određenog broja volontera u akciju|Omogućuje bolju organizaciju akcija čišćenja koje mogu obuhvatiti više prijava te sprječavanje mogućih preklapanja|
+|Model za volontere(src/volunteers)|Omogućuje prijavu građana na akcije čišćenja ako akcija nije popunjena i ako građanin već nije prijavljen na drugu akciju u isto vrijeme|Lakša organizacija oko raspodjele građana na akcije čišćenja|
+|Modul za službene naloge(src/orders)|Omogućuje komunalnim redarima generiranje naloga komunalnim tvrtkama za teški i opasni otpad|Odvaja službene postupke od volonterskih akcija|
 
 
-**Analiza primjera:** 
+
+
 
 </details>
 
