@@ -20,58 +20,45 @@ Za svaki UML dijagram čuvajte čitljivu sliku i PlantUML izvor, kako je opisano
 
 **Cilj:** Objasniti nekoliko arhitekturnih odluka koje najviše utječu na rješenje i navesti njihove projektno specifične razloge.
 
-| Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
-| --- | --- | --- |
-|  |  |  |
+
 
 Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako važna odluka ima ADR, dovoljno je u tablici navesti njegov ID.
 
 <details>
 <summary><strong>Objašnjenje odabira</strong></summary>
 
-**Primjer — CrisisMap:**
-
 | Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
 | --- | --- | --- |
-| Klijent u pregledniku i jedan poslužiteljski API | Više zasebno postavljenih poslužiteljskih usluga | Klijent prikazuje kartu, dok poslužiteljski sustav provjerava i pohranjuje prijave. Jedan poslužiteljski sustav upravljiv je za ovaj opseg; njegov kvar može privremeno prekinuti rad s prijavama. Obrazloženje je u ADR-01. |
-| Relacijska pohrana prijava | Dokumentno orijentirana pohrana | Prijave imaju prepoznatljive veze s korisnicima i lokacijama. Relacijska shema te veze čini eksplicitnima, ali zahtijeva migracije kada se shema promijeni. |
-
-**Analiza primjera:** Obje odluke navode razlog vezan uz aplikaciju za prijavljivanje kriznih događaja i priznaju kompromis. Odluka o poslužiteljskom sustavu upućuje na ADR-01 umjesto ponavljanja cijele usporedbe. Moduli unutar jedne aplikacije koja se postavlja kao cjelina nisu zasebne mikrousluge. U vlastitoj tablici navedite alternative koje je tim doista razmatrao.
-
+| Pristup bazi podataka preko Prisme | Ručno pisani SQL upiti  | Prisma omogućuje povezivanje backend dijela aplikacije s bazom preko definiranih modela. TypeScript tipovi automatski se generiraju te se time smanjuje mogućnost pogreške. Uz to Prisma olakšava ažuriranje baze podataka bez potrebe za ručnim mijenjanjem SQL koda. Loša strana: nakon svake promjene sheme članovi tima moraju ponovo generirati Prisma kod |
+|Izrada frontenda pomoću Reacta| Izrada frontenda HTML-om, CSS-om i JavaScriptom |React je biblioteka koja se koristi za izradu korisničkih sučelja web-stranica i aplikacija. Njegova najveća prednost je komponentna struktura koja olakšava organizaciju koda, ponovno korištenje elemenata i održavanje aplikacije. Uz veliku zajednicu i bogat ekosustav biblioteka, React je fleksibilan, pouzdan i odličan za razvoj skalabilnih aplikacija. Loša strana: neki studenti nisu se susreli s Reactom pa to zahtijeva dodatno učenje|
+|Korištenje TypeScripta|Korištenje JavaScripta|TypeScript je napredniji i bolje strukturiran od JavaScripta jer ima ono što JavaScriptu nedostaje. Kod njega možemo vidjeti greške tijekom pisanja koda te nam je tako lakše i raditi. Loša strana: neki studenti nisu se susreli s TypeScriptom pa to zahtijeva dodatno učenje|
+|Rad u zasebnim granama (branchevima) i spajanje u main preko pull requesta|Svi rade na jednoj grani|Više ljudi istovremeno mijenja backend,frontend i dokumentaciju,pa zasebne grane omogućuju da svatko radi svoj dio bez miješanja s drugim osobama, a kasnije se to sve spoji u main. Loša strana: ako je dogovor loš između sudionika tima pa dvoje ljudi mijenja isti dio datoteke te tako nastaje sukob koji se onda mora ručno rješavati|
+|Backend podijeljen na module po funkcionalnosti|Sav kod na jednom mjestu|Svaka cjelina ima svoju mapu, pa se backend tim može lakše raspodijeliti po zadacima. Uz to sve je preglednije i brže se nalazi određen dio koda koji se želi urediti ili napraviti. Loša strana: ponekad se neka funkcionalnost programira u više mapa, što je teže i dulje nego kad je sve na istom mjestu |
 </details>
 
 ## 4.2 Gradivni blokovi i UML dijagram komponenata
 
 **Cilj:** Prikazati logičku podjelu programa na komponente, njihova sučelja i vanjske integracije. Dijagram komponenata prikazuje logičku organizaciju, dok dijagram razmještaja prikazuje fizičko izvođenje. Ovaj pogled ažurirajte kako sustav poprima konačan oblik.
 
-**Dijagram komponenata:** [Ugradite čitljiv UML dijagram komponenata.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]
-
-| Komponenta | Odgovornost | Razlog za ovu granicu |
-| --- | --- | --- |
-|  |  |  |
-
-Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dijelove s različitim odgovornostima; planiranu bazu podataka aplikacije smjestite unutar granice, a usluge trećih strana izvan nje. Važne veze označite podatkom ili uslugom koja njima prolazi. Logička komponenta može biti modul unutar jedne poslužiteljske aplikacije: zaseban pravokutnik ne znači zasebno postavljenu uslugu. Tijekom implementacije ažurirajte dijagram kada se promijene odgovornosti ili veze. U završnoj inačici čitatelj treba moći povezati njegove dijelove s kodom. Dijagram razmještaja odgovara na pitanje gdje se ti dijelovi stvarno izvode.
 
 <details>
 <summary><strong>Granica sustava, odgovornosti i vanjske ovisnosti</strong></summary>
 
-**Primjer — CrisisMap:** Predložena arhitektura podržava podnošenje prijava kriznih događaja, prikaz na karti i obavijesti o potvrđenim prijavama.
 
-![Dijagram komponenata sustava CrisisMap](./assets/diagrams/4-1-crisismap-system-CMP.svg)
-
-**Slika 4.1. Dijagram komponenata sustava CrisisMap**
-
-**PlantUML izvor:** [izvor](./puml/4-1-crisismap-system-CMP.puml)
 
 | Dio | Odgovornost | Razlog za ovu granicu |
 | --- | --- | --- |
-| Web-klijent | Prikazuje prijave i prikuplja podatke za novu prijavu. | Korisnička interakcija odvojena je od pravila prijave i trajne pohrane. |
-| API za prijave | Prihvaća zahtjeve za rad s prijavama i vraća odgovore. | Odgovornosti izložene putem HTTP-a odvojene su od obrade prijava. |
-| Usluga za prijave | Primjenjuje pravila prijave i pristupa pohranjenim prijavama. | Pravila provjere valjanosti i pohrane prijava imaju jasno mjesto odgovornosti. |
-| Proces za obavijesti | Određuje korisnike koji trebaju primiti obavijest i traži od vanjskog pružatelja da je pošalje. | Obrada obavijesti odvojena je od odgovaranja na korisnikov zahtjev za prijavu. |
+|Web Klijent (fronted)|Prikazuje interaktivnu kartu, omogućuje unos novih prijava te pregled akcija|Odvajanje korisničkog sučelja od obrade podataka i pohrane|
+|Prisma Client|Služi kao prevoditelj (ORM sloj) između programskog koda u TypeScriptu i baze podataka|Omogućuje da moduli ne moraju pisati SQL upite za bazu, već da rade s podacima na isti način preko jednog zajedničkog mjesta|
+|Modul za autentifikaciju (src/auth)|Provjerava identitet korisnika prilikom prijave i upravlja korisničkim ulogama|Provjera lozinki i prava pristupa su smještena na jednom mjestu, odvojena od ostatka sustava|
+|Modul za prijave odlagališta (src/reports)|Obrađivanje zaprimljenih prijava otpada, provjera valjanosti te promjena statusa lokacije|Sve prijave i pravila njihove obrade nalaze se na jednom mjestu|
+|Modul za akcije (src/actions)|Omogućuje udrugama kreiranje akcija čišćenja. Pomaže u određivanju datuma i lokacija akcija te dodavanju određenog broja volontera u akciju|Omogućuje bolju organizaciju akcija čišćenja koje mogu obuhvatiti više prijava te sprječavanje mogućih preklapanja|
+|Model za volontere (src/volunteers)|Omogućuje prijavu građana na akcije čišćenja ako akcija nije popunjena i ako građanin već nije prijavljen na drugu akciju u isto vrijeme|Lakša organizacija oko raspodjele građana na akcije čišćenja|
+|Modul za službene naloge (src/orders)|Omogućuje komunalnim redarima generiranje naloga komunalnim tvrtkama za teški i opasni otpad|Odvaja službene postupke od volonterskih akcija|
 
-**Analiza primjera:** Vanjska granica odvaja predloženi sustav od pružatelja karte i pružatelja obavijesti. Unutarnja granica grupira API za prijave, uslugu za prijave i proces za obavijesti unutar jedne poslužiteljske aplikacije; njihovi zasebni simboli prikazuju predložene odgovornosti, a ne neovisno postavljene usluge. PostgreSQL pohranjuje podatke aplikacije, dok pružatelj karte osigurava kartografske pločice. Strelice sažimaju ovisnosti, a ne redoslijed transakcije; taj redoslijed prikazuje sekvencijski dijagram. Izostavite proces za obavijesti i Firebase Cloud Messaging ako obavijesti nisu dio odobrenog opsega. Pružatelja prijave u sustav uključite samo ako to zahtijeva odobreni zadatak. Kako implementacija napreduje, ispravite svaku predloženu granicu koja se pokaže netočnom; završni dijagram mora odgovarati onome što je tim izgradio. Jedan koherentan pogled na komponente korisniji je od nekoliko gotovo jednakih inačica s proturječnim vezama.
+
+
+
 
 </details>
 
@@ -83,14 +70,13 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **Cilj:** Prikazati važne pohranjene entitete, njihove identifikatore i veze te dovoljno atributa za razumijevanje podataka aplikacije. ER dijagram odvojen je od reprezentativnog UML dijagrama razreda u nastavku.
 
-**ER dijagram:** [Ugradite čitljiv dijagram projekta.]  
-**Izvor dijagrama:** [Poveznica na njegov izvor.]  
-**Implementacija:** [Navedite gdje je odgovarajući model podataka definiran u projektu.]
+ 
+**Implementacija:** Pristup bazi podataka implementiran je pomoću Prisme. Model podataka definiran je u [Prisma shemi](../backend/prisma/schema.prisma).
 
 <details>
 <summary><strong>Jedna prijava poplave i povezani podaci</strong></summary>
 
-**Primjer — CrisisMap:** Ana putem svojeg korisničkog računa podnosi prijavu poplave `R-104`. Odabire lokaciju na karti i označava razinu ozbiljnosti kao visoku. Građanin može podnijeti više prijava; svaka prijava pripada jednoj kategoriji kriznog događaja, primjerice *Poplava*. Aplikacija pohranjuje prijavu i njezine koordinate. Kartografske pločice dolaze od vanjskog pružatelja i nisu entiteti u modelu podataka aplikacije.
+**Primjer — CrisisMap:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
 
 ![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-crisismap-data-ERD.svg)
 
@@ -98,7 +84,7 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **PlantUML izvor:** [izvor](./puml/4-2-crisismap-data-ERD.puml)
 
-**Analiza primjera:** `R-104` ima jednog autora i jednu kategoriju; Ana i kategorija *Poplava* mogu biti povezane s više prijava. Dijagram prikazuje veze bez prepisivanja svih stupaca baze podataka ili pisanja drugog tabličnog opisa za svaki entitet. Ako aplikacija prihvaća i **anonimne** prijave, tu mogućnost prikažite u vezi s entitetom `Citizen`. Ako su kategorije fiksne vrijednosti, a ne pohranjeni zapisi, nemojte izmišljati tablicu kategorija. Završni ER dijagram usporedite s modelom trajne pohrane i objasnite samo razlike važne za razumijevanje projekta.
+
 
 </details>
 
@@ -106,14 +92,13 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **Cilj:** Prije implementacije reprezentativnog dijela sustava modelirati i prikazati razrede ili sučelja potrebna za dodjelu odgovornosti, operacija i veza. Oblikovanje ažurirajte kada se te odluke promijene.
 
-**Dijagram razreda:** [Ugradite čitljiv UML dijagram razreda za reprezentativni dio oblikovanja.]  
-**PlantUML izvor:** [Poveznica na odgovarajuću `.puml` datoteku.]  
-**Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.]
+ 
+**Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.](../backend)
 
 <details>
 <summary><strong>Oblikovanje odgovornosti prijave i dopuštenih promjena</strong></summary>
 
-**Primjer — CrisisMap:** Prijava sadrži pravila za promjenu vlastitog statusa. Razred tijeka rada koordinira podnošenje i pregled, dok sučelje repozitorija opisuje potrebne operacije trajne pohrane. Dijagram predlaže te odgovornosti prije implementacije.
+**Primjer — CrisisMap:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
 
 ![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-crisismap-domain-CD.svg)
 
@@ -121,7 +106,7 @@ Započnite crtanjem granice oko predloženog sustava. Unutar nje prepoznajte dij
 
 **PlantUML izvor:** [izvor](./puml/4-3-crisismap-domain-CD.puml)
 
-**Analiza primjera:** `DisasterReport` sadrži dopuštena pravila promjene stanja pa tijek rada ne može prešutno odobriti već odbijenu prijavu. `ReportWorkflow` koordinira operaciju bez preuzimanja pravila prijelaza stanja same prijave; `ReportRepository` definira potrebne operacije pohrane. Kompozicija `Location` i odabrani tipovi prikazuju veze korisne za oblikovanje. Dijagram namjerno izostavlja stupce baze podataka i nepovezane razrede: ER model objašnjava pohranjene podatke, dok ovaj dijagram dodjeljuje programske odgovornosti i operacije. Ti su razredi odluka oblikovanja, a ne obavezni slojevi za svaki tim. Završnu implementaciju usporedite s početnim oblikovanjem i ažurirajte dijagram tamo gdje su se odluke promijenile; generiranje dijagrama iz koda tek na kraju ne može zamijeniti ovo početno modeliranje.
+
 
 </details>
 
