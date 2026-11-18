@@ -73,7 +73,7 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | **Povezani zahtjevi** | F-001; C-02; NF-1.1, NF-1.2 |
 | **Preduvjeti** | Korisnik nije prijavljen i ima račun kod OAuth pružatelja identiteta. Račun u sustavu stvara se automatski pri prvoj prijavi. |
 | **Glavni uspješni tok** | 1. Korisnik se prijavljuje putem OAuth 2.0.<br>2. Sustav pronalazi račun korisnika, a pri prvoj prijavi ga stvara (korisnik odabire je li građanin ili eko-udruga, pohranjuju se samo ime i adresa e-pošte).<br>3. Sustav provjerava da korisnik nije blokiran i omogućuje radnje dostupne prijavljenim korisnicima. |
-| **Alternativni tokovi / Iznimke** | **1a — Pružatelj nedostupan ili prijava neuspješna:** Sustav prikazuje poruku, a korisnik ostaje neprijavljen.<br>**2a — Prva prijava eko-udruge:** Nastavlja se registracija profila eko-udruge.<br>**3a — Korisnik je blokiran:** Sustav odbija prijavu uz poruku.<br>**3b — Profil eko-udruge nije odobren:** Prijava uspijeva, a funkcije udruge ostaju nedostupne uz poruku da profil čeka provjeru. |
+| **Alternativni tokovi / Iznimke** | **1a — Pružatelj nedostupan ili prijava neuspješna:** Sustav prikazuje poruku, a korisnik ostaje neprijavljen.<br>**3a — Korisnik je blokiran:** Sustav odbija prijavu uz poruku.<br>**3b — Profil eko-udruge nije odobren:** Prijava uspijeva, a funkcije udruge ostaju nedostupne uz poruku da profil čeka provjeru. |
 | **Posljedice (ishod)** | Prijavljeni korisnik ima pristup radnjama svoje uloge, a pri prvoj prijavi stvoren je račun. Neuspješna prijava ne mijenja stanje sustava. |
 
 ### UC-02: Registracija profila eko-udruge
@@ -82,9 +82,9 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | :--- | :--- |
 | **Primarni akter** | Eko-udruga |
 | **Povezani zahtjevi** | F-001, F-020, F-010; AS-03 |
-| **Preduvjeti** | Korisnik se prijavio putem OAuth-a i pri prvoj prijavi odabrao registraciju kao eko-udruga. |
-| **Glavni uspješni tok** | 1. Voditelj udruge unosi naziv udruge i OIB te odabire regiju.<br>2. Sustav provjerava obavezna polja, valjanost OIB-a i da udruga s tim OIB-om nema račun.<br>3. Sustav pohranjuje profil sa statusom „čeka provjeru". |
-| **Alternativni tokovi / Iznimke** | **1a — Voditelj odustane:** Profil ostaje nepotpun, a unos se može dovršiti pri sljedećoj prijavi.<br>**2a — Nedostaju obavezna polja ili je OIB nevaljan:** Sustav označava polja i ne pohranjuje profil.<br>**2b — Udruga s istim OIB-om već postoji:** Sustav ne pohranjuje profil uz poruku. |
+| **Preduvjeti** | Eko-udruga nije prijavljena i nema profil. |
+| **Glavni uspješni tok** | 1. Voditelj udruge se registrira putem OAuth-a te odabire ulogu eko-udruge.<br>2. Voditelj unosi naziv udruge, OIB i odabire regiju.<br>3. Sustav provjerava obavezna polja, valjanost OIB-a i da udruga s tim OIB-om nema račun.<br>3. Sustav pohranjuje profil sa statusom „čeka provjeru". |
+| **Alternativni tokovi / Iznimke** | **1a — Registracija nije uspjela:** Registracija se prekida i korisnik ostaje neprijavljen.<br>**2a - Voditelj odustaje tijekom unosa podataka:** Profil ostaje nepotpun.<br>**3a — Nedostaju obavezna polja ili je OIB nevaljan:** Sustav označava polja i ne pohranjuje profil.<br>**3b — Udruga s istim OIB-om već postoji:** Sustav ne pohranjuje profil uz poruku. |
 | **Posljedice (ishod)** | Profil udruge pohranjen je neaktivan do provjere administratora. Regija se koristi za filtriranje prijava. |
 
 ### UC-03: Prijava administratora
@@ -236,10 +236,10 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | :--- | :--- |
 | **Primarni akter** | Administrator |
 | **Povezani zahtjevi** | F-019, F-008; AS-06; NF-1.4 |
-| **Preduvjeti** | Administrator je prijavljen. Prijava je u statusu „Prijavljeno", a otpad je opasan ili prevelik za akciju čišćenja. U konfiguraciji je zadana adresa e-pošte komunalne tvrtke. |
-| **Glavni uspješni tok** | 1. Administrator otvara prijavu i jednim klikom pokreće slanje službenog naloga.<br>2. Sustav generira nalog s podacima prijave (oznaka, adresa, koordinate, kategorija, fotografija) i šalje ga e-poštom komunalnoj tvrtki.<br>3. Sustav mijenja status prijave u „Službena sanacija" i šalje obavijest prijavitelju. |
+| **Preduvjeti** | Administrator je prijavljen. Prijava je u statusu „Prijavljeno", a otpad je opasan ili prevelik za akciju čišćenja. |
+| **Glavni uspješni tok** | 1. Administrator otvara prijavu i jednim klikom pokreće slanje službenog naloga.<br>2. Sustav generira nalog s podacima prijave.<br>3. Sustav mijenja status prijave u „Službena sanacija" i šalje obavijest prijavitelju. |
 | **Alternativni tokovi / Iznimke** | **1a — Prijava nije u statusu „Prijavljeno":** Opcija slanja naloga nije dostupna.<br>**2a — Slanje naloga nije uspjelo:** Status prijave se ne mijenja, a administrator dobiva poruku o grešci. |
-| **Posljedice (ishod)** | Prijava u statusu „Službena sanacija" više se ne prikazuje udrugama kao aktivna i ne može se uključiti u akciju čišćenja. Komunalna tvrtka prima nalog e-poštom i ne koristi aplikaciju. |
+| **Posljedice (ishod)** | Prijava u statusu „Službena sanacija" više se ne prikazuje udrugama kao aktivna i ne može se uključiti u akciju čišćenja. |
 
 ### UC-17: Pregled aktivnih prijava regije
 
@@ -304,7 +304,7 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | **Povezani zahtjevi** | F-012, F-015; NF-3.2 |
 | **Preduvjeti** | Građanin je prijavljen i pregledava detalje akcije. Akcija ima slobodno mjesto, a građanin se na nju još nije prijavio. |
 | **Glavni uspješni tok** | 1. Građanin odabire prijavu za sudjelovanje.<br>2. Sustav provjerava da ima slobodnih mjesta i da se građanin nije već prijavio.<br>3. Sustav evidentira građanina kao volontera, ažurira broj popunjenih mjesta i stvara događaj u njegovu Google Calendaru. |
-| **Alternativni tokovi / Iznimke** | **2a — Akcija je u međuvremenu popunjena:** Sustav odbija prijavu uz poruku.<br>**2b — Građanin je već prijavljen:** Sustav javlja da je prijava već evidentirana.<br>**3a — Google Calendar nedostupan ili pristup kalendaru nije odobren:** Prijava ostaje valjana, a građanin dobiva poruku da događaj nije dodan. |
+| **Alternativni tokovi / Iznimke** | **2a — Akcija je u međuvremenu popunjena:** Sustav odbija prijavu uz poruku.<br>**2b — Građanin je već prijavljen:** Sustav javlja da je prijava već evidentirana.<br>**3a — Google Calendar nedostupan ili pristup kalendaru nije odobren:** Sustav odbija prijavu, a građanin dobiva poruku da događaj nije dodan. |
 | **Posljedice (ishod)** | Građanin je volonter na akciji i broj slobodnih mjesta se smanjio. Kada broj dosegne maksimum, daljnje prijave se onemogućavaju. Udruga vidi novi broj u kalendaru. |
 
 ### UC-23: Prikaz rute do mjesta okupljanja
