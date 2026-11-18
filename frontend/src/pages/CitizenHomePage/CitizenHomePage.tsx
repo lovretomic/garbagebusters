@@ -4,16 +4,24 @@ import CardCarousel from "../../components/CardCarousel";
 import UserGreeting from "../../components/UserGreeting";
 import ProfilePlaceholder from "../../assets/images/profile_placeholder.webp";
 import c from "./CitizenHomePage.module.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const reports = [
-  {
-    id: 1,
-    name: "Odlagalište PPK Velebit",
-    area: "Gospić",
-    status: "in_progress",
-  },
-  { id: 2, name: "Odlagalište Sodol", area: "Ogulin", status: "checked" },
-] as const;
+type Report = {
+  ID_Report: number;
+  category: string;
+  report_status: "Prijavljeno" | "Službena sanacija" | "Akcija u tijeku" | "Očišćeno";
+  Report_date: string;
+  GPS_coordinates: string;
+  photos_before: string;
+};
+
+const statusMap = {
+  "Prijavljeno": "reported",
+  "Službena sanacija": "official_sanation",
+  "Akcija u tijeku": "in_progress",
+  Očišćeno: "cleaned",
+} as const;
 
 const actions = [
   {
@@ -32,43 +40,54 @@ const actions = [
   },
 ] as const;
 
-const CitizenHomePage = () => (
-  <main className={c.page}>
-    <UserGreeting
-      name="Mak"
-      avatarUrl={ProfilePlaceholder}
-      subtitle="Nažalost, nemate novih obavijesti."
-    />
+const CitizenHomePage = () => {
+  const [reports, setReports] = useState<Report[]>([]);
 
-    <section className={c.section}>
-      <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
-      <CardCarousel>
-        {reports.map((report) => (
-          <ReportCard
-            key={report.id}
-            name={report.name}
-            area={report.area}
-            status={report.status}
-          />
-        ))}
-      </CardCarousel>
-    </section>
+  useEffect(() => {
+    axios
+      .get<Report[]>("/reports/me")
+      .then((res) => setReports(res.data))
+      .catch(console.error);
+  }, []);
+  return (
+    <main className={c.page}>
+      <UserGreeting
+        name="Mak"
+        avatarUrl={ProfilePlaceholder}
+        subtitle="Nažalost, nemate novih obavijesti."
+      />
 
-    <section className={c.section}>
-      <h2 className={c.title}>Vaše akcije</h2>
-      <CardCarousel>
-        {actions.map((action) => (
-          <ActionCard
-            key={action.id}
-            landfill={action.landfill}
-            county={action.county}
-            date={action.date}
-            numberOfRegistrations={action.numberOfRegistrations}
-          />
-        ))}
-      </CardCarousel>
-    </section>
-  </main>
-);
+      <section className={c.section}>
+        <h2 className={c.title}>Odlagališta koja ste prijavili</h2>
+        <CardCarousel>
+          {reports.map((report) => (
+            <ReportCard
+              key={report.ID_Report}
+              name={`Prijava #${report.ID_Report}`}
+              area={report.GPS_coordinates}
+              imageUrl={report.photos_before}
+              status={statusMap[report.report_status]}
+            />
+          ))}
+        </CardCarousel>
+      </section>
+
+      <section className={c.section}>
+        <h2 className={c.title}>Vaše akcije</h2>
+        <CardCarousel>
+          {actions.map((action) => (
+            <ActionCard
+              key={action.id}
+              landfill={action.landfill}
+              county={action.county}
+              date={action.date}
+              numberOfRegistrations={action.numberOfRegistrations}
+            />
+          ))}
+        </CardCarousel>
+      </section>
+    </main>
+  );
+};
 
 export default CitizenHomePage;

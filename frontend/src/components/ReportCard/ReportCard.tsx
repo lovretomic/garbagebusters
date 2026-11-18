@@ -4,23 +4,29 @@ import clsx from "clsx";
 import GearIcon from "../../assets/icons/gear_icon.svg?react";
 import DefaultImage from "../../assets/images/default_image.png";
 import PersonCheckedIcon from "../../assets/icons/person_check_icon.svg?react";
-import FlagIcon from "../../assets/icons/flag_icon.svg?react";
+import StopIcon from "../../assets/icons/stop_icon.svg?react";
+import CheckmarkIcon from "../../assets/icons/checkmark_icon.svg?react";
 
 const STATUS = {
+  reported: {
+    Icon: StopIcon,
+    label: "Prijavljeno",
+    className: c.statusReported,
+  },
+  official_sanation: {
+    Icon: PersonCheckedIcon,
+    label: "Službena sanacija",
+    className: c.statusOfficial,
+  },
   in_progress: {
     Icon: GearIcon,
     label: "Sanacija u tijeku",
     className: c.statusInProgress,
   },
-  marked: {
-    Icon: FlagIcon,
-    label: "Teren pregledan",
-    className: c.statusMarked,
-  },
-  checked: {
-    Icon: PersonCheckedIcon,
-    label: "Zabilježeno",
-    className: c.statusChecked,
+  cleaned: {
+    Icon: CheckmarkIcon,
+    label: "Sanirano",
+    className: c.statusCleaned,
   },
 };
 
@@ -35,7 +41,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
   name,
   area,
   imageUrl,
-  status = "checked",
+  status = "reported",
   className,
   ...handlers
 }) => {
