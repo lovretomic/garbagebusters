@@ -1,11 +1,10 @@
 import express from "express";
-import { requireAuth } from "../auth/auth.middleware";
-
+import { requireAdmin } from "../auth/admin.middleware";
 import { getAllUsers } from "./users.controller";
 
 const router = express.Router();
 
-router.use(requireAuth);
+router.use(requireAdmin);
 
 router.get("/", getAllUsers);
 
