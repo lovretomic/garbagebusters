@@ -83,8 +83,8 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | **Primarni akter** | Eko-udruga |
 | **Povezani zahtjevi** | F-001, F-020, F-010; AS-03 |
 | **Preduvjeti** | Eko-udruga nije prijavljena i nema profil. |
-| **Glavni uspješni tok** | 1. Voditelj udruge se registrira putem OAuth-a te odabire ulogu eko-udruge.<br>2. Voditelj unosi naziv udruge, OIB i odabire regiju.<br>3. Sustav provjerava obavezna polja, valjanost OIB-a i da udruga s tim OIB-om nema račun.<br>3. Sustav pohranjuje profil sa statusom „čeka provjeru". |
-| **Alternativni tokovi / Iznimke** | **1a — Registracija nije uspjela:** Registracija se prekida i korisnik ostaje neprijavljen.<br>**2a - Voditelj odustaje tijekom unosa podataka:** Profil ostaje nepotpun.<br>**3a — Nedostaju obavezna polja ili je OIB nevaljan:** Sustav označava polja i ne pohranjuje profil.<br>**3b — Udruga s istim OIB-om već postoji:** Sustav ne pohranjuje profil uz poruku. |
+| **Glavni uspješni tok** | 1. Voditelj udruge se registrira putem OAuth-a te odabire ulogu eko-udruge.<br>2. Voditelj unosi naziv udruge, OIB i odabire regiju.<br>3. Sustav provjerava obavezna polja, valjanost OIB-a i da udruga s tim OIB-om nema račun.<br>4. Sustav pohranjuje profil sa statusom „čeka provjeru". |
+| **Alternativni tokovi / Iznimke** | **1a — Registracija nije uspjela:** Registracija se prekida i korisnik ostaje neprijavljen.<br>**2a — Voditelj odustaje tijekom unosa podataka:** Profil ostaje nepotpun.<br>**3a — Nedostaju obavezna polja ili je OIB nevaljan:** Sustav označava polja i ne pohranjuje profil.<br>**3b — Udruga s istim OIB-om već postoji:** Sustav ne pohranjuje profil uz poruku. |
 | **Posljedice (ishod)** | Profil udruge pohranjen je neaktivan do provjere administratora. Regija se koristi za filtriranje prijava. |
 
 ### UC-03: Prijava administratora
@@ -260,7 +260,7 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | **Povezani zahtjevi** | F-011, F-015, F-008, F-020 |
 | **Preduvjeti** | Voditelj je prijavljen, a profil udruge odobren. U regiji udruge postoje aktivne prijave. |
 | **Glavni uspješni tok** | 1. Voditelj odabire jednu ili više aktivnih prijava i pokreće stvaranje akcije.<br>2. Voditelj unosi naziv, opis, maksimalan broj volontera te datum i vrijeme sastanka.<br>3. Sustav provjerava podatke i određuje lokaciju akcije kao lokaciju prve odabrane prijave.<br>4. Sustav sprema akciju, mijenja status odabranih prijava u „Akcija u tijeku", stvara događaj u Google Calendaru udruge i šalje obavijesti prijaviteljima.<br>5. Akcija se prikazuje građanima i u kalendaru udruge. |
-| **Alternativni tokovi / Iznimke** | **1a — Nije odabrana nijedna prijava:** Pokretanje akcije nije moguće.<br>**3a — Podaci su nepotpuni ili nevaljani:** Sustav označava polja i ne sprema akciju.<br>|
+| **Alternativni tokovi / Iznimke** | **1a — Nije odabrana nijedna prijava:** Pokretanje akcije nije moguće.<br>**3a — Podaci su nepotpuni ili nevaljani:** Sustav označava polja i ne sprema akciju.|
 | **Posljedice (ishod)** | Akcija je pohranjena, njezine prijave imaju status „Akcija u tijeku" (žute pribadače), udruga vidi događaj u Google Calendaru, a prijavitelji su obaviješteni. |
 
 ### UC-19: Dodavanje događaja u Google Calendar
@@ -271,7 +271,7 @@ Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostv
 | **Povezani zahtjevi** | F-015; C-01; NF-3.2 |
 | **Preduvjeti** | Akcija je stvorena, odnosno građanin je prijavljen na akciju. Korisnik je odobrio pristup svom Google Calendaru. |
 | **Glavni uspješni tok** | 1. Sustav sastavlja događaj s terminom, uputama za akciju, poveznicom na lokaciju na karti i podsjetnikom 2 sata prije akcije.<br>2. Sustav REST zahtjevom šalje događaj Google Calendar API-ju za kalendar korisnika koji je stvorio akciju, odnosno prijavio se.<br>3. Korisnik vidi događaj u svom kalendaru. |
-| **Alternativni tokovi / Iznimke** | **2a — Google Calendar API nedostupan ili pristup kalendaru nije odobren:** Događaj se ne dodaje i korisnik dobiva poruku, a stvaranje akcije odnosno prijava na akciju svejedno uspijevaju. |
+| **Alternativni tokovi / Iznimke** | **2a — Google Calendar API nedostupan ili pristup kalendaru nije odobren:** Događaj se ne dodaje i korisnik dobiva poruku te stvaranje akcije ne uspijeva. |
 | **Posljedice (ishod)** | Događaj postoji samo u kalendaru udruge koja je stvorila akciju i građanina koji se prijavio. Promjena termina ne ažurira već stvorene događaje. |
 
 ### UC-20: Pregled kalendara akcija
