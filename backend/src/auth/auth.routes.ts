@@ -187,10 +187,7 @@ router.get("/google/callback", async (req, res) => {
           });
         }
 
-        res.json({
-          message: "Google login successful",
-          user: req.session.user,
-        });
+        res.redirect("/home");
       });
     });
   } catch (error) {
