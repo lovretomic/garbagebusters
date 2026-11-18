@@ -1,6 +1,6 @@
 import { List, Datagrid, TextField, EmailField } from "react-admin";
 
-export const UserList = () => (
+export const UsersList = () => (
   <List>
     <Datagrid>
       <TextField source="id" label="ID" />
