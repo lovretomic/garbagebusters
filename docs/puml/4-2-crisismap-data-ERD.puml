@@ -1,0 +1,97 @@
+@startuml
+
+title Sustav CrisisMap – logički podatkovni model
+
+entity "App User" as App_User {
+    *ID_User: ID <<PK>>
+    --
+    *name: text
+    surname: text
+    *username: text
+    *email: text <<unique>>
+    *password: text
+    profile_photo: text
+}
+
+entity Admin {
+    *ID_User: ID <<PK>><<FK>> 
+}
+
+entity Citizen {
+    *ID_User: ID <<PK>> <<FK>>
+}
+
+entity Warden {
+    *ID_User: ID <<PK>> <<FK>>
+}
+
+entity "Eco Association" as Eco_Association {
+    *ID_User: ID <<PK>> <<FK>>
+    --
+    *is_approved: boolean
+    *social_media: text
+}
+
+entity Report{
+   *ID_Report: ID <<PK>>
+   --
+   ID_Action: ID <<FK>>
+   *ID_User: ID <<FK>>
+   ID_Warden: ID <<FK>>
+   *GPS_coordinates: text
+   *photos_before: text
+   photos_after: text
+   *category: enum
+   *waste_volume: decimal
+   *report_status: enum
+   *Report_date: datetime
+}
+
+entity Orders {
+    *ID_Order: ID <<PK>>
+    --
+    *ID_Report: ID <<FK>>
+    *ID_Warden: ID <<FK>>
+    *company_name: text
+    *order_status: enum
+    *issue_date: datetime
+}
+
+entity "Cleanup Action" as Cleanup_Action {
+   *ID_Action: ID <<PK>>
+   --
+   *ID_User: ID <<FK>>
+   *name: text
+   *description: text
+   *max_volunteers: integer
+   *action_date: date
+   *action_time: time
+   *action_location: text
+}
+
+entity Volunteers {
+   *ID_User: ID <<PK>><<FK>>
+   *ID_Action: ID <<PK>><<FK>>
+   --
+   *singup_time: datetime
+}
+
+App_User ||--o| Admin: is >
+App_User ||--o| Citizen: is >
+App_User ||--o| Warden: is >
+App_User ||--o| Eco_Association: is >
+
+Citizen ||--o{ Report: submits >
+Citizen ||--o{ Volunteers: volunteers >
+
+Warden |o--o{ Report: checks >
+Warden ||--o{ Orders: sends >
+
+Report ||--o| Orders: creates >
+
+Cleanup_Action ||--o{ Volunteers: has >
+Cleanup_Action |o--o{ Report:  defines >
+
+Eco_Association ||--o{ Cleanup_Action: starts >
+
+@enduml
