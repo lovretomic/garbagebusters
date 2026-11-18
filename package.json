@@ -29,5 +29,8 @@
       "prettier --write",
       "eslint --fix"
     ]
+  },
+  "dependencies": {
+    "react-admin": "^5.15.7"
   }
 }
