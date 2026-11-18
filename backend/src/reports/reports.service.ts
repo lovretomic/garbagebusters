@@ -13,7 +13,7 @@ export async function getMyReports(userId: number) {
       Report_date: true,
       GPS_coordinates: true,
       photos_before: true,
-      },
+    },
 
     orderBy: {
       Report_date: "desc",
