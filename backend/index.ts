@@ -7,11 +7,21 @@ import authRoutes from "./src/auth/auth.routes";
 import session from "express-session";
 import reportsRoutes from "./src/reports/reports.routes";
 import associationRoutes from "./src/associations/associations.routes";
+import usersRoutes from "./src/users/users.routes";
+import cors from "cors";
 
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
+
 app.use(express.json());
 
 const sessionSecret = process.env.SESSION_SECRET;
@@ -62,6 +72,7 @@ app.use("/auth", authRoutes);
 app.use("/volunteers", volunteerRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/associations", associationRoutes);
+app.use("/users", usersRoutes);
 
 const PORT = Number(process.env.PORT || 3001);
 

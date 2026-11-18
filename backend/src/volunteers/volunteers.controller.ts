@@ -29,6 +29,7 @@ export async function registerVolunteer(req: Request, res: Response) {
     });
   }
 }
+
 export async function getActionsForVolunteers(req: Request, res: Response) {
   try {
     const userId = req.session.user!.id;
