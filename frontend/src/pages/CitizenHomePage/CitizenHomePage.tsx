@@ -17,7 +17,7 @@ type Report = {
 };
 
 const statusMap = {
-  "Prijavljeno": "reported",
+  Prijavljeno: "reported",
   "Službena sanacija": "official_sanation",
   "Akcija u tijeku": "in_progress",
   Očišćeno: "cleaned",
