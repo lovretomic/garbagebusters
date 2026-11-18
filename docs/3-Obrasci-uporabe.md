@@ -4,14 +4,18 @@
 
 ## 3.1 Dijagram obrazaca uporabe
 
-![Dijagram obrazaca uporabe: Funkcionalnost građanina](./assets/diagrams/3-1-1-gradanin-UC.png)
-_Slika 3.1.1 - Dijagram obrazaca uporabe: Funkcionalnost građanina_
+![Dijagram obrazaca uporabe: Funkcionalnost građanina](./assets/diagrams/3-1-1-gradanin-UC-v2.png)
+_Slika 3.1.1 - Dijagram obrazaca uporabe: Funkcionalnosti građanina_
 
-![Dijagram obrazaca uporabe: Funkcionalnost eko-udruge](./assets/diagrams/3-1-2-ekoudruga-UC.png)
-_Slika 3.1.2 - Dijagram obrazaca uporabe: Funkcionalnost eko-udruge_
+![Dijagram obrazaca uporabe: Funkcionalnost eko-udruge](./assets/diagrams/3-1-2-ekoudruga-UC-v2.png)
+_Slika 3.1.2 - Dijagram obrazaca uporabe: Funkcionalnosti eko-udruge_
 
-![Dijagram obrazaca uporabe: Funkcionalnost administratora (komunalnog redara)](./assets/diagrams/3-1-3-administrator-UC.png)
-_Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnost administratora (komunalnog redara)_
+![Dijagram obrazaca uporabe: Funkcionalnost administratora (komunalnog redara)](./assets/diagrams/3-1-3-administrator-UC-v2.png)
+_Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnosti administratora (komunalnog redara)_
+
+**Napomena:** Sustav je prikazan uz pomoć 3 dijagrama jer su svi pokušaji spajanja više aktera u jedan dijagram rezultirali jako nečitljivim i nezgrapnim dijagramom. Zadatak je takav da građanin, eko-udruga i administrator imaju potpuno drukčiji skup obrazaca uporabe te je samim time teže provesti proces generalizacije. Jedino građanin i eko-udruga dijele mali broj obrazaca, ali i tada zbog samoga broja ostalih obrazaca dijagram funkcionalnosti građanina i eko-udruge bi bio nepregledan.
+
+---
 
 **Cilj:** Prikazati granicu sustava, relevantne aktere i njihove glavne ciljeve u **jednom čitljivom UML dijagramu obrazaca uporabe**. Dodajte drugi, usmjereni dijagram samo ako potpuni prikaz više ne može ostati čitljiv; treći dijagram zahtijeva zaseban razlog specifičan za projekt.
 
