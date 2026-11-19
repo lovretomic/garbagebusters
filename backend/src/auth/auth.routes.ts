@@ -227,11 +227,11 @@ router.get("/me", async (req, res) => {
 
   res.json({
     user: {
-        id: user.ID_User,
-        email: user.email,
-        name: user.name,
-        profile_photo: user.profile_photo,
-      },
+      id: user.ID_User,
+      email: user.email,
+      name: user.name,
+      profile_photo: user.profile_photo,
+    },
   });
 });
 
