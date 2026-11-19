@@ -3,6 +3,7 @@ import ActionCard from "../../components/ActionCard";
 import CardCarousel from "../../components/CardCarousel";
 import UserGreeting from "../../components/UserGreeting";
 import ProfilePlaceholder from "../../assets/images/profile_placeholder.webp";
+import ReportPlaceholder from "../../assets/images/report_placeholder.webp";
 import c from "./CitizenHomePage.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,7 +14,7 @@ type Report = {
   report_status: "Prijavljeno" | "Službena sanacija" | "Akcija u tijeku" | "Očišćeno";
   Report_date: string;
   GPS_coordinates: string;
-  photos_before: string;
+  photos_before?: string;
 };
 
 type User = {
@@ -81,7 +82,7 @@ const CitizenHomePage = () => {
               key={report.ID_Report}
               name={`Prijava #${report.ID_Report}`}
               area={report.GPS_coordinates}
-              imageUrl={report.photos_before}
+              imageUrl={report.photos_before || ReportPlaceholder}
               status={statusMap[report.report_status]}
             />
           ))}
