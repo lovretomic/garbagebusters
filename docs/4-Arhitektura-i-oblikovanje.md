@@ -1,7 +1,5 @@
 # 4. Arhitektura i oblikovanje
 
-**Cilj:** Definirati arhitekturni stil, dekompoziciju programa na podsustave i module, organizaciju podataka te dinamičko ponašanje tijekom izvođenja. Arhitektura predstavlja temelj za implementaciju i ažurira se pri svakoj važnijoj promjeni projektnih odluka.
-
 | Arhitekturni pogled | Ključno inženjersko pitanje | Primijenjeni model ili dijagram |
 | :--- | :--- | :--- |
 | **Strategija rješenja** | Koji stil i temeljne odluke određuju program? | Tablica odluka (odjeljak 4.1) |
@@ -14,18 +12,7 @@
 
 ---
 
-Za svaki UML dijagram čuvajte čitljivu sliku i PlantUML izvor, kako je opisano na stranici [Home](./Home.md). U dovršenoj stranici koristite vlastite projektne odluke i modele.
-
 ## 4.1 Strategija rješenja
-
-**Cilj:** Objasniti nekoliko arhitekturnih odluka koje najviše utječu na rješenje i navesti njihove projektno specifične razloge.
-
-
-
-Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako važna odluka ima ADR, dovoljno je u tablici navesti njegov ID.
-
-<details>
-<summary><strong>Objašnjenje odabira</strong></summary>
 
 | Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
 | --- | --- | --- |
@@ -34,17 +21,9 @@ Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako va�
 |Korištenje TypeScripta|Korištenje JavaScripta|TypeScript je napredniji i bolje strukturiran od JavaScripta jer ima ono što JavaScriptu nedostaje. Kod njega možemo vidjeti greške tijekom pisanja koda te nam je tako lakše i raditi. Loša strana: neki studenti nisu se susreli s TypeScriptom pa to zahtijeva dodatno učenje|
 |Rad u zasebnim granama (branchevima) i spajanje u main preko pull requesta|Svi rade na jednoj grani|Više ljudi istovremeno mijenja backend,frontend i dokumentaciju,pa zasebne grane omogućuju da svatko radi svoj dio bez miješanja s drugim osobama, a kasnije se to sve spoji u main. Loša strana: ako je dogovor loš između sudionika tima pa dvoje ljudi mijenja isti dio datoteke te tako nastaje sukob koji se onda mora ručno rješavati|
 |Backend podijeljen na module po funkcionalnosti|Sav kod na jednom mjestu|Svaka cjelina ima svoju mapu, pa se backend tim može lakše raspodijeliti po zadacima. Uz to sve je preglednije i brže se nalazi određen dio koda koji se želi urediti ili napraviti. Loša strana: ponekad se neka funkcionalnost programira u više mapa, što je teže i dulje nego kad je sve na istom mjestu |
-</details>
+
 
 ## 4.2 Gradivni blokovi i UML dijagram komponenata
-
-**Cilj:** Prikazati logičku podjelu programa na komponente, njihova sučelja i vanjske integracije. Dijagram komponenata prikazuje logičku organizaciju, dok dijagram razmještaja prikazuje fizičko izvođenje. Ovaj pogled ažurirajte kako sustav poprima konačan oblik.
-
-
-<details>
-<summary><strong>Granica sustava, odgovornosti i vanjske ovisnosti</strong></summary>
-
-
 
 | Dio | Odgovornost | Razlog za ovu granicu |
 | --- | --- | --- |
@@ -56,25 +35,11 @@ Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako va�
 |Model za volontere (src/volunteers)|Omogućuje prijavu građana na akcije čišćenja ako akcija nije popunjena i ako građanin već nije prijavljen na drugu akciju u isto vrijeme|Lakša organizacija oko raspodjele građana na akcije čišćenja|
 |Modul za službene naloge (src/orders)|Omogućuje komunalnim redarima generiranje naloga komunalnim tvrtkama za teški i opasni otpad|Odvaja službene postupke od volonterskih akcija|
 
-
-
-
-
-</details>
-
 ## 4.3 Podaci i detaljno oblikovanje
 
-**Cilj:** Objasniti važne informacije koje aplikacija pohranjuje i jedno reprezentativno područje oblikovanja na razini razreda. Model podataka i UML dijagram razreda odgovaraju na različita pitanja; jedno ne zamjenjuje drugo.
-
 ### 4.3.1 ER dijagram i model podataka
-
-**Cilj:** Prikazati važne pohranjene entitete, njihove identifikatore i veze te dovoljno atributa za razumijevanje podataka aplikacije. ER dijagram odvojen je od reprezentativnog UML dijagrama razreda u nastavku.
-
  
 **Implementacija:** Pristup bazi podataka implementiran je pomoću Prisme. Model podataka definiran je u [Prisma shemi](../backend/prisma/schema.prisma).
-
-<details>
-<summary><strong>Jedna prijava poplave i povezani podaci</strong></summary>
 
 **Primjer — CrisisMap:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
 
@@ -84,19 +49,9 @@ Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako va�
 
 **PlantUML izvor:** [izvor](./puml/4-2-crisismap-data-ERD.puml)
 
-
-
-</details>
-
 ### 4.3.2 Reprezentativni UML dijagram razreda
 
-**Cilj:** Prije implementacije reprezentativnog dijela sustava modelirati i prikazati razrede ili sučelja potrebna za dodjelu odgovornosti, operacija i veza. Oblikovanje ažurirajte kada se te odluke promijene.
-
- 
 **Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.](../backend)
-
-<details>
-<summary><strong>Oblikovanje odgovornosti prijave i dopuštenih promjena</strong></summary>
 
 **Primjer — CrisisMap:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
 
@@ -105,10 +60,6 @@ Objasnite glavne arhitekturne odluke bez ponavljanja popisa tehnologija. Ako va�
 **Slika 4.3. Dijagram razreda za obradu prijava kriznih događaja**
 
 **PlantUML izvor:** [izvor](./puml/4-3-crisismap-domain-CD.puml)
-
-
-
-</details>
 
 ## 4.4 Ponašanje tijekom izvođenja
 
