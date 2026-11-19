@@ -86,7 +86,7 @@ UC19 -- CAL
 UC24 -- OWM
 
 note right of UC13
-Građanin je pasivni akter koji prima 
-obavijest unutar vlastite mobilne aplikacije.
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
 end note
 @enduml

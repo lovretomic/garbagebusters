@@ -118,12 +118,16 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 | A-01 | Građanin | Akter - koristi mobilno sučelje, prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
 | A-02 | Eko-udruga | Akter - koristi web i mobilno sučelje, pregledava prijave, organizira akcije te šalje sanacije na potvrdu fotografiranjem | F-001, F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
 | A-03 | Administrator (komunalni redar) | Akter - koristi web sučelje, upravlja korisnicima, izdaje službene naloge, blokira korisnike, odobrava udruge, pregledava statistiku | F-002, F-003, F-009, F-019, F-020, F-021, F-022, F-023, F-024, NF-1.3, NF-1.4 |
-| A-04 | Komunalna tvrtka | Pasivni akter - ne koristi sučelje. Prima službene naloge internim poslovnim procesima. | F-019 |
 
 | Dionik | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
 | --- | --- | --- | --- |
 | D-01 | Agencija za zaštitu osobnih podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
-| D-02 | Razvojni tim | Dionik - Izrađuje, testira i održava aplikaciju. U njihovom interesu je da je aplikacija pouzdana i funkcionalna. |
+| D-02 | Razvojni tim | Dionik - Izrađuje, testira i održava aplikaciju. U njihovom interesu je da je aplikacija pouzdana i funkcionalna. | Funkcionalnost aplikacije u cijelosti. |
+| D-03 | Komunalna tvrtka | Dionik - Ne koristi sustav. Prima službene naloge internim poslovnim procesima. | F-019 |
+| D-04 | Kupac aplikacije (asistent na kolegiju) | Dionik - Ne koristi sustav. Interes u način izvedbe i rezultat projekta koji je kupio tj. u koji je uložio. | Funkcionalnost aplikacije u cijelosti. |
+| D-05 | Građanin | Dionik koji koristi mobilno sučelje. U interesu mu je funkcionalnost prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja. | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
+| D-06 | Eko-udruga | Dionik koji koristi web i mobilno sučelje. U interesu mu je funkcionalnost pregledavanja prijava, organiziranje akcija te slanje sanacija na potvrdu fotografiranjem. | F-001, F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
+| D-07 | Administrator (komunalni redar) | Dionik koji koristi web sučelje. U interesu mu je funkcionalnost upravljanja korisnicima, izdavanja službenih naloga, blokiranje korisnika, odobravanja udruga i pregledavanje statistike. | F-002, F-003, F-009, F-019, F-020, F-021, F-022, F-023, F-024, NF-1.3, NF-1.4 |
 
 <details>
 <summary><strong>Povezivanje aktera sa zahtjevima</strong></summary>
@@ -160,7 +164,7 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 | AS-03 | Pretpostavka | Svaka eko-udruga ima jedan korisnički račun i jednu regiju (grad ili općinu) koju odabire pri prvoj prijavi. | Procjena tima | Testiranjem provjeriti da se u F-010 prikazuju samo prijave iz regije udruge. |
 | AS-04 | Pretpostavka | Na dan 15. 11. 2026. aktualne verzije su: Android 17 i 16, iOS 27 i 26, Firefox 158 i 160, Chrome 158 i 157 i Safari 27 i 26. | Procjena tima | Provjeriti verzije prije svake kontrolne točke (7. i 14. tjedan) i prije završne predaje. Ako se promijene, treba ažurirati AS-04 i zabilježiti u poglavlju 2.5 samo ako se mijenja opseg testiranja. |
 | AS-05 | Pretpostavka | Prvi administratorski račun postoji unaprijed (kreira se pri postavljanju sustava). | Procjena tima | Prije prve isporuke provjeriti da se sustav može pokrenuti na praznoj bazi i da se prvi administrator može prijaviti. |
-| AS-06 | Pretpostavka | E-pošta ugovorene komunalne tvrtke unaprijed je zadana u konfiguraciji sustava, a službeni nalog (F-019) šalje se e-poštom. | Procjena tima | Pri testiranju F-019 provjeriti da e-pošta s nalogom stiže na testnu adresu. |
+| AS-06 | Pretpostavka | Ugovorena komunalna tvrtka zaprima službeni nalog putem poslovnih procesa (F-019) tj. proces slanja samog naloga se događa izvan EcoSentry sustava. | Procjena tima | Dogovoreno s asistentom. |
 | AS-07 | Pretpostavka | Promjena termina akcije (F-017) mijenja termin u sustavu i obavještava volontere unutar aplikacije. Već stvoreni događaji u Google Calendaru se ne ažuriraju automatski. | Procjena tima (Opis zadatka: "prebacivanje termina u kalendaru") | Potvrditi s asistentom da automatsko ažuriranje Google događaja nije obavezno. |
 
 
@@ -191,6 +195,12 @@ Ograničenje je uvjet koji tim mora poštovati; pretpostavka je uvjet na koji se
 | 26. 10. | F-001, F-002, AS-01 | Razjašnjeno tko se prijavljuje putem OAuth-a, a kome administrator kreira račun. | Dogovoreno s asistentom |
 | 26. 10. | F-010, AS-03 | Razjašnjeno određivanje regije udruge i filtriranje prijava. | Dogovoreno s asistentom |
 | 26. 10. | NF-3.1, NF-3.3 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
+| 26. 10. | AS-01 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
+| 26. 10. | AS-02 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
+| 26. 10. | AS-03 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
+| 26. 10. | AS-04 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
+| 26. 10. | AS-05 | Uvedene konkretne mjerljive vrijednosti. | Validirano s kupcem (asistentom). |
+| 16. 11. | AS-06 | Komunalna tvrtka zaprima naloge putem poslovnih procesa umjesto e-poštom. Prevelika zahtjevnost navedene implementacije. | Dogovoreno s asistentom |
 
 <details>
 <summary><strong>Bilježenje značajne promjene</strong></summary>

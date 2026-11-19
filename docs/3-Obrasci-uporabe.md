@@ -1,73 +1,18 @@
 # 3. Obrasci uporabe
-
-**Cilj:** Prikazati glavne interakcije između aktera aplikacije i sustava. Opišite kako akter ostvaruje cilj i što se događa kada važan korak ne uspije. Interakcije temeljite na odobrenim zahtjevima i ažurirajte ih kako se aplikacija razvija.
-
 ## 3.1 Dijagram obrazaca uporabe
 
-![Dijagram obrazaca uporabe: Funkcionalnost građanina](./assets/diagrams/3-1-1-gradanin-UC-v3.png)
+![Dijagram obrazaca uporabe: Funkcionalnost građanina](./assets/diagrams/3-1-1-gradanin-UC-v4.png)
 _Slika 3.1.1 - Dijagram obrazaca uporabe: Funkcionalnosti građanina_
 
-![Dijagram obrazaca uporabe: Funkcionalnost eko-udruge](./assets/diagrams/3-1-2-ekoudruga-UC-v3.png)
+![Dijagram obrazaca uporabe: Funkcionalnost eko-udruge](./assets/diagrams/3-1-2-ekoudruga-UC-v4.png)
 _Slika 3.1.2 - Dijagram obrazaca uporabe: Funkcionalnosti eko-udruge_
 
-![Dijagram obrazaca uporabe: Funkcionalnost administratora (komunalnog redara)](./assets/diagrams/3-1-3-administrator-UC-v4.png)
+![Dijagram obrazaca uporabe: Funkcionalnost administratora (komunalnog redara)](./assets/diagrams/3-1-3-administrator-UC-v5.png)
 _Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnosti administratora (komunalnog redara)_
 
 **Napomena:** Sustav je prikazan uz pomoć 3 dijagrama jer su svi pokušaji spajanja više aktera u jedan dijagram rezultirali jako nečitljivim i nezgrapnim dijagramom. Zadatak je takav da građanin, eko-udruga i administrator imaju potpuno drukčiji skup obrazaca uporabe te je samim time teže provesti proces generalizacije. Jedino građanin i eko-udruga dijele mali broj obrazaca, ali i tada zbog samoga broja ostalih obrazaca dijagram funkcionalnosti građanina i eko-udruge bi bio nepregledan.
 
----
-
-**Cilj:** Prikazati granicu sustava, relevantne aktere i njihove glavne ciljeve u **jednom čitljivom UML dijagramu obrazaca uporabe**. Dodajte drugi, usmjereni dijagram samo ako potpuni prikaz više ne može ostati čitljiv; treći dijagram zahtijeva zaseban razlog specifičan za projekt.
-
-![Dijagram obrazaca uporabe sustava CrisisMap](./assets/diagrams/3-1-crisismap-system-UC.svg)
-
-**Slika 3.1. Dijagram obrazaca uporabe sustava CrisisMap**
-
-**PlantUML izvor:** [izvor](./puml/3-1-crisismap-system-UC.puml)
-
-**Provjera dijagrama:** Prikažite prepoznate uloge koje **komuniciraju s aplikacijom**, a ne dionike koji s njom nemaju interakciju. Svaki glavni korisnički cilj mora imati pridruženog aktera; uključeni obrazac uporabe može se dosegnuti preko drugog obrasca uporabe bez vlastite izravne veze s akterom. `<<include>>` i `<<extend>>` koristite samo kada odnos odgovara stvarnom ponašanju.
-
-<details>
-<summary><strong>Primjer odabira aktera i granica sustava</strong></summary>
-
-**Opis primjera — CrisisMap:**
-
-Dijagram prikazuje **ogledni scenarij** s građaninom, posjetiteljem i organizacijom koja provjerava dostupne resurse. Organizaciju uključite kao aktera samo ako joj odobreni projekt stvarno omogućuje interakciju s aplikacijom. OAuth je izvan ovog primjera jer je riječ o implementacijski specifičnom načinu prijave i pripada zahtjevima samo ako je odobren.
-
-**Odabir aktera i ciljeva:** Granica pokazuje što aplikacija nudi, akteri imaju različite ciljeve, a nijedan akter ni obrazac uporabe ne tvrdi da ova studentska aplikacija angažira hitne službe. Dijagram usporedite s odobrenim funkcijskim zahtjevima i akterima.
-
-
-**Pet pitanja za odabir sadržaja dijagrama** (ne pet dijagrama za predaju):
-
-| Fokus | Pitanje |
-| --- | --- |
-| Cijeli sustav | Koji korisnički ciljevi najbolje objašnjavaju čemu ova aplikacija služi? |
-| Ključne funkcionalnosti | Koje ciljeve treba detaljnije opisati ili, ako je potrebno, prikazati zasebnim usmjerenim dijagramom? |
-| Korisničke uloge | Koji akteri mogu sudjelovati u pojedinom cilju i kako se njihove ovlasti razlikuju? |
-| Ključni procesi | Koji cilj ima važne alternative koje treba opisati u obrascu uporabe? |
-| Vanjske integracije | Sudjeluje li drugi sustav u obrascu uporabe kao **sekundarni akter**, primjerice odobreni pružatelj identiteta pri prijavi? |
-
-Vanjski sustav može biti sekundarni akter obrasca uporabe kada sudjeluje u ostvarenju korisničkog cilja; tehničke veze opisuju se u arhitekturi. Nemojte stvarati dodatni obavezni dijagram obrazaca uporabe samo radi popisa integracija. Prenatrpan dijagram podijelite prema povezanim akterima ili ciljevima samo kada time postaje čitljiviji.
-
-</details>
-
 ## 3.2 Specifikacije obrazaca uporabe
-
-**Cilj:** Za svaki obrazac uporabe iz dijagrama objasniti cilj aktera, uobičajenu interakciju s aplikacijom i važne alternative. Jednostavne obrasce uporabe opišite kratko; proširite one kod kojih alternative, vanjske ovisnosti ili posljedice zahtijevaju dodatno objašnjenje.
-
-**Za svaki obrazac uporabe koristite jednu okomitu tablicu.** Navedite samo onoliko pojedinosti koliko interakcija zahtijeva; neprimjenjivu alternativu izostavite umjesto da je popunjavate samo radi forme.
-
-### UC-[ID]: [Naziv usmjeren na cilj]
-
-| Element specifikacije | Opis |
-| :--- | :--- |
-| **Primarni akter** | [Uloga definirana u analizi zahtjeva] |
-| **Povezani zahtjevi** | [Identifikatori funkcijskih zahtjeva, npr. F-001, F-004] |
-| **Preduvjeti** | [Stanje sustava koje mora biti zadovoljeno prije početka izvođenja] |
-| **Glavni uspješni tok** | 1. Akter pokreće akciju.<br>2. Program obrađuje unos i vraća povratnu informaciju.<br>3. [Koračni prikaz interakcije do ostvarenja cilja] |
-| **Alternativni tokovi / Iznimke** | **[Korak]a — [Naziv iznimke]:** [Uvjet nastanka, reakcija programa i nastavak toka] |
-| **Posljedice (ishod)** | [Promjena stanja podataka ili potvrda nakon uspješnog završetka] |
-
 
 ### UC-01: Prijava putem OAuth-a 2.0
 

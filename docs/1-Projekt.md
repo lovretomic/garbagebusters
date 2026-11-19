@@ -21,29 +21,21 @@ Divlja odlagališta otpada predstavljaju ekološki problem koji građani ne mogu
 
 **Cilj:** Utvrditi osobe, uloge i organizacije čije potrebe i interesi određuju projektni zadatak.
 
-| Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
+| Skupina korisnika | Potreba ili interes relevantan za ovaj projekt |
 | --- | --- |
 | Građanin | Prijaviti divlje odlagalište otpada, pratiti tijek prijava, praćenje povijesti vlastitih prijava i prijava kao volonter za sudjelovanje u čišćenjima. |
 | Eko-udruga | Pregledavanje prijavljenih odlagališta otpada, organiziranje akcija čišćenja, koordiniranje volontera i slanje zahtjeva za zatvaranje prijave. |
 | Komunalni redar (administrator) | Pregledavanje i upravljanje korisnicima, kontrola prijava otpada, izdavanje službenih naloga komunalnim tvrtkama te pregledavanje statistike prijava. |
-| Agencija za zaštitu podataka | Zahtijeva zaštitu njihovih osobnih podataka s primjenjivim propisima, ne koristi aplikaciju. |
 
-<details>
-<summary><strong>Korisnici, dionici i neobavezna persona</strong></summary>
-
-**Primjer — CrisisMap:**
-
-| Skupina korisnika ili dionika | Potreba ili interes relevantan za ovaj projekt |
+| Skupina dionika | Potreba ili interes relevantan za ovaj projekt |
 | --- | --- |
-| Građanin | Pronaći informacije o obližnjim kriznim događajima i podnijeti prijavu kriznog događaja s lokacijom. |
-| Koordinator pomoći | Pregledati prijave relevantne za područje i dostupne resurse, ako je koordinacija unutar odobrenog opsega. |
-| Regulatorno tijelo / Agencija za zaštitu podataka (Dionik) | Zahtijeva osiguravanje anonimnosti prijavitelja i zaštitu osobnih podataka (npr. usklađenost s GDPR-om). Ovaj dionik ne koristi aplikaciju, ali definira ograničenja sustava. |
-
-Riječ je o dvjema različitim potrebama, a ne o dvjema izmišljenim biografijama. Akter komunicira s aplikacijom; demonstrator na kolegiju kojem je rezultat zanimljiv ne mora biti akter aplikacije. Koristite uloge i ovlasti iz svojeg odobrenog zadatka. Persona je neobavezna i korisna je kada pomaže riješiti konkretno projektno pitanje.
-
-**Neobavezni primjer persone:** Ana, koordinatorica pomoći, treba aktualne informacije o resursima kako bi mogla rasporediti pomoć. To može pomoći kada tim odlučuje koje informacije koordinator treba vidjeti prve. Personu opišite samo ako objašnjava projektnu odluku; popis izmišljenih biografija nije obavezni rezultat kolegija.
-
-</details>
+| Komunalna tvrtka | Interes komunalne tvrtke je proces primanja službenih naloga za sanacije, ne koristi aplikaciju.  |
+| Agencija za zaštitu podataka | Zahtijeva zaštitu njihovih osobnih podataka s primjenjivim propisima, ne koristi aplikaciju. |
+| Razvojni tim | U njihovom interesu je da je aplikacija pouzdana i funkcionalna. |
+| Kupac aplikacije (asistent na kolegiju) | Interes u način izvedbe i rezultat projekta koji je kupio tj. u koji je uložio. |
+| Građanin | U interesu mu je funkcionalnost prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja. |
+| Eko-udruga | U interesu mu je funkcionalnost pregledavanja prijava, organiziranje akcija te slanje sanacija na potvrdu fotografiranjem. |
+| Administrator (komunalni redar) | U interesu mu je funkcionalnost upravljanja korisnicima, izdavanja službenih naloga, blokiranje korisnika, odobravanja udruga i pregledavanje statistike. |
 
 ## 1.3 Granice projekta
 

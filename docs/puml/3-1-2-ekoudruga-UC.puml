@@ -81,8 +81,8 @@ EKO --> UC24
 UC13 --> GRAD
 
 note bottom of GRAD
-Građanin je pasivni akter koji prima 
-obavijest unutar vlastite mobilne aplikacije.
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
 end note
 
 note right of UC02

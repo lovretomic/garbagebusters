@@ -40,7 +40,6 @@ actor "Administrator\n(komunalni redar)" as ADMN
 
 actor "Građanin" as GRAD
 
-actor "Komunalna tvrtka" as KOMTV
 
   rectangle "Ecosentry - WEB aplikacija" as SUS {
     usecase "UC-03: Prijava\nadministratora" as UC03
@@ -72,18 +71,17 @@ ADMN --> UC07
 ADMN --> UC14
 ADMN --> UC28
 UC13 --> GRAD
-UC16 --> KOMTV
 
 UC16 ..> UC13 : <<include>>
 UC27 ..> UC13 : <<include>>
 
-note bottom of KOMTV
-Komunalna tvrtka je pasivni akter
-koji prima službeni nalog putem poslovnih procesa.
+note right of UC16
+Komunalna tvrtka je dionik koji prima
+službeni nalog putem poslovnih procesa.
 end note
 
 note bottom of GRAD
-Građanin je pasivni akter koji prima 
-obavijest unutar vlastite mobilne aplikacije.
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
 end note
 @enduml
