@@ -2,6 +2,8 @@
 
 ## 4.1 Strategija rješenja
 
+U nastavku su opisane ključne arhitekturne odluke koje su najviše utjecale na naše rješenje, uz obrazloženje zašto su baš one odabrane u sklopu ovog projekta.
+
 | Odluka | Razmatrana alternativa | Projektno specifično obrazloženje i kompromis |
 | --- | --- | --- |
 | Pristup bazi podataka preko Prisme | Ručno pisani SQL upiti  | Prisma omogućuje povezivanje backend dijela aplikacije s bazom preko definiranih modela. TypeScript tipovi automatski se generiraju te se time smanjuje mogućnost pogreške. Uz to Prisma olakšava ažuriranje baze podataka bez potrebe za ručnim mijenjanjem SQL koda. Loša strana: nakon svake promjene sheme članovi tima moraju ponovo generirati Prisma kod |
@@ -12,6 +14,8 @@
 
 
 ## 4.2 Gradivni blokovi i UML dijagram komponenata
+
+U ovom dijelu je prikazano kako je sustav podijeljen na komponente, što je odgovornost svake od njih i zašto su granice među njima postavljene baš ovako. 
 
 | Dio | Odgovornost | Razlog za ovu granicu |
 | --- | --- | --- |
@@ -26,10 +30,8 @@
 ## 4.3 Podaci i detaljno oblikovanje
 
 ### 4.3.1 ER dijagram i model podataka
- 
-**Implementacija:** Pristup bazi podataka implementiran je pomoću Prisme. Model podataka definiran je u [Prisma shemi](../backend/prisma/schema.prisma).
 
-**Primjer — EcoSentry:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
+Ispod je prikazan ER dijagram baze podataka sustava EcoSentry. Iz dijagrama su vidljivi svi entiteti i njihove poveznice u sustavu sa drugim entitetima, čime se dobiva vizualni prikaz povezanosti cijelog sustava. Pristup bazi podataka implementiran je pomoću Prisme. Shema se može pronaći [ovdje](../backend/prisma/schema.prisma).
 
 ![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-ecosentry-data-ERD.svg)
 
@@ -39,9 +41,7 @@
 
 ### 4.3.2 Reprezentativni UML dijagram razreda
 
-**Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.](../backend)
-
-**Primjer — EcoSentry:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
+U dijagramu ispod su prikazani glavni razredi sustava, njihovi atributi i veze među njima. Dijagram služi kao pregled strukture koda i raspodjele zadataka između razreda. Backend dio projekta može se pronaći [ovdje](../backend).
 
 ![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-ecosentry-domain-CD.svg)
 
