@@ -3,6 +3,8 @@ import { generators } from "openid-client";
 import { randomBytes, scrypt } from "node:crypto";
 import { createGoogleClient } from "./auth.config";
 import { prisma } from "../lib/prisma";
+import { hashPassword, verifyPassword } from "./password";
+import { requireAdmin } from "./admin.middleware";
 
 const router = Router();
 
@@ -207,6 +209,141 @@ router.get("/google/callback", async (req, res) => {
       error: "Google authentication failed",
     });
   }
+});
+
+router.post("/admin/login", async (req, res) => {
+  const { username, password } = req.body ?? {};
+
+  if (
+    typeof username !== "string" ||
+    typeof password !== "string" ||
+    !username.trim() ||
+    !password ||
+    username.length > 100 ||
+    password.length > 1024
+  ) {
+    res.status(400).json({
+      message: "Invalid login data.",
+    });
+    return;
+  }
+
+  try {
+    const user = await prisma.app_User.findUnique({
+      where: {
+        username: username.trim(),
+      },
+      include: {
+        admin: true,
+      },
+    });
+
+    if (!user || !user.admin || !(await verifyPassword(password, user.password))) {
+      res.status(401).json({
+        message: "Invalid username or password.",
+      });
+      return;
+    }
+
+    req.session.regenerate((error) => {
+      if (error) {
+        res.status(500).json({
+          message: "Failed to create session.",
+        });
+        return;
+      }
+
+      req.session.user = {
+        id: user.ID_User,
+        email: user.email,
+        name: user.name,
+      };
+
+      req.session.save((saveError) => {
+        if (saveError) {
+          res.status(500).json({
+            message: "Failed to save session.",
+          });
+          return;
+        }
+
+        res.status(200).json({
+          message: "Admin login successful.",
+          user: {
+            id: user.ID_User,
+            username: user.username,
+            name: user.name,
+          },
+        });
+      });
+    });
+  } catch (error) {
+    console.error("Admin login failed:", error);
+
+    res.status(500).json({
+      message: "Authentication failed.",
+    });
+  }
+});
+
+router.patch("/admin/password", requireAdmin, async (req, res) => {
+  const { oldPassword, newPassword } = req.body ?? {};
+  const userId = req.session.user?.id;
+
+  if (!userId) {
+    return res.status(401).json({
+      message: "Authentication required.",
+    });
+  }
+
+  if (
+    typeof oldPassword !== "string" ||
+    !oldPassword ||
+    oldPassword.length > 1024 ||
+    typeof newPassword !== "string" ||
+    newPassword.length < 12 ||
+    newPassword.length > 1024
+  ) {
+    return res.status(400).json({
+      message: "Invalid password data.",
+    });
+  }
+
+  try {
+    const user = await prisma.app_User.findUnique({
+      where: { ID_User: userId },
+      select: { password: true },
+    });
+
+    if (!user || !(await verifyPassword(oldPassword, user.password))) {
+      return res.status(401).json({
+        message: "Current password is incorrect.",
+      });
+    }
+
+    await prisma.app_User.update({
+      where: { ID_User: userId },
+      data: {
+        password: await hashPassword(newPassword),
+      },
+    });
+
+    return res.status(200).json({
+      message: "Password changed successfully.",
+    });
+  } catch (error) {
+    console.error("Password change failed:", error);
+
+    return res.status(500).json({
+      message: "Failed to change password.",
+    });
+  }
+});
+
+router.get("/admin/me", requireAdmin, (req, res) => {
+  res.status(200).json({
+    user: req.session.user,
+  });
 });
 
 router.get("/me", (req, res) => {
