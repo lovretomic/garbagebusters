@@ -36,12 +36,6 @@ title Funkcionalnosti administratora (komunalnog redara)
 
 frame "uc" {
 
-actor "Baza podataka" as BP
-note top of BP
-Svi obrasci uporabe 
-komuniciraju s bazom podataka
-end note
-
   actor "Administrator\n(komunalni redar)" as ADMN
 
 actor "Građanin" as GRAD

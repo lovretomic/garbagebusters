@@ -35,11 +35,7 @@ skinparam note {
 title Funkcionalnosti eko-udruge
 
 frame "uc" {
-actor "Baza podataka" as BP
-note top of BP
-Svi obrasci uporabe osim UC-13, UC-17, UC-24 
-i UC-19 komuniciraju s bazom podataka
-end note
+
   actor "Eko-udruga" as EKO
 
   rectangle "Ecosentry - WEB i mobilna aplikacija" as SUS {
