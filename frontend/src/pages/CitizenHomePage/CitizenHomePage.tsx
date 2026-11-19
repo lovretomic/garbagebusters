@@ -81,7 +81,9 @@ const CitizenHomePage = () => {
             <ReportCard
               key={report.ID_Report}
               name={`Prijava #${report.ID_Report}`}
-              area={report.GPS_coordinates}
+              area={report.GPS_coordinates.split(",")
+                .map((coord) => `${coord.trim()}°`)
+                .join(", ")}
               imageUrl={report.photos_before || ReportPlaceholder}
               status={statusMap[report.report_status]}
             />
