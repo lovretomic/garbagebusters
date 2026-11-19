@@ -1,0 +1,97 @@
+@startuml
+left to right direction
+
+skinparam shadowing false
+skinparam defaultFontSize 13
+skinparam ArrowColor black
+skinparam titleBorderThickness 2
+skinparam titleBorderColor black
+skinparam titleBackgroundColor white
+skinparam actor {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam usecase {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor black
+  FontStyle bold
+}
+skinparam frame {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam note {
+  BackgroundColor #FFCCCC
+  BorderColor black
+}
+
+title Funkcionalnosti građanina
+
+frame "uc" {
+actor "Baza podataka" as BP
+note top of BP
+Svi obrasci uporabe osim UC-24, UC-23, 
+UC-11, UC-09, UC-19 i UC-13 komuniciraju s bazom podataka
+end note
+actor "Građanin" as GRAD
+
+rectangle "Ecosentry - Mobilna aplikacija" as SUS {
+    usecase "UC-01: Prijava putem\nOAuth-a 2.0" as UC01
+    usecase "UC-08: Prijava divljeg\nodlagališta" as UC08
+    usecase "UC-09: Ručni odabir\nlokacije na karti" as UC09
+    usecase "UC-10: Geokodiranje\nlokacije" as UC10
+    usecase "UC-11: Pregled karte\nprijava" as UC11
+    usecase "UC-12: Pregled povijesti\nvlastitih prijava" as UC12
+    usecase "UC-13: Slanje obavijesti o\npromjeni statusa prijave" as UC13
+    usecase "UC-21: Pregled nadolazećih\nakcija čišćenja" as UC21
+    usecase "UC-22: Prijava na akciju\nčišćenja kao volonter" as UC22
+    usecase "UC-23: Prikaz rute do\nmjesta okupljanja" as UC23
+    usecase "UC-24: Pregled prognoze\nza termin akcije" as UC24
+    usecase "UC-19: Dodavanje događaja\nu Google Calendar" as UC19
+}
+
+actor "OAuth 2.0" as OAUTH
+actor "Google Maps API" as MAPS
+actor "Google Calendar API" as CAL
+actor "OpenWeatherMap API" as OWM
+}
+
+GRAD --> UC01
+UC11 -- MAPS
+GRAD --> UC11
+
+GRAD --> UC22
+UC10 -- MAPS
+UC09 ..> UC08 : <<extend>>
+UC23 -- MAPS
+GRAD --> UC24
+GRAD --> UC12
+UC09 ..> UC10 : <<include>>
+
+UC22 ..> UC19 : <<include>>
+
+GRAD --> UC21
+UC13 --> GRAD
+GRAD --> UC08
+
+UC08 ..> UC10 : <<include>>
+
+UC23 ..> UC21 : <<extend>>
+
+UC01 -- OAUTH
+UC09 -- MAPS
+
+UC19 -- CAL
+UC24 -- OWM
+
+note right of UC13
+Građanin je pasivni akter koji prima 
+obavijest unutar vlastite mobilne aplikacije.
+end note
+@enduml

@@ -52,14 +52,17 @@
   white-space: nowrap;
 }
 
+.statusReported {
+  background-color: #5e5e5e;
+}
+.statusOfficial {
+  background-color: #5e5e5e;
+}
 .statusInProgress {
   background-color: #a44eb7;
 }
-.statusMarked {
-  background-color: #8b8b8b;
-}
-.statusChecked {
-  background-color: #5e5e5e;
+.statusCleaned {
+  background-color: #36aa4c;
 }
 
 .statusIcon {

@@ -1,0 +1,87 @@
+@startuml
+left to right direction
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam ArrowColor black
+skinparam titleBorderThickness 2
+skinparam titleBorderColor black
+skinparam titleBackgroundColor white
+skinparam actor {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam usecase {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor black
+  FontStyle bold
+} 
+skinparam frame {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam note {
+  BackgroundColor #FFCCCC
+  BorderColor black
+}
+
+title Funkcionalnosti administratora (komunalnog redara)
+
+frame "uc" {
+
+actor "Baza podataka" as BP
+note top of BP
+Svi obrasci uporabe 
+komuniciraju s bazom podataka
+end note
+
+  actor "Administrator\n(komunalni redar)" as ADMN
+
+actor "Građanin" as GRAD
+
+  rectangle "Ecosentry - WEB aplikacija" as SUS {
+    usecase "UC-03: Prijava\nadministratora" as UC03
+    usecase "UC-04: Stvaranje računa\nkomunalnog redara" as UC04
+    usecase "UC-05: Promjena inicijalne\nlozinke" as UC05
+
+    usecase "UC-06: Provjera i odobravanje\neko-udruge" as UC06
+    usecase "UC-07: Blokiranje korisnika" as UC07
+
+    usecase "UC-14: Odbacivanje\nlažne prijave" as UC14
+    usecase "UC-15: Izmjena kategorije\notpada" as UC15
+    usecase "UC-16: Slanje službenog naloga\nkomunalnoj tvrtki" as UC16
+
+    usecase "UC-27: Potvrda dokaza\no sanaciji" as UC27
+    usecase "UC-13: Slanje obavijesti o\npromjeni statusa prijave" as UC13
+
+    usecase "UC-28: Pregled statističkih\ngrafikona" as UC28
+  }
+}
+
+ADMN --> UC03
+ADMN --> UC15
+ADMN --> UC16
+ADMN --> UC06
+ADMN --> UC27
+ADMN --> UC05
+ADMN --> UC04
+ADMN --> UC07
+ADMN --> UC14
+ADMN --> UC28
+UC13 --> GRAD
+
+UC16 ..> UC13 : <<include>>
+UC27 ..> UC13 : <<include>>
+
+note bottom of GRAD
+Građanin je pasivni akter koji prima 
+obavijest unutar vlastite mobilne aplikacije.
+end note
+@enduml
