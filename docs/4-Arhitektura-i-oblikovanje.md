@@ -1,5 +1,4 @@
 # 4. Arhitektura i oblikovanje
----
 
 ## 4.1 Strategija rješenja
 
