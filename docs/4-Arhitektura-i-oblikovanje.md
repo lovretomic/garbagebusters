@@ -1,15 +1,4 @@
 # 4. Arhitektura i oblikovanje
-
-| Arhitekturni pogled | Ključno inženjersko pitanje | Primijenjeni model ili dijagram |
-| :--- | :--- | :--- |
-| **Strategija rješenja** | Koji stil i temeljne odluke određuju program? | Tablica odluka (odjeljak 4.1) |
-| **Struktura podsustava** | Koji su glavni dijelovi i kako komuniciraju? | Dijagram komponenata |
-| **Model podataka** | Kako su strukturirani trajni podaci programa? | Relacijski ER dijagram |
-| **Struktura koda** | Kako su dodijeljene odgovornosti i ključne klase? | Reprezentativni dijagram razreda |
-| **Dinamičko ponašanje** | Kako moduli surađuju pri obradi ključnih transakcija? | sekvencijski dijagram |
-| **Stanja sustava** | Kako ključni domenski objekt mijenja svoja stanja? | Dijagram stanja |
-| **Fizički razmještaj** | Na kojim se izvršnim čvorovima program izvodi? | Dijagram razmještaja (poglavlje 6) |
-
 ---
 
 ## 4.1 Strategija rješenja
