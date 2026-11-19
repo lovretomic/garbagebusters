@@ -1,6 +1,6 @@
 @startuml
 
-title Sustav CrisisMap – logički podatkovni model
+title Ecosentry – logički podatkovni model
 
 entity "App User" as App_User {
     *ID_User: ID <<PK>>
