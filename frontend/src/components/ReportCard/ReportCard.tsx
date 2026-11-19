@@ -2,7 +2,7 @@ import c from "./ReportCard.module.scss";
 import React from "react";
 import clsx from "clsx";
 import GearIcon from "../../assets/icons/gear_icon.svg?react";
-import DefaultImage from "../../assets/images/default_image.png";
+import ReportPlaceholder from "../../assets/images/report_placeholder.webp";
 import PersonCheckedIcon from "../../assets/icons/person_check_icon.svg?react";
 import StopIcon from "../../assets/icons/stop_icon.svg?react";
 import CheckmarkIcon from "../../assets/icons/checkmark_icon.svg?react";
@@ -45,7 +45,7 @@ const ReportCard: React.FC<ReportCardProps> = ({
   className,
   ...handlers
 }) => {
-  const resolvedImageUrl = imageUrl || DefaultImage;
+  const resolvedImageUrl = imageUrl || ReportPlaceholder;
   const badge = status ? STATUS[status] : null;
   return (
     <div className={clsx(c.cardDiv, className)} {...handlers}>

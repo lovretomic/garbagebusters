@@ -3,6 +3,7 @@ import ActionCard from "../../components/ActionCard";
 import CardCarousel from "../../components/CardCarousel";
 import UserGreeting from "../../components/UserGreeting";
 import ProfilePlaceholder from "../../assets/images/profile_placeholder.webp";
+import ReportPlaceholder from "../../assets/images/report_placeholder.webp";
 import c from "./CitizenHomePage.module.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,7 +14,14 @@ type Report = {
   report_status: "Prijavljeno" | "Službena sanacija" | "Akcija u tijeku" | "Očišćeno";
   Report_date: string;
   GPS_coordinates: string;
-  photos_before: string;
+  photos_before?: string;
+};
+
+type User = {
+  id: number;
+  email: string;
+  name?: string;
+  profile_photo?: string | null;
 };
 
 const statusMap = {
@@ -42,6 +50,7 @@ const actions = [
 
 const CitizenHomePage = () => {
   const [reports, setReports] = useState<Report[]>([]);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     axios
@@ -49,11 +58,19 @@ const CitizenHomePage = () => {
       .then((res) => setReports(res.data))
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    axios
+      .get<{ user: User }>("/auth/me")
+      .then((res) => setUser(res.data.user))
+      .catch(console.error);
+  }, []);
+
   return (
     <main className={c.page}>
       <UserGreeting
-        name="Mak"
-        avatarUrl={ProfilePlaceholder}
+        name={user?.name ?? "korisnik"}
+        avatarUrl={user?.profile_photo || ProfilePlaceholder}
         subtitle="Nažalost, nemate novih obavijesti."
       />
 
@@ -64,8 +81,10 @@ const CitizenHomePage = () => {
             <ReportCard
               key={report.ID_Report}
               name={`Prijava #${report.ID_Report}`}
-              area={report.GPS_coordinates}
-              imageUrl={report.photos_before}
+              area={report.GPS_coordinates.split(",")
+                .map((coord) => `${coord.trim()}°`)
+                .join(", ")}
+              imageUrl={report.photos_before || ReportPlaceholder}
               status={statusMap[report.report_status]}
             />
           ))}

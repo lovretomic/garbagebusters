@@ -209,15 +209,29 @@ router.get("/google/callback", async (req, res) => {
   }
 });
 
-router.get("/me", (req, res) => {
+router.get("/me", async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({
       error: "Not authenticated",
     });
   }
 
+  const user = await prisma.app_User.findUnique({
+    where: { ID_User: req.session.user.id },
+    select: { ID_User: true, email: true, name: true, profile_photo: true },
+  });
+
+  if (!user) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
   res.json({
-    user: req.session.user,
+    user: {
+      id: user.ID_User,
+      email: user.email,
+      name: user.name,
+      profile_photo: user.profile_photo,
+    },
   });
 });
 

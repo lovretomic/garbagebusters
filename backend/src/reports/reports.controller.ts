@@ -45,8 +45,6 @@ export async function createReportController(req: Request, res: Response): Promi
   if (
     typeof GPS_coordinates !== "string" ||
     !GPS_coordinates.trim() ||
-    typeof photos_before !== "string" ||
-    !photos_before.trim() ||
     typeof category !== "string" ||
     !category.trim() ||
     typeof waste_volume !== "number" ||
@@ -62,7 +60,7 @@ export async function createReportController(req: Request, res: Response): Promi
   try {
     const report = await createReport(userId, {
       GPS_coordinates: GPS_coordinates.trim(),
-      photos_before: photos_before.trim(),
+      photos_before: typeof photos_before === "string" ? photos_before.trim() : "",
       category: category.trim(),
       waste_volume,
     });
