@@ -113,13 +113,17 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 
 **Cilj:** Utvrditi uloge koje utječu na zahtjeve i razlikovati dionike od aktera koji komuniciraju s aplikacijom.
 
-| ID uloge ili aktera | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
+| Akter | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
 | --- | --- | --- | --- |
 | A-01 | Građanin | Akter - koristi mobilno sučelje, prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
 | A-02 | Eko-udruga | Akter - koristi web i mobilno sučelje, pregledava prijave, organizira akcije te šalje sanacije na potvrdu fotografiranjem | F-001, F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
 | A-03 | Administrator (komunalni redar) | Akter - koristi web sučelje, upravlja korisnicima, izdaje službene naloge, blokira korisnike, odobrava udruge, pregledava statistiku | F-002, F-003, F-009, F-019, F-020, F-021, F-022, F-023, F-024, NF-1.3, NF-1.4 |
-| D-01 | Ugovorena komunalna tvrtka | Dionik - ne koristi aplikaciju, ali prima službene naloge i sanira opasni i veliki otpad | F-019 |
-| D-02 | Agencija za zaštitu osobnih podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
+| A-04 | Komunalna tvrtka | Pasivni akter - ne koristi sučelje. Prima službene naloge internim poslovnim procesima. | F-019 |
+
+| Dionik | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
+| --- | --- | --- | --- |
+| D-01 | Agencija za zaštitu osobnih podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
+| D-02 | Razvojni tim | Dionik - Izrađuje, testira i održava aplikaciju. U njihovom interesu je da je aplikacija pouzdana i funkcionalna. |
 
 <details>
 <summary><strong>Povezivanje aktera sa zahtjevima</strong></summary>
