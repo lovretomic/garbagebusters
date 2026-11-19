@@ -31,11 +31,11 @@
 
 **Primjer — EcoSentry:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
 
-![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-crisismap-data-ERD.svg)
+![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-ecosentry-data-ERD.svg)
 
 **Slika 4.2. ER dijagram podataka sustava EcoSentry**
 
-**PlantUML izvor:** [izvor](./puml/4-2-crisismap-data-ERD.puml)
+**PlantUML izvor:** [izvor](./puml/4-2-ecosentry-data-ERD.puml)
 
 ### 4.3.2 Reprezentativni UML dijagram razreda
 
@@ -43,11 +43,11 @@
 
 **Primjer — EcoSentry:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
 
-![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-crisismap-domain-CD.svg)
+![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-ecosentry-domain-CD.svg)
 
 **Slika 4.3. Dijagram razreda za obradu prijava kriznih događaja**
 
-**PlantUML izvor:** [izvor](./puml/4-3-crisismap-domain-CD.puml)
+**PlantUML izvor:** [izvor](./puml/4-3-ecosentry-domain-CD.puml)
 
 ## 4.4 Ponašanje tijekom izvođenja
 
