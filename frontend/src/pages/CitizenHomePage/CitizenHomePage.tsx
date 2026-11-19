@@ -16,6 +16,13 @@ type Report = {
   photos_before: string;
 };
 
+type User = {
+  id: number;
+  email: string;
+  name?: string;
+  profile_photo?: string | null;
+};
+
 const statusMap = {
   Prijavljeno: "reported",
   "Službena sanacija": "official_sanation",
@@ -42,6 +49,7 @@ const actions = [
 
 const CitizenHomePage = () => {
   const [reports, setReports] = useState<Report[]>([]);
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     axios
@@ -49,11 +57,19 @@ const CitizenHomePage = () => {
       .then((res) => setReports(res.data))
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    axios
+      .get<{ user: User }>("/auth/me")
+      .then((res) => setUser(res.data.user))
+      .catch(console.error);
+  }, []);
+
   return (
     <main className={c.page}>
       <UserGreeting
-        name="Mak"
-        avatarUrl={ProfilePlaceholder}
+        name={user?.name ?? "korisnik"}
+        avatarUrl={user?.profile_photo || ProfilePlaceholder}
         subtitle="Nažalost, nemate novih obavijesti."
       />
 
