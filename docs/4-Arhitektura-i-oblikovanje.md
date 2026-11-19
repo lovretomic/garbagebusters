@@ -29,11 +29,11 @@
  
 **Implementacija:** Pristup bazi podataka implementiran je pomoću Prisme. Model podataka definiran je u [Prisma shemi](../backend/prisma/schema.prisma).
 
-**Primjer — CrisisMap:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
+**Primjer — EcoSentry:** Petar se prijavljuje u sustav unoseći podatke navedene u App User. Kada primijeti zagađenu lokaciju on odlučuje slati prijavu 'R-22' te lokacije kako bi se ona očistila. Redar provjerava ovu prijavu te gleda hoće li poslati nalog komunalnoj tvrtki. Ako do toga ne dođe Ekoudruga pokreće akciju čišćenja te se Petar i sam može u nju uključiti ako ima slobodnih mjesta.
 
 ![ER dijagram podataka sustava CrisisMap](./assets/diagrams/4-2-crisismap-data-ERD.svg)
 
-**Slika 4.2. ER dijagram podataka sustava CrisisMap**
+**Slika 4.2. ER dijagram podataka sustava EcoSentry**
 
 **PlantUML izvor:** [izvor](./puml/4-2-crisismap-data-ERD.puml)
 
@@ -41,7 +41,7 @@
 
 **Referenca na kod pri završnom pregledu:** [Poveznica na odgovarajuću implementaciju.](../backend)
 
-**Primjer — CrisisMap:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
+**Primjer — EcoSentry:** Građanin kojeg korisnik aplikacije stvara novu prijavu koju obrađuje komunalni redar koji može poslati nalog za čišćenje lokacije iz prijave ili prijavu ostaviti (eko udruzi koja još nije definirana) koja na osnovu prijave otvara novu akciju čišćenja. Dijagram predlaže te odgovornosti prije implementacije.
 
 ![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-crisismap-domain-CD.svg)
 
