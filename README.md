@@ -1,19 +1,6 @@
-<!--
-PREDLOŽAK — README završnog projekta na kolegiju Programsko inženjerstvo FER-a.
-Kopirajte ovu datoteku u README.md u repozitoriju svojeg projekta. Zamijenite
-svaku uputu u uglatim zagradama činjenicama o svojem projektu, uklonite sve
-komentare s uputama i ogledne <details> blokove te prije predaje izbrišite ovu
-napomenu. Nemojte kopirati nastavni primjer kao rezultat svojeg projekta.
--->
 
 # EcoSentry
 
-<details>
-<summary>Zašto je ovaj odjeljak važan</summary>
-
-Započnite README nazivom svojeg projekta i sažetim opisom njegove svrhe. Naziv projekta ne mora sam po sebi objašnjavati čemu projekt služi, ali opis uz naziv treba novom čitatelju omogućiti da brzo razumije što aplikacija radi.
-
-</details>
 
 Aplikacija Ecosentry omogućuje prijavljivanje divljih odlagališta i povezuje građane, eko-udruge te komunalne redare kako bi olakšala proces prijave, organizacije čišćenja i uklanjanje otpada.
 
@@ -21,30 +8,28 @@ Aplikacija Ecosentry omogućuje prijavljivanje divljih odlagališta i povezuje g
 
 ## Opis aplikacije
 
-[U dvije ili tri rečenice objasnite problem, ciljane korisnike i glavnu korist svoje aplikacije. Trenutačne funkcionalnosti navedite odvojeno od planiranih; opišite stvarni opseg umjesto obećanih mogućnosti.]
+Divlja odlagališta otpada ekološki su problem koji građani ne mogu jednostavno prijaviti niti pratiti što se dalje događa s prijavom. EcoSentry je namijenjen građanima, eko-udrugama i komunalnim redarima (administratorima): građani prijavljuju odlagališta i prate status prijava, eko-udruge organiziraju akcije čišćenja uz prijavu volontera, a administratori moderiraju prijave i izdaju službene naloge komunalnim tvrtkama. EcoSentry ne zamjenjuje službene kanale prijave (npr. ELOO), nego dodatno uključuje eko-udruge i volontere u sanaciju manjih odlagališta.
+
 
 **Ključne funkcionalnosti**
 
-- [Reprezentativna funkcionalnost koju korisnici mogu isprobati]
-- [Druga reprezentativna funkcionalnost]
-- [Po želji dodatna funkcionalnost; nemojte kopirati cijeli popis zahtjeva]
+- Registracija i prijava Google računom (OAuth 2.0) uz sesije pohranjene u bazi podataka (F-001).
+- Pregled povijesti vlastitih prijava: nakon prijave građanin na početnoj stranici vidi kartice svojih prijava s identifikatorom, koordinatama, fotografijom i trenutačnim statusom (F-007).
 
-Za potpuni opseg, zahtjeve, oblikovanje i dokaze ispitivanja pogledajte [docs](docs/Home.md).
+Za potpuni opseg, zahtjeve, oblikovanje i dokaze ispitivanja pogledajte [docs](./docs/).
 
 <a id="deployment"></a>
 
 ## Postavljanje (engl. deployment)
 
-<!-- UPUTA: Ovaj odjeljak opisuje već postavljenu aplikaciju koju se  može otvoriti i isprobati bez lokalnog pokretanja izvornog koda.
-Za Iteraciju 1 i Završni pregled navedite konkretne podatke. Provjerite vodi li URL na javno dostupnu pokrenutu aplikaciju i radi li navedeni tijek uporabe. Nikada ne objavljujte lozinke ni pristupne tokene. -->
+**Javno dostupna aplikacija:** [EcoSentry](https://ecosentry-backend-2jo9.onrender.com)
 
-**Javno dostupna aplikacija:** [Javni URL]
+**Isprobajte:** Prijavite se Google računom, a zatim na početnoj stranici građanina pogledajte kartice vlastitih prijava i njihove statuse.
 
-**Isprobajte:** [Jedna ili dvije kratke radnje koje pokazuju funkcionalan korisnički tijek.]
 
-**Demonstracija:** [Objasnite kako dobiti potreban ograničeni pristup ako je prijava obavezna; u suprotnom napišite „Korisnički račun nije potreban.” Ovdje ne objavljujte lozinke ni pristupne tokene.]
+**Demonstracija:** Prijava je obavezna i provodi se Google računom (OAuth 2.0).
 
-**Ograničenja:** [Kratko navedite ograničenja postavljene inačice ili postavite poveznicu na jedinstveno mjerodavno mjesto u dokumentaciji s poznatim problemima.]
+**Ograničenja:** Obrazac za prijavu odlagališta još nije izrađen pa se testne prijave stvaraju izravno preko `POST /reports`. Ostala poznata ograničenja i funkcionalnosti na čekanju navedene su u [2.4 ograničenja i pretpostavke](docs/2-Analiza-zahtjeva.md#24-ograničenja-i-pretpostavke).
 
 [Vodič za postavljanje i pokretanje](docs/6-Postavljanje-instalacija-i-konfiguracija.md) opisuje smještaj aplikacije (engl. hosting) koji tim stvarno koristi. Tim može koristiti Render ili drugu platformu koju ste dogovorili s asistentom/demonstratorom.
 
@@ -54,43 +39,61 @@ Za Iteraciju 1 i Završni pregled navedite konkretne podatke. Provjerite vodi li
 
 <!-- Obavezno od Demo 1 nadalje. Zamijenite mjesta za unos naredbama koje je drugi član tima uspješno provjerio nakon čistog kloniranja repozitorija. Detaljne upute za administraciju držite u projektnoj dokumentaciji u direktoriju docs/. -->
 
-**Preduvjeti:** [Navedite potrebno izvršno okruženje (engl. runtime) i verzija, upravitelj paketa (engl. package manager), baza podataka ili vanjska usluga ako je nužna.]
+**Preduvjeti:** Node.js 24.22.3 LTS, Yarn 4.18.1,
+PostgreSQL baza podataka (u produkciji Neon)
+i Google OAuth klijent.
+
 
 ```bash
-git clone [repository URL]
-cd [repository directory]
-[install dependencies]
-[run the application]
+git clone https://github.com/lovretomic/garbagebusters.git
+cd garbagebusters
+
+# Instalacija ovisnosti
+yarn install
+cd frontend && yarn install && cd ..
+cd backend && yarn install && cd ..
+
+# Pokretanje frontenda i backenda
+yarn dev
 ```
 
-**Adresa:** [Stvarna adresa koju aplikacija ispiše nakon pokretanja.]
+**Adresa:**
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3001
+- Google prijava: http://localhost:5173
 
-**Konfiguracija:** [Navedite potrebne varijable okruženja (engl. environment variables) ili uputite na sigurnu datoteku `.env.example`; objasnite gdje se dobivaju vrijednosti. Nikada ne stavljajte stvarne pristupne podatke u ovu datoteku, primjer konfiguracije, snimke zaslona, zapise ni zapise promjena (engl. commits).]
+**Konfiguracija:** <br>Prije pokretanja potrebno je u
+direktoriju backend stvoriti .env datoteku
+prema predlošku backend/.env.example i
+postaviti potrebne varijable:
 
-[Dodajte kratak korak provjere, primjerice koja se stranica treba otvoriti ili koja naredba pokreće osnovnu provjeru.] Za detaljno postavljanje pogledajte [projektnu dokumentaciju](docs/Home.md).
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+- GOOGLE_CALLBACK_URL
+- SESSION_SECRET
+- DATABASE_URL
+
+Stvarne pristupne podatke nije dopušteno
+objavljivati u repozitoriju.
+
+
+**Provjera:** Nakon pokretanja (`yarn dev`) otvorite http://localhost:5173 i prijavite se Google računom; nakon prijave trebaju se prikazati pozdrav korisniku i kartice njegovih prijava. Rad backenda možete provjeriti otvaranjem http://localhost:3001/auth/me. prijavljenom korisniku vraća njegove podatke, a neprijavljenom odbija pristup. Za detaljno postavljanje pogledajte [projektnu dokumentaciju](docs/Home.md).
 
 ## Tehnologije
 
 Navedite nekoliko tehnologija i vanjskih usluga koje bitno određuju kako vaša aplikacija radi. Za svaku navedite njezinu konkretnu ulogu i jedan razlog ili ograničenje važno za projekt. Alat za razvoj ili ispitivanje uključite samo ako je njegova uloga važna za razumijevanje načina na koji je projekt izrađen ili provjeren. Nemojte prepisivati popis ovisnosti (engl. dependencies), statistiku programskih jezika ni popis razvojnih okruženja i komunikacijskih alata. Tablicu provjerite prema stvarnom repozitoriju i pokrenutoj aplikaciji; potrebne verzije i konfiguraciju dokumentirajte u vodiču za instalaciju.
 
-| Tehnologija ili alat | Uloga u ovom projektu        | Razlog uporabe ili važno ograničenje           |
-| -------------------- | ---------------------------- | ---------------------------------------------- |
-| [Naziv]              | [Što radi u ovoj aplikaciji] | [Razlog ili ograničenje specifično za projekt] |
+| Tehnologija ili alat | Uloga u ovom projektu | Razlog uporabe ili važno ograničenje |
+| -------------------- | --------------------- | ------------------------------------ |
+| React, TypeScript i Vite | Klijentski dio: korisničko sučelje koje šalje HTTP zahtjeve prema backendu | Komponentna struktura olakšava ponovnu uporabu elemenata, a TypeScript otkriva pogreške tijekom pisanja koda; dio tima ih prije nije koristio pa je trebalo dodatno učenje. |
+| Node.js, Express i TypeScript | Poslužiteljski dio podijeljen u funkcionalne module (`auth`, `reports`, `actions`, `volunteers`, `associations`) | Podjela na module olakšava raspodjelu zadataka, ali ista se funkcionalnost ponekad programira u više mapa. |
+| PostgreSQL (Neon) i Prisma ORM | Pohrana prijava, korisnika i ostalih podataka; Prisma povezuje kod i bazu preko modela | Prisma generira TypeScript tipove i olakšava izmjene sheme; nakon svake promjene sheme članovi tima moraju ponovno generirati Prisma kod. |
+| express-session i connect-pg-simple | Sesije prijavljenih korisnika pohranjene u PostgreSQL | Backend identitet korisnika (npr. za `GET /reports/me`) uzima iz sesije. |
+| Google OAuth 2.0 | Vanjski pružatelj registracije i prijave | Zahtjev odobrenog zadatka (C-02); prijavljeni korisnici dolaze isključivo preko Google računa, osim administratora. |
+| Render | Smještaj javne web-aplikacije i backenda | Javna aplikacija ovisi o toj platformi i njezinim varijablama okruženja. |
+| GitHub Actions | Automatske provjere koda prije spajanja promjena | Obavezne za frontend i backend prije spajanja u `main`. |
 
-<details>
-<summary><strong>Primjer: objašnjenje ključnih tehnoloških odluka</strong></summary>
-
-**Primjer — CrisisMap:**
-
-| Tehnologija ili alat                                  | Uloga u ovom projektu                                                | Razlog uporabe ili važno ograničenje                                                                                                               |
-| ----------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| React                                                 | Prikazuje obrazac za prijavu i kartu kriznih događaja u pregledniku. | Karta i poslane prijave mogu se ažurirati bez ponovnog učitavanja cijele stranice.                                                                 |
-| PostgreSQL                                            | Pohranjuje prijave, lokacije i njihove odnose.                       | Zapisi o prijavama moraju ostati povezani s autorima i lokacijama; promjene sheme zahtijevaju migracije baze podataka (engl. database migrations). |
-| Usluga kartografskih pločica (engl. map tile service) | Omogućuje prikaz karte u pregledniku.                                | Karta ovisi o vanjskoj usluzi; aplikacija mora imati definirano ponašanje i kada kartografske pločice nisu dostupne.                               |
-
-**Analiza primjera:** Svaki redak opisuje ulogu ili posljedicu konkretne tehnologije u ovoj aplikaciji. Verzije paketa pripadaju datotekama s ovisnostima projekta; verzije izvršnog okruženja i konfiguracija važna za postavljanje pripadaju vodiču za instalaciju. Važne kompromise u oblikovanju (engl. design trade-offs) objasnite na stranici arhitekture u direktoriju `docs/` umjesto da ovdje ponavljate cijeli zapis odluke. Navodite samo usluge koje vaš tim stvarno integrira.
-
-</details>
+Vanjske integracije Google Maps, Google Calendar i OpenWeatherMap dio su odobrenog zadatka, ali još nisu ostvarene u ovom stadiju projekta pa ovdje nisu navedene.
 
 <a id="team-members"></a>
 
@@ -109,15 +112,11 @@ Uloge se tijekom projekta mogu mijenjati. Repozitorij i dogovoreni alat za prać
 
 ## Doprinos projektu
 
-[Ako je primjenjivo, ukratko opišite kako se evidentiraju zadaci i nedostaci te kako se pregledavaju promjene koda i gdje se nalazi aktualna evidencija zadataka. Ako tim održava `CONTRIBUTING.md`, ovdje postavite poveznicu umjesto ponavljanja pravila. Nemojte stvarati tu datoteku samo zato da biste popunili ovaj odjeljak.]
+Zadaci i nedostaci bilježe se putem [GitHub Issues](https://github.com/lovretomic/garbagebusters/issues), a plan rada vodi se na [GitHub Projects ploči](https://github.com/users/lovretomic/projects/2). Svaki član radi u zasebnoj grani (branchu), a promjene se u `main` spajaju isključivo putem zahtjeva za uključivanje promjena (pull requesta). Prije spajanja obvezne su lokalne provjere, pregled koda i provjere GitHub Actions.
 
 <a id="license"></a>
 
-**Status licence:** [Navedite licencu i postavite poveznicu na projektnu datoteku `LICENSE` ili izričito navedite da nije dodijeljena licenca koja dopušta javnu ponovnu uporabu. Namjeravani opseg provjerite s timom; nemojte prepisivati licencu predloška ove dokumentacije kao licencu svoje aplikacije.]
-
-Dokumentacijski predložak kolegija sadrži otvorene obrazovne sadržaje (engl. Open Educational Resources, OER) i licenciran je licencom Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International. Ta licenca **ne određuje automatski licencu studentske aplikacije**; tim treba jasno navesti licencu svojeg projekta u prethodnom retku i datoteci `LICENSE`, ako je primjenjivo.
-
-Kod trećih strana, skupovi podataka, slike, ikone i drugi sadržaji zadržavaju vlastite licence i uvjete uporabe. [Po potrebi postavite poveznicu na zahvale i izvore.]
+**Status licence:**  izvorni kod i dokumentacija projekta EcoSentry objavljeni su pod [MIT licencom](../LICENSE) (© 2026 članovi tima TG01.4 Garbagebusters). Licenca se odnosi samo na kod i dokumentaciju tima.
 
 <a id="ai-usage"></a>
 
@@ -125,15 +124,13 @@ Kod trećih strana, skupovi podataka, slike, ikone i drugi sadržaji zadržavaju
 
 Ovaj projekt slijedi FER-ova [pravila o primjerenoj uporabi umjetne inteligencije](https://www.fer.unizg.hr/_download/repository/Policy%20on%20the%20appropriate%20use%20of%20artificial%20intelligence%20at%20the%20faculty%20of%20electrical%20engineering%20and%20computing%5B1%5D.pdf).
 
-**Izjava:** [Navedite jesu li korišteni alati umjetne inteligencije. Ako jesu, navedite alate i njihove glavne namjene te objasnite kako je tim pregledao nastali kod ili tekst i kako može objasniti vlastiti doprinos. Ako nisu korišteni, to jasno navedite. U alate umjetne inteligencije nemojte unositi privatne podatke, pristupne podatke ni tuđe zaštićene materijale.]
-
-[Ako je za ovaj projekt potreban detaljniji zapis uporabe umjetne inteligencije, postavite poveznicu na njegovo jedinstveno mjerodavno mjesto u dokumentaciji.]
+**Izjava:** [HOME – Uporaba umjetne inteligencije](./docs/Home.md#korišteni-alati). Ovaj odjeljak bilježi koji su alati korišteni, za koju dokumentaciju ili kod te kako je tim provjerio rezultat.
 
 <a id="code-of-conduct-and-support"></a>
 
 ## Kodeks ponašanja i podrška [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
-Od članova tima očekuje se pridržavanje **Kodeksa ponašanja studenata** Fakulteta elektrotehnike i računarstva Sveučilišta u Zagrebu, pravila timskog rada na kolegiju i [Etičkog kodeksa IEEE-a](https://www.ieee.org/about/corporate/governance/p7-8.html). [Postavite poveznicu na `CODE_OF_CONDUCT.md` ako se ta datoteka koristi u vašem repozitoriju.]
+Od članova tima očekuje se pridržavanje **Kodeksa ponašanja studenata** Fakulteta elektrotehnike i računarstva Sveučilišta u Zagrebu, pravila timskog rada na kolegiju i [Etičkog kodeksa IEEE-a](https://www.ieee.org/about/corporate/governance/p7-8.html).
 
 ---
 

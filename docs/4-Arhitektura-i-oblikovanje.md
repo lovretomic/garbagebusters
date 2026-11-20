@@ -45,7 +45,7 @@ U dijagramu ispod su prikazani glavni razredi sustava, njihovi atributi i veze m
 
 ![Dijagram razreda za obradu prijava kriznih događaja](./assets/diagrams/4-3-ecosentry-domain-CD.svg)
 
-**Slika 4.3. Dijagram razreda za obradu prijava kriznih događaja**
+**Slika 4.3. Dijagram razreda za obradu prijava divljih odlagališta otpada**
 
 **PlantUML izvor:** [izvor](./puml/4-3-ecosentry-domain-CD.puml)
 
