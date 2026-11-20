@@ -185,7 +185,7 @@ Ovo poglavlje prikazuje razloge promjena koje mijenjaju dogovoreni opseg, priori
 | 26. 10. | AS-04 | Uvedene konkretne mjerljive vrijednosti. Prijašnju iteraciju nije bilo moguće testirati. | Validirano s kupcem (asistentom). |
 | 26. 10. | AS-05 | Jasnije definiran proces stvaranja administratora zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
 | 16. 11. | AS-06 | Komunalna tvrtka zaprima naloge putem poslovnih procesa umjesto e-poštom. Prevelika zahtjevnost navedene implementacije. | Validirano s kupcem (asistentom). |
-| Nakon 1. kontrolne točke. Čeka na validaciju | AS-07 | Komunalna tvrtka zaprima naloge putem poslovnih procesa umjesto e-poštom. Prevelika kompleksnost navedene originalne ideje implementacije. | Čeka na validaciju. |
+| **Na čekanju:** Nakon 1. kontrolne točke. | AS-07 | Komunalna tvrtka zaprima naloge putem poslovnih procesa umjesto e-poštom. Prevelika kompleksnost navedene originalne ideje implementacije. | Čeka na validaciju. |
 
 ---
 
@@ -195,49 +195,42 @@ Ovo poglavlje prikazuje razloge promjena koje mijenjaju dogovoreni opseg, priori
 
 | ID zahtjeva | Obrazac uporabe / modul | Arhitekturna realizacija | Ispitivanje ili provjera |
 | --- | --- | --- | --- |
-| F-001 | [UC-001] | [Komponenta, modul ili drugo mjesto realizacije] | [ST-01, CT-01 ili druga provjera] |
-|  |  |  |  |
+| F-001 | UC-01, UC-02 | Modul src/auth | |
+| F-002 | UC-03, UC-04 | Modul src/auth | |
+| F-003 | UC-05 | Modul src/auth | |
+| F-004 | UC-08, UC-09, UC-10 | Web klijent; Modul src/reports (geokodiranje u ovome periodu razvoja sustava nije implementirano u arhitekturi) | |
+| F-005 | UC-11, UC-17 | Web klijent; Modul src/reports | |
+| F-006 | UC-10, UC-08, UC-09, UC-11, UC-17 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-007 | UC-12 | Modul src/reports | |
+| F-008 | UC-13, UC-16, UC-18, UC-27 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-009 | UC-14, UC-11 | Modul src/reports | |
+| F-010 | UC-17, UC-02, UC-10 | Web klijent; Modul src/reports (filtriranje po regiji u ovome periodu razvoja sustava nije implementirano u arhitekturi) | |
+| F-011 | UC-18, UC-13 | Modul src/actions; Modul src/reports | |
+| F-012 | UC-21, UC-22 | Web klijent; Modul src/volunteers | |
+| F-013 | UC-20 | Web klijent; Modul src/actions (kalendar u ovome periodu razvoja sustava nije implementiran u arhitekturi) | |
+| F-014 | UC-23 | Web klijent; Modul src/actions (ruta do mjesta okupljanja u ovome periodu razvoja sustava nije implementirana u arhitekturi) | |
+| F-015 | UC-18, UC-19, UC-22 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-016 | UC-24 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-017 | UC-24, UC-25 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-018 | UC-27, UC-26 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-019 | UC-16 | Modul src/orders; Modul src/reports | |
+| F-020 | UC-06, UC-02, UC-18 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-021 | UC-07 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-022 | UC-28 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-023 | UC-15, UC-12 | Modul src/reports | |
+| F-024 | UC-27, UC-13 | Modul src/reports | |
 
-<details>
-<summary><strong>Povezivanje zahtjeva, slučajeva uporabe i ispitivanja</strong></summary>
-
-**Primjer — poveznice zahtjeva CrisisMapa:**
-
-| ID zahtjeva | Obrazac uporabe / ponašanje | Arhitekturna realizacija | Ispitivanje / provjera |
-| --- | --- | --- | --- |
-| F-004 | UC-002 Podnošenje prijave kriznog događaja | Web-klijent; API za prijave; usluga za prijave | T-01 Valjana prijava; T-02 Nedostaje lokacija; T-03 Odbijeno dopuštenje za geolokaciju |
-| F-001 | UC-001 Registracija računa | [Odgovarajući dio sustava u projektu koji uključuje registraciju] | T-04 Valjana registracija; T-05 Postojeća adresa e-pošte |
-
-**Pokrivenost i dokazi:** Svaki redak pokazuje gdje je zahtjev opisan kao ponašanje, gdje je ostvaren u sustavu i gdje se nalazi dokaz njegove provjere. Zahtjev ne mora imati zaseban obrazac uporabe ako ne opisuje korisničku interakciju; tada navedite relevantno ponašanje, arhitekturni element ili drugi prikladan način realizacije. U svojem projektu koristite stvarne nazive komponenata, modula i provjera iz dokumentacije i implementacije. Nedostajuću poveznicu ostavite praznom ili označite kao *na čekanju* uz kratak razlog. Stvarni rezultati ispitivanja bilježe se uz ispitne slučajeve; ova tablica pokazuje gdje ih pronaći.
-
-</details>
 
 ---
 
 ## 2.7 Pregled zahtjeva
 
-**Cilj:** Zabilježiti važne povratne informacije o zahtjevima i odluke koje iz njih proizlaze na dvije formalne kontrolne točke projekta, u 7. i 14. tjednu.
+U tablici pregleda zahtjeva bilježimo važne povratne informacije o zahtjevima i odluke koje iz njih proizlaze na dvije formalne kontrolne točke projekta, u 7. i 14. tjednu.
 
 | Kontrolna točka | Povratna informacija ili nalaz | Odluka o zahtjevu ili opsegu |
 | --- | --- | --- |
-| Kontrolna točka 1 (7. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
+| Kontrolna točka 1 (7. tjedan) | Tijekom diskusije s kupcem (asistentom) utemeljeno je da je slanje službenih naloga e-poštom komunalnoj tvrtci izvan opsega projekta. | Uklanjanje planova za implementaciju funkcionalnosti slanja naloga komunalnoj tvrtci e-poštom; Ažurirati F-019 te razlog: Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#2.5-značajne-promjene-zahtjeva) (AS-06)  |
 | Demo 2 (11. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
 | Kontrolna točka 2 (14. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
 
-<details>
-<summary><strong>Bilježenje odluka nakon pregleda</strong></summary>
-
-**Primjer scenarija — pregled zahtjeva CrisisMapa:**
-
-| Kontrolna točka | Povratna informacija ili nalaz | Odluka o zahtjevu ili opsegu |
-| --- | --- | --- |
-| 7. tjedan (primjer) | Demonstracija pokazuje da odbijanje pristupa lokaciji preglednika onemogućuje podnošenje prijave. | Dogovoriti ručni odabir lokacije; ažurirati F-004 i primjer NF-01 te razlog zabilježiti u odjeljku 2.5. |
-
-**Odluka povezana s povratnom informacijom:** Zapis povezuje opaženo ponašanje s konkretnom promjenom zahtjeva i izbjegava zapisnik cijelog sastanka. Zapišite samo stvarne povratne informacije i odluke za kontrolne točke. Konzultacije u nekom drugom tjednu ne stvaraju dodatnu obaveznu predaju.
-
-</details>
-
----
-
->**Završna provjera:** Zahtjevi su aktualni, provjerljivi i povezani. Svaki važan zahtjev moguće je pratiti od njegova opisa i ponašanja preko mjesta realizacije u sustavu do odgovarajućeg ispitivanja ili druge provjere. Poveznice koriste stvarne identifikatore i nazive iz projektne dokumentacije.
-
+_Napomena_: Trenutno stanje projekta dozvoljava ispunjavanje samo prvog retka tablice.

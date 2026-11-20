@@ -118,7 +118,7 @@ _Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnosti administratora (komuna
 | Element specifikacije | Opis |
 | :--- | :--- |
 | **Primarni akter** | Građanin, preko prijave divljeg odlagališta i ručnog odabira lokacije |
-| **Povezani zahtjevi** | F-006, F-010 |
+| **Povezani zahtjevi** | F-004, F-006, F-010 |
 | **Preduvjeti** | Postoje koordinate (pretvorba u adresu) ili tekstualna adresa (pretvorba u koordinate). |
 | **Glavni uspješni tok** | 1. Sustav šalje koordinate ili adresu Google Maps API-ju.<br>2. Sustav iz odgovora izdvaja adresu i regiju, odnosno koordinate, i vraća ih pozivajućem obrascu. |
 | **Alternativni tokovi / Iznimke** | **2a — Nema rezultata:** Sustav javlja da lokacija nije prepoznata, a traži se ispravak.<br>**2b — Usluga nije dostupna:** Sustav prikazuje poruku. |

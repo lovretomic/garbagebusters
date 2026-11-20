@@ -3,7 +3,6 @@
 **Cilj:** Objasniti odobreni projektni zadatak vlastitim riječima tima. Čitatelj treba razumjeti problem, ciljane korisnike, cilj projekta i njegove granice bez prethodnog čitanja detaljnih zahtjeva.
 
 ## 1.1 Problem i cilj projekta
-
 **Cilj:** Jasno razgraničiti problem koji se rješava od predloženog rješenja i stvarne koristi za korisnika.
 
 Divlja odlagališta otpada predstavljaju ekološki problem koji građani ne mogu na jednostavan način prijaviti i pratiti što se dalje događa s prijavom. Aplikacija Ecosentry omogućuje prijavljivanje divljih odlagališta i povezuje građane, eko-udruge te komunalne redare kako bi olakšala proces prijave, organizacije čišćenja i uklanjanje otpada.
