@@ -33,7 +33,7 @@ Primjeri koriste temu projekta CrisisMap. Neki namjerno sadrže korisne nedostat
 | F-016 | Sustav prikazuje prognozu za termin akcije na toj lokaciji. | Visok | Odobreni zadatak | U sučelju volontera i udruge se prikazuje prognoza za taj termin na toj lokaciji. |
 | F-017 | Sustav u sučelju ističe crveno upozorenje i nudi opciju odgađanja ako je predviđeno nevrijeme za termin čišćenja. | Visok | Odobreni zadatak | Pri najavi nevremena u sučelju se prikazuje crveno upozorenje i eko-udruzi se nudi opcija odgode ili prebacivanja termina. |
 | F-018 | Sustav omogućuje učitavanje fotografije "Dokaza o sanaciji" od strane voditelja eko-udruge, zasebno za svaku prijavu obuhvaćenu akcijom, kako bi se poslao zahtjev za zatvaranje prijave. | Visok | Odobreni zadatak | Zahtjev za zatvaranje prijave se šalje kada voditelj priloži fotografiju. Nakon što ju administrator potvrdi prijava dobiva status "Očišćeno". (F-024) |
-| F-019 | Sustav omogućuje administratoru da stvori službeni nalog i pošalje ga komunalnoj tvrtci jednim klikom za otpad koji smatra opasnim ili prevelikim za akcije čišćenja eko-udruga. Nalog sadrži podatke prijave (oznaka, adresa, koordinate, kategorija, fotografija) i šalje se e-poštom na unaprijed postavljenu adresu ugovorene komunalne tvrtke. | Visok | Odobreni zadatak | Jednim klikom na prijavu u statusu "Prijavljeno" generira se službeni nalog, šalje se komunalnoj tvrtci, a prijava dobiva status "Službena sanacija". Prijava u tom statusu više se ne prikazuje eko-udrugama kao aktivna i ne može se uključiti u akciju čišćenja. Ako slanje naloga ne uspije, status prijave se ne mijenja i administrator dobiva poruku o grešci. |
+| F-019 | Sustav omogućuje administratoru da stvori službeni nalog i pošalje ga komunalnoj tvrtci jednim klikom za otpad koji smatra opasnim ili prevelikim za akcije čišćenja eko-udruga. Nalog sadrži podatke prijave (oznaka, adresa, koordinate, kategorija, fotografija) i šalje se putem poslovnih procesa. | Visok | Odobreni zadatak | Jednim klikom na prijavu u statusu "Prijavljeno" generira se službeni nalog, šalje se komunalnoj tvrtci, a prijava dobiva status "Službena sanacija". Prijava u tom statusu više se ne prikazuje eko-udrugama kao aktivna i ne može se uključiti u akciju čišćenja. Ako slanje naloga ne uspije, status prijave se ne mijenja i administrator dobiva poruku o grešci. |
 | F-020 | Sustav omogućava administratoru provjeru prijavljenih udruga kako bi se osiguralo da se prijavljuju samo registrirane organizacije. | Visok | Odobreni zadatak | Samo se registrirane organizacije mogu prijaviti za sudjelovanje i mogu stvarati akcije čišćenja. |
 | F-021 | Sustav omogućuje administratorima blokiranje problematičnih korisnika koji šalju lažne prijave. | Srednji | Odobreni zadatak | Kada administrator blokira korisnika taj korisnik se ne može prijaviti ni prijavljivati odlagališta otpada. |
 | F-022 | Sustav omogućava pregled statističkih grafikona administratoru (broj prijava po mjesecima, najkritičniji kvartovi, postotak uspješnosti). | Nizak | Odobreni zadatak | Administrator u sučelju može pregledati statističke grafikone (broj prijava po mjesecima, najkritičniji kvartovi, postotak uspješnosti). |
@@ -113,13 +113,21 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 
 **Cilj:** Utvrditi uloge koje utječu na zahtjeve i razlikovati dionike od aktera koji komuniciraju s aplikacijom.
 
-| ID uloge ili aktera | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
+| Akter | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
 | --- | --- | --- | --- |
 | A-01 | Građanin | Akter - koristi mobilno sučelje, prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
 | A-02 | Eko-udruga | Akter - koristi web i mobilno sučelje, pregledava prijave, organizira akcije te šalje sanacije na potvrdu fotografiranjem | F-001, F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
 | A-03 | Administrator (komunalni redar) | Akter - koristi web sučelje, upravlja korisnicima, izdaje službene naloge, blokira korisnike, odobrava udruge, pregledava statistiku | F-002, F-003, F-009, F-019, F-020, F-021, F-022, F-023, F-024, NF-1.3, NF-1.4 |
-| D-01 | Ugovorena komunalna tvrtka | Dionik - ne koristi aplikaciju, ali prima službene naloge i sanira opasni i veliki otpad | F-019 |
-| D-02 | Agencija za zaštitu osobnih podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
+
+| Dionik | Uloga | Odnos prema sustavu | Relevantni zahtjevi |
+| --- | --- | --- | --- |
+| D-01 | Agencija za zaštitu osobnih podataka | Dionik - ne koristi aplikaciju, ali određuje kako se obrađuju i koriste osobni podaci | NF-1.1, NF-1.2, NF-1.3 |
+| D-02 | Razvojni tim | Dionik - Izrađuje, testira i održava aplikaciju. U njihovom interesu je da je aplikacija pouzdana i funkcionalna. | Funkcionalnost aplikacije u cijelosti. |
+| D-03 | Komunalna tvrtka | Dionik - Ne koristi sustav. Prima službene naloge internim poslovnim procesima. | F-019 |
+| D-04 | Kupac aplikacije (asistent na kolegiju) | Dionik - Ne koristi sustav. Interes u način izvedbe i rezultat projekta koji je kupio tj. u koji je uložio. | Funkcionalnost aplikacije u cijelosti. |
+| D-05 | Građanin | Dionik koji koristi mobilno sučelje. U interesu mu je funkcionalnost prijavljuje odlagališta, prati vlastite prijave i prijavljuje se na akcije čišćenja. | F-001, F-004, F-005, F-006, F-007, F-008, F-012, F-014, F-015, F-016; NF-1.2, NF-2.1, NF-3.1, NF-3.3 |
+| D-06 | Eko-udruga | Dionik koji koristi web i mobilno sučelje. U interesu mu je funkcionalnost pregledavanja prijava, organiziranje akcija te slanje sanacija na potvrdu fotografiranjem. | F-001, F-010, F-011, F-013, F-015, F-016, F-017, F-018; NF-3.2, NF-3.3 |
+| D-07 | Administrator (komunalni redar) | Dionik koji koristi web sučelje. U interesu mu je funkcionalnost upravljanja korisnicima, izdavanja službenih naloga, blokiranje korisnika, odobravanja udruga i pregledavanje statistike. | F-002, F-003, F-009, F-019, F-020, F-021, F-022, F-023, F-024, NF-1.3, NF-1.4 |
 
 <details>
 <summary><strong>Povezivanje aktera sa zahtjevima</strong></summary>
@@ -150,56 +158,34 @@ Relevantna svojstva mogu se odnositi na uporabljivost, pristupačnost, sigurnost
 | C-02 | Ograničenje | Registracija i prijava korisnika se provodi s OAuth 2.0 | Odobreni zadatak | Prijava i registracija se dizajnira preko OAuth 2.0 |
 | C-03 | Ograničenje | Sustav ima mobilno sučelje za građane, web i mobilno sučelje za eko-udruge te web sučelje za administratore. Administratori koriste samo web sučelje. | Odobreni zadatak | Ovlasti se provjeravaju na poslužitelju neovisno o kojem je sučelju riječ. |
 | C-04 | Ograničenje | Svaka prijava divljeg odlagališta mora imati fotografiju, lokaciju i kategoriju otpada. | Odobreni zadatak | Sva polja se trebaju provjeriti prilikom slanja prijave (F-004) i svi se podaci trebaju pohraniti u bazi. |
-| C-05 | Ograničenje | Obrada osobnih podataka mora biti usklađena s primijenjenim propisima. | Zahtjev dionika iz [1.2](./1-Projekt.md#1.2-Ciljani-korisnici-i-dionici) | Pristup podacima je ograničen prema propisanim ulogama, podaci koji se prikupljaju su isključivo nužni za rad aplikacije (NF-1.2) |
-| AS-01 | Pretpostavka | Građani, volonteri i voditelji eko-udruga prijavljuju se putem OAuth 2.0 (profil udruge aktivira administrator prema F-020), a administrator ručno kreira samo račune komunalnih redara (administratora). | Procjena tima | Potvrda s asistentom. |
-| AS-02 | Pretpostavka | Građanin dopušta pristup lokaciji uređaja tijekom prijave divljeg odlagališta, a ako ne, omogućuje mu se ručni unos lokacije na karti. | Procjena tima | Ispitati ponašanje pri odbijanju dozvole na stvarnom uređaju (F-004). |
-| AS-03 | Pretpostavka | Svaka eko-udruga ima jedan korisnički račun i jednu regiju (grad ili općinu) koju odabire pri prvoj prijavi. | Procjena tima | Testiranjem provjeriti da se u F-010 prikazuju samo prijave iz regije udruge. |
-| AS-04 | Pretpostavka | Na dan 15. 11. 2026. aktualne verzije su: Android 17 i 16, iOS 27 i 26, Firefox 158 i 160, Chrome 158 i 157 i Safari 27 i 26. | Procjena tima | Provjeriti verzije prije svake kontrolne točke (7. i 14. tjedan) i prije završne predaje. Ako se promijene, treba ažurirati AS-04 i zabilježiti u poglavlju 2.5 samo ako se mijenja opseg testiranja. |
-| AS-05 | Pretpostavka | Prvi administratorski račun postoji unaprijed (kreira se pri postavljanju sustava). | Procjena tima | Prije prve isporuke provjeriti da se sustav može pokrenuti na praznoj bazi i da se prvi administrator može prijaviti. |
-| AS-06 | Pretpostavka | E-pošta ugovorene komunalne tvrtke unaprijed je zadana u konfiguraciji sustava, a službeni nalog (F-019) šalje se e-poštom. | Procjena tima | Pri testiranju F-019 provjeriti da e-pošta s nalogom stiže na testnu adresu. |
-| AS-07 | Pretpostavka | Promjena termina akcije (F-017) mijenja termin u sustavu i obavještava volontere unutar aplikacije. Već stvoreni događaji u Google Calendaru se ne ažuriraju automatski. | Procjena tima (Opis zadatka: "prebacivanje termina u kalendaru") | Potvrditi s asistentom da automatsko ažuriranje Google događaja nije obavezno. |
+| C-05 | Ograničenje | Obrada osobnih podataka mora biti usklađena s primijenjenim propisima. | Zahtjev dionika iz [1.2](./1-Projekt.md#12-Ciljani-korisnici-i-dionici) | Pristup podacima je ograničen prema propisanim ulogama, podaci koji se prikupljaju su isključivo nužni za rad aplikacije (NF-1.2) |
+| AS-01 | Pretpostavka | Građani, volonteri i voditelji eko-udruga prijavljuju se putem OAuth 2.0 (profil udruge aktivira administrator prema F-020), a administrator ručno kreira samo račune komunalnih redara (administratora). | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Provjeriti da administrator može ručno kreirati samo račune drugih administratora dok se bilo koji drugi tip profila (građanin i eko-udruga) može kreirati jedino prijavom putem OAuth 2.0. |
+| AS-02 | Pretpostavka | Građanin dopušta pristup lokaciji uređaja tijekom prijave divljeg odlagališta, a ako ne, omogućuje mu se ručni unos lokacije na karti. | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Ispitati ponašanje pri odbijanju dozvole na stvarnom uređaju (F-004). |
+| AS-03 | Pretpostavka | Svaka eko-udruga ima jedan korisnički račun i jednu regiju (grad ili općinu) koju odabire pri prvoj prijavi. | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Testiranjem provjeriti da se u F-010 prikazuju samo prijave iz regije udruge. |
+| AS-04 | Pretpostavka | Na dan 15. 11. 2026. aktualne verzije su: Android 17 i 16, iOS 27 i 26, Firefox 158 i 160, Chrome 158 i 157 i Safari 27 i 26. | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Provjeriti verzije prije svake kontrolne točke (7. i 14. tjedan) i prije završne predaje. Ako se promijene, treba ažurirati AS-04 i zabilježiti u poglavlju 2.5 samo ako se mijenja opseg testiranja. |
+| AS-05 | Pretpostavka | Prvi administratorski račun postoji unaprijed (kreira se pri postavljanju sustava). | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Prije prve isporuke provjeriti da se sustav može pokrenuti na praznoj bazi i da se prvi administrator može prijaviti. |
+| AS-06 | Pretpostavka | Ugovorena komunalna tvrtka zaprima službeni nalog putem poslovnih procesa (F-019) tj. proces slanja samog naloga se događa izvan EcoSentry sustava. | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Proces slanja službenog naloga se ne implementira u EcoSentry sustavu nego je dio vanjskih poslovnih procesa koji su izvan opsega projekta.  |
+| AS-07 | Pretpostavka | Promjena termina akcije (F-017) mijenja termin u sustavu i obavještava volontere unutar aplikacije. Već stvoreni događaji u Google Calendaru se ne ažuriraju automatski. | Procjena tima (Vidi odjeljak [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) | Potvrditi s asistentom da automatsko ažuriranje Google događaja nije obavezno. |
 
 
-<details>
-<summary><strong>Ograničenja nasuprot pretpostavkama</strong></summary>
-
-Ograničenje je uvjet koji tim mora poštovati; pretpostavka je uvjet na koji se tim oslanja i koji treba ponovno provjeravati.
-
-**Primjer — projektni kontekst CrisisMapa:**
-
-| ID | Ograničenje ili pretpostavka | Izvor | Posljedica ili način provjere |
-| --- | --- | --- | --- |
-| C-01 | Odobreni zadatak zahtijeva OAuth prijavu u sustav za uređivanje vlastitih prijava korisnika. | Odobreni zadatak  | Zaštićeno uređivanje projektirati oko odabranog pružatelja identiteta; provjeriti autorizirane i neautorizirane zahtjeve. |
-| AS-01 | Prijave koje se prikazuju na karti imaju uporabive koordinate. | Pretpostavka o podacima  | Pregledati ogledne i uvezene prijave; planirati prikaz prijava bez valjanih koordinata. |
-
-**Ograničenje nasuprot pretpostavci:** C-01 navodi obvezujuću odluku i njezin arhitekturni učinak; AS-01 je moguće provjeriti i može se pokazati netočnim. Nemojte kopirati C-01 ako OAuth nije dio stvarnog odobrenog zadatka. Projektni odgovor objasnite u arhitekturi bez prepisivanja ove tablice.
-
-</details>
 
 ---
-
 ## 2.5 Značajne promjene zahtjeva
 
-**Cilj:** Sačuvati razlog promjena koje mijenjaju dogovoreni opseg, prioritet ili kriterije prihvaćanja, uz istodobno održavanje prethodnih zahtjeva ažurnima.
+Ovo poglavlje prikazuje razloge promjena koje mijenjaju dogovoreni opseg, prioritet ili kriterije prihvaćanja, uz istodobno održavanje prethodnih zahtjeva ažurnima.
 
 | Datum | ID zahtjeva | Promjena i razlog | Dogovoreno s / dokaz |
 | --- | --- | --- | --- |
-| 26. 10. | F-001, F-002, AS-01 | Razjašnjeno tko se prijavljuje putem OAuth-a, a kome administrator kreira račun. | Dogovoreno s asistentom |
-| 26. 10. | F-010, AS-03 | Razjašnjeno određivanje regije udruge i filtriranje prijava. | Dogovoreno s asistentom |
-| 26. 10. | NF-3.1, NF-3.3 | Uvedene konkretne mjerljive vrijednosti. | Dogovoreno s asistentom |
-
-<details>
-<summary><strong>Bilježenje značajne promjene</strong></summary>
-
-**Primjer scenarija — odluka tijekom pregleda CrisisMapa:**
-
-| Datum | ID zahtjeva | Promjena i razlog | Dogovoreno s / dokaz |
-| --- | --- | --- | --- |
-| [Datum pregleda] | F-004, NF-01 | Dodati ručni odabir lokacije kada korisnik odbije geolokaciju preglednika; bez toga građanin ne može podnijeti prijavu kriznog događaja s lokacijom. | [Poveznica na stvarnu bilješku pregleda ili zadatak tima] |
-
-**Razlog promjene:** Zapis navodi zahvaćene stavke i objašnjava razlog iz perspektive korisnika, a zatim upućuje na dokaz odluke.  Nakon stvarne odluke ažurirajte trenutačne zahtjeve; stilska izmjena teksta ne zahtijeva zapis u dnevniku promjena. Trenutačni red zadataka držite u alatu za praćenje zadataka.
-
-</details>
+| 26. 10. | F-001, F-002, AS-01 | Razjašnjeno tko se prijavljuje putem OAuth-a, a kome administrator kreira račun zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
+| 26. 10. | F-010, AS-03 | Razjašnjeno određivanje regije udruge i filtriranje prijava zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
+| 26. 10. | NF-3.1, NF-3.3 | Uvedene konkretne mjerljive vrijednosti. Prijašnju iteraciju nije bilo moguće testirati. | Validirano s kupcem (asistentom). |
+| 26. 10. | AS-01 | Jasnije definirano s kupcem zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
+| 26. 10. | AS-02 | Prijašnja implementacija bi onemogućivala prijave dijelu korisnika (onima koji ne žele dozvoliti pristup lokaciji uređaja) te se ovime dodaje ručni unos. | Validirano s kupcem (asistentom). |
+| 26. 10. | AS-03 | Jasnije definiran pojam regije eko-udruge i broj te struktura njihovih prijava zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
+| 26. 10. | AS-04 | Uvedene konkretne mjerljive vrijednosti. Prijašnju iteraciju nije bilo moguće testirati. | Validirano s kupcem (asistentom). |
+| 26. 10. | AS-05 | Jasnije definiran proces stvaranja administratora zbog nejasnoće originalnog zahtjeva kupca. | Validirano s kupcem (asistentom). |
+| 16. 11. | AS-06 | Komunalna tvrtka zaprima naloge putem poslovnih procesa umjesto e-poštom. Prevelika zahtjevnost navedene implementacije. | Validirano s kupcem (asistentom). |
+| **Na čekanju:** Nakon 1. kontrolne točke. | AS-07 | Promjena termina akcije (F-017) mijenja termin u sustavu i obavještava volontere unutar aplikacije. Već stvoreni događaji u Google Calendaru se ne ažuriraju automatski. | Čeka na validaciju. |
 
 ---
 
@@ -209,49 +195,42 @@ Ograničenje je uvjet koji tim mora poštovati; pretpostavka je uvjet na koji se
 
 | ID zahtjeva | Obrazac uporabe / modul | Arhitekturna realizacija | Ispitivanje ili provjera |
 | --- | --- | --- | --- |
-| F-001 | [UC-001] | [Komponenta, modul ili drugo mjesto realizacije] | [ST-01, CT-01 ili druga provjera] |
-|  |  |  |  |
+| F-001 | UC-01, UC-02 | Modul src/auth | |
+| F-002 | UC-03, UC-04 | Modul src/auth | |
+| F-003 | UC-05 | Modul src/auth | |
+| F-004 | UC-08, UC-09, UC-10 | Web klijent; Modul src/reports (geokodiranje u ovome periodu razvoja sustava nije implementirano u arhitekturi) | |
+| F-005 | UC-11, UC-17 | Web klijent; Modul src/reports | |
+| F-006 | UC-10, UC-08, UC-09, UC-11, UC-17 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-007 | UC-12 | Modul src/reports | |
+| F-008 | UC-13, UC-16, UC-18, UC-27 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-009 | UC-14, UC-11 | Modul src/reports | |
+| F-010 | UC-17, UC-02, UC-10 | Web klijent; Modul src/reports (filtriranje po regiji u ovome periodu razvoja sustava nije implementirano u arhitekturi) | |
+| F-011 | UC-18, UC-13 | Modul src/actions; Modul src/reports | |
+| F-012 | UC-21, UC-22 | Web klijent; Modul src/volunteers | |
+| F-013 | UC-20 | Web klijent; Modul src/actions (kalendar u ovome periodu razvoja sustava nije implementiran u arhitekturi) | |
+| F-014 | UC-23 | Web klijent; Modul src/actions (ruta do mjesta okupljanja u ovome periodu razvoja sustava nije implementirana u arhitekturi) | |
+| F-015 | UC-18, UC-19, UC-22 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-016 | UC-24 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-017 | UC-24, UC-25 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-018 | UC-27, UC-26 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-019 | UC-16 | Modul src/orders; Modul src/reports | |
+| F-020 | UC-06, UC-02, UC-18 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-021 | UC-07 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-022 | UC-28 | **Na čekanju:** U ovome periodu razvoja sustava nije implementirano u arhitekturi. | |
+| F-023 | UC-15, UC-12 | Modul src/reports | |
+| F-024 | UC-27, UC-13 | Modul src/reports | |
 
-<details>
-<summary><strong>Povezivanje zahtjeva, slučajeva uporabe i ispitivanja</strong></summary>
-
-**Primjer — poveznice zahtjeva CrisisMapa:**
-
-| ID zahtjeva | Obrazac uporabe / ponašanje | Arhitekturna realizacija | Ispitivanje / provjera |
-| --- | --- | --- | --- |
-| F-004 | UC-002 Podnošenje prijave kriznog događaja | Web-klijent; API za prijave; usluga za prijave | T-01 Valjana prijava; T-02 Nedostaje lokacija; T-03 Odbijeno dopuštenje za geolokaciju |
-| F-001 | UC-001 Registracija računa | [Odgovarajući dio sustava u projektu koji uključuje registraciju] | T-04 Valjana registracija; T-05 Postojeća adresa e-pošte |
-
-**Pokrivenost i dokazi:** Svaki redak pokazuje gdje je zahtjev opisan kao ponašanje, gdje je ostvaren u sustavu i gdje se nalazi dokaz njegove provjere. Zahtjev ne mora imati zaseban obrazac uporabe ako ne opisuje korisničku interakciju; tada navedite relevantno ponašanje, arhitekturni element ili drugi prikladan način realizacije. U svojem projektu koristite stvarne nazive komponenata, modula i provjera iz dokumentacije i implementacije. Nedostajuću poveznicu ostavite praznom ili označite kao *na čekanju* uz kratak razlog. Stvarni rezultati ispitivanja bilježe se uz ispitne slučajeve; ova tablica pokazuje gdje ih pronaći.
-
-</details>
 
 ---
 
 ## 2.7 Pregled zahtjeva
 
-**Cilj:** Zabilježiti važne povratne informacije o zahtjevima i odluke koje iz njih proizlaze na dvije formalne kontrolne točke projekta, u 7. i 14. tjednu.
+U tablici pregleda zahtjeva bilježimo važne povratne informacije o zahtjevima i odluke koje iz njih proizlaze na dvije formalne kontrolne točke projekta, u 7. i 14. tjednu.
 
 | Kontrolna točka | Povratna informacija ili nalaz | Odluka o zahtjevu ili opsegu |
 | --- | --- | --- |
-| Kontrolna točka 1 (7. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
+| Kontrolna točka 1 (7. tjedan) | Tijekom diskusije s kupcem (asistentom) utemeljeno je da je slanje službenih naloga e-poštom komunalnoj tvrtci izvan opsega projekta. | Uklanjanje planova za implementaciju funkcionalnosti slanja naloga komunalnoj tvrtci e-poštom; Ažurirati F-019 te pretpostavku zabilježiti u odjeljku [2.4](./2-Analiza-zahtjeva.md#24-ograničenja-i-pretpostavke), a razlog u odjeljku [2.5](./2-Analiza-zahtjeva.md#25-značajne-promjene-zahtjeva)) (AS-06)  |
 | Demo 2 (11. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
 | Kontrolna točka 2 (14. tjedan) | [Povratna informacija] | [Odluka; vidi odjeljak 2.5] |
 
-<details>
-<summary><strong>Bilježenje odluka nakon pregleda</strong></summary>
-
-**Primjer scenarija — pregled zahtjeva CrisisMapa:**
-
-| Kontrolna točka | Povratna informacija ili nalaz | Odluka o zahtjevu ili opsegu |
-| --- | --- | --- |
-| 7. tjedan (primjer) | Demonstracija pokazuje da odbijanje pristupa lokaciji preglednika onemogućuje podnošenje prijave. | Dogovoriti ručni odabir lokacije; ažurirati F-004 i primjer NF-01 te razlog zabilježiti u odjeljku 2.5. |
-
-**Odluka povezana s povratnom informacijom:** Zapis povezuje opaženo ponašanje s konkretnom promjenom zahtjeva i izbjegava zapisnik cijelog sastanka. Zapišite samo stvarne povratne informacije i odluke za kontrolne točke. Konzultacije u nekom drugom tjednu ne stvaraju dodatnu obaveznu predaju.
-
-</details>
-
----
-
->**Završna provjera:** Zahtjevi su aktualni, provjerljivi i povezani. Svaki važan zahtjev moguće je pratiti od njegova opisa i ponašanja preko mjesta realizacije u sustavu do odgovarajućeg ispitivanja ili druge provjere. Poveznice koriste stvarne identifikatore i nazive iz projektne dokumentacije.
-
+_Napomena_: Trenutno stanje projekta dozvoljava ispunjavanje samo prvog retka tablice.

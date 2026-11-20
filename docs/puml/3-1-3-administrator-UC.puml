@@ -36,15 +36,10 @@ title Funkcionalnosti administratora (komunalnog redara)
 
 frame "uc" {
 
-actor "Baza podataka" as BP
-note top of BP
-Svi obrasci uporabe 
-komuniciraju s bazom podataka
-end note
-
-  actor "Administrator\n(komunalni redar)" as ADMN
+actor "Administrator\n(komunalni redar)" as ADMN
 
 actor "Građanin" as GRAD
+
 
   rectangle "Ecosentry - WEB aplikacija" as SUS {
     usecase "UC-03: Prijava\nadministratora" as UC03
@@ -80,8 +75,13 @@ UC13 --> GRAD
 UC16 ..> UC13 : <<include>>
 UC27 ..> UC13 : <<include>>
 
+note right of UC16
+Komunalna tvrtka je dionik koji prima
+službeni nalog putem poslovnih procesa.
+end note
+
 note bottom of GRAD
-Građanin je pasivni akter koji prima 
-obavijest unutar vlastite mobilne aplikacije.
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
 end note
 @enduml

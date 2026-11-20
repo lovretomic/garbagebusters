@@ -34,11 +34,6 @@ skinparam note {
 title Funkcionalnosti građanina
 
 frame "uc" {
-actor "Baza podataka" as BP
-note top of BP
-Svi obrasci uporabe osim UC-24, UC-23, 
-UC-11, UC-09, UC-19 i UC-13 komuniciraju s bazom podataka
-end note
 actor "Građanin" as GRAD
 
 rectangle "Ecosentry - Mobilna aplikacija" as SUS {
@@ -91,7 +86,7 @@ UC19 -- CAL
 UC24 -- OWM
 
 note right of UC13
-Građanin je pasivni akter koji prima 
-obavijest unutar vlastite mobilne aplikacije.
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
 end note
 @enduml
