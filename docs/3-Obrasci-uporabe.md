@@ -372,39 +372,40 @@ Ako odobreni zadatak umjesto toga koristi isključivo OAuth prijavu, zamijenite 
 
 ## 3.3 Provjera dosljednosti obrazaca uporabe
 
-**Cilj:** Provjeriti međusobnu usklađenost obrazaca uporabe, aktera, zahtjeva i ispitnih slučajeva. Cjelovito mapiranje održava se isključivo u **[matrici sljedivosti zahtjeva](2-Analiza-zahtjeva.md#26-sljedivost-zahtjeva)**.
+Provjeravamo međusobnu usklađenost obrazaca uporabe, aktera, zahtjeva i ispitnih slučajeva, dok se cjelovito mapiranje održava se isključivo u **[matrici sljedivosti zahtjeva](2-Analiza-zahtjeva.md#26-sljedivost-zahtjeva)**.
 
-| Provjera | Pitanje za tim |
-| --- | --- |
-| Zahtjev | Je li svaki važan obrazac uporabe povezan s postojećim zahtjevom? |
-| Akter | Odgovara li akter naveden ovdje prethodno utvrđenoj ulozi i dopuštenoj interakciji? |
-| Aplikacija | Može li tim demonstrirati opisani glavni rezultat i važnu alternativu ili je opis jasno označen kao trenutačno oblikovanje? |
-
----
-
-Povezivanje zahtjev → obrazac uporabe → ispitivanje održavajte **samo jednom, u [tablici sljedivosti zahtjeva](./2-Analiza-zahtjeva.md)**. Ovdje nemojte održavati drugu projektnu tablicu mapiranja ni stupac sa statusom implementacije. Ako važan zahtjev nema interakciju s ljudskim akterom, objasnite gdje se obrađuje umjesto izmišljanja aktera.
-
-<details>
-<summary><strong>Provjera pokrivenosti zahtjeva</strong></summary>
-
-**Primjer — CrisisMap:** Tablica pokrivenosti obrazaca uporabe koju treba analizirati:
 
 | Broj obrasca uporabe | Naziv obrasca uporabe | Obuhvaćeni funkcijski zahtjevi |
 | --- | --- | --- |
-| UC-001 | Registracija računa | F-001: Registracija računa putem e-pošte |
-| UC-002 | Prijava kriznog događaja | F-022: Prijava i provjera kriznog događaja |
-| UC-003 | Sustav upozorenja | F-045: Slanje upozorenja korisnicima i timovima |
-| UC-004 | Koordinacija spašavanja | F-067: Koordinacija s hitnim službama |
-
----
+| UC-01 | Prijava putem OAuth-a 2.0 | F-001: Registracija i prijava putem OAuth-a |
+| UC-02 | Registracija profila eko-udruge | F-001; F-020: Provjera prijavljenih udruga; F-010: Prikaz aktivnih prijava eko-udrugama (regija udruge) |
+| UC-03 | Prijava administratora | F-002: Kreiranje računa administratora (prijava inicijalnom lozinkom) |
+| UC-04 | Stvaranje računa administratora | F-002 |
+| UC-05 | Promjena inicijalne lozinke | F-003: Promjena inicijalne lozinke |
+| UC-06 | Provjera i odobravanje eko-udruge | F-020 |
+| UC-07 | Blokiranje korisnika | F-021: Blokiranje korisnika |
+| UC-08 | Prijava divljeg odlagališta | F-004: Prijava divljeg odlagališta; F-006: Geokodiranje lokacije |
+| UC-09 | Ručni odabir lokacije na karti | F-004; F-006 |
+| UC-10 | Geokodiranje lokacije | F-004; F-006; F-010 |
+| UC-11 | Pregled karte prijava | F-005: Prikaz prijava na karti; F-006; F-009: Odbacivanje lažnih prijava |
+| UC-12 | Pregled povijesti vlastitih prijava | F-007: Povijest vlastitih prijava; F-023: Izmjena kategorije otpada |
+| UC-13 | Slanje obavijesti o promjeni statusa prijave | F-008: Obavijesti o promjeni statusa; F-011: Stvaranje akcije čišćenja; F-024: Potvrda dokaza o sanaciji |
+| UC-14 | Odbacivanje lažne prijave | F-009 |
+| UC-15 | Izmjena kategorije otpada | F-023 |
+| UC-16 | Slanje službenog naloga komunalnoj tvrtki | F-019: Službeni nalog; F-008 |
+| UC-17 | Pregled aktivnih prijava regije | F-010; F-006; F-005 |
+| UC-18 | Stvaranje akcije čišćenja | F-011; F-015: Događaj u Google Calendaru; F-008; F-020 |
+| UC-19 | Dodavanje događaja u Google Calendar | F-015 |
+| UC-20 | Pregled kalendara akcija | F-013: Kalendar akcija |
+| UC-21 | Pregled nadolazećih akcija čišćenja | F-012: Pregled akcija i prijava volontera |
+| UC-22 | Prijava na akciju čišćenja kao volonter | F-012; F-015 |
+| UC-23 | Prikaz rute do mjesta okupljanja | F-014: Prikaz rute do lokacije akcije |
+| UC-24 | Pregled prognoze za termin akcije | F-016: Prognoza za termin akcije; F-017: Upozorenje o nevremenu i odgoda |
+| UC-25 | Odgoda termina akcije zbog nevremena | F-017 |
+| UC-26 | Slanje dokaza o sanaciji | F-018: Dokaz o sanaciji |
+| UC-27 | Potvrda dokaza o sanaciji | F-024; F-018; F-008 |
+| UC-28 | Pregled statističkih grafikona | F-022: Statistički grafikoni |
 
 **Problemi pokrivenosti koje treba riješiti:**
-
-- **Pogrešan ID zahtjeva:** ova tablica povezuje UC-002 s F-022, dok se opis UC-002 u odjeljku 3.2 poziva na F-004, zahtjev za podnošenje prijave iz odjeljk1 2.1.
-- **Zahtjevi koji ne postoje:** F-022, F-045 i F-067 nisu definirani u oglednim zahtjevima u 2.1.
-- **Obrasci uporabe bez opisa:** UC-003 i UC-004 nemaju opis u 3.2. UC-004 (koordinacija s hitnim službama) ujedno je mogućnost s vanjskim posljedicama koju opseg dopušta samo ako je uključena u odobreni zadatak.
-- **Nesklad aktera:** primjer aktera u odjeljku 2.3 navodi da koordinator pomoći podnosi prijave (F-004), dok UC-002 kao primarnog aktera navodi građanina.
-
-</details>
-
-**Završna provjera:** Dijagram, specifikacije obrazaca uporabe i matrica sljedivosti međusobno su usklađeni. Svaki važan obrazac uporabe povezan je s postojećim zahtjevom, akteri odgovaraju stvarnim ulogama u aplikaciji, a opisani glavni i alternativni tijekovi odgovaraju ponašanju koje sustav stvarno podržava.
+- **F-019 / UC-16 / AS-06:** Alternativa 2a („slanje naloga nije uspjelo”) i kriterij prihvaćanja F-019 pretpostavljaju slanje, no prema AS-06 slanje je izvan sustava.
+- **UC-08 / 2.6:** Preduvjet UC-08 navodi mobilno sučelje, a arhitekturna realizacija F-004 u 2.6 navodi „Web klijent”.
