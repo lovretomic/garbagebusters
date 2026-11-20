@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam ArrowColor black
+skinparam titleBorderThickness 2
+skinparam titleBorderColor black
+skinparam titleBackgroundColor white
+skinparam actor {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam usecase {
+  BackgroundColor #FFFFC0
+  BorderColor black
+  FontStyle bold
+}
+skinparam rectangle {
+  BackgroundColor white
+  BorderColor black
+  FontStyle bold
+}
+skinparam frame {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam note {
+  BackgroundColor #FFCCCC
+  BorderColor black
+}
+
+title Funkcionalnosti eko-udruge
+
+frame "uc" {
+
+  actor "Eko-udruga" as EKO
+
+  rectangle "Ecosentry - WEB i mobilna aplikacija" as SUS {
+    usecase "UC-01: Prijava putem\nOAuth-a 2.0" as UC01
+    usecase "UC-02: Registracija\nprofila eko-udruge" as UC02
+    usecase "UC-17: Pregled aktivnih\nprijava regije" as UC17
+    usecase "UC-18: Stvaranje akcije\nčišćenja" as UC18
+    usecase "UC-19: Dodavanje događaja\nu Google Calendar" as UC19
+    usecase "UC-13: Slanje obavijesti o\npromjeni statusa prijave" as UC13
+    usecase "UC-20: Pregled kalendara\nakcija" as UC20
+    usecase "UC-24: Pregled prognoze\nza termin akcije" as UC24
+    usecase "UC-25: Odgoda termina akcije\nzbog nevremena" as UC25
+    usecase "UC-26: Slanje dokaza\no sanaciji" as UC26
+  }
+
+  actor "OAuth 2.0" as OAUTH
+  actor "Google Maps API" as MAPS
+  actor "Google Calendar API" as CAL
+  actor "OpenWeatherMap API" as OWM
+  actor "Građanin" as GRAD
+}
+
+EKO --> UC01
+UC25 -- CAL
+EKO --> UC18
+EKO --> UC25
+EKO --> UC26
+
+UC02 ..> UC01 : <<include>>
+
+EKO --> UC02
+EKO --> UC17
+
+UC17 -- MAPS
+UC19 -- CAL
+UC18 ..> UC13 : <<include>>
+UC18 ..> UC19 : <<include>>
+UC25 ..> UC24 : <<extend>>
+UC24 -- OWM
+EKO --> UC20
+UC01 -- OAUTH
+EKO --> UC24
+UC13 --> GRAD
+
+note bottom of GRAD
+Građanin je pasivni akter koji prima obavijest 
+unutar vlastite mobilne aplikacije.
+end note
+
+note right of UC02
+Profil postaje aktivan tek nakon
+odobrenja administratora (UC-06).
+end note
+@enduml

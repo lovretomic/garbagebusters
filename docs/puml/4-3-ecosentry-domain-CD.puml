@@ -1,0 +1,59 @@
+@startuml
+title EcoSentry - UML dijagram razreda (Reports)
+left to right direction
+
+class App_User <<entity>> {
+    +ID_User: Int
+    +name: String
+    +username: String
+    +email: String
+}
+
+class Citizen <<entity>> {
+    +ID_User: Int
+}
+
+class Warden <<entity>> {
+    +ID_User: Int
+}
+
+class Cleanup_Action <<entity>> {
+    +ID_Action: Int
+    +name: String
+    +description: String
+    +max_volunteers: Int
+    +action_date: DateTime
+    +action_time: DateTime
+    +action_location: String
+}
+
+class Report <<entity>> {
+    +ID_Report: Int
+    +GPS_coordinates: String
+    +photos_before: String
+    +photos_after: String
+    +category: String
+    +waste_volume: Float
+    +report_status: String
+    +Report_date: DateTime
+    +ID_Action: Int [0..1]
+    +ID_Warden: Int [0..1]
+}
+
+class Orders <<entity>> {
+    +ID_Order: Int
+    +company_name: String
+    +order_status: String
+    +issue_date: DateTime
+}
+
+App_User "1" -- "0..1" Citizen : uloga
+App_User "1" -- "0..1" Warden : uloga
+
+Citizen "1" -- "0..*" Report : podnosi
+Warden "0..1" -- "0..*" Report : obraduje
+Cleanup_Action "0..1" -- "0..*" Report : povezana s
+
+Report "1" -- "0..1" Orders : ima
+Warden "1" -- "0..*" Orders : izdaje
+@enduml
