@@ -1,5 +1,10 @@
 # 3. Obrasci uporabe
+
+Kroz dijagrame obrazaca uporabe prikazati ćemo glavne interakcije između aktera aplikacije i sustava te opisati kako akter ostvaruje cilj i što se događa kada važan korak ne uspije. 
+
 ## 3.1 Dijagram obrazaca uporabe
+
+Putem dijagrama za svakoga od korisnika sustava prikazujemo granicu sustava, relevantne aktere i njihove glavne ciljeve.
 
 ![Dijagram obrazaca uporabe: Funkcionalnost građanina](./assets/diagrams/3-1-1-gradanin-UC-v4.png)
 _Slika 3.1.1 - Dijagram obrazaca uporabe: Funkcionalnosti građanina_
@@ -13,6 +18,8 @@ _Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnosti administratora (komuna
 **Napomena:** Sustav je prikazan uz pomoć 3 dijagrama jer su svi pokušaji spajanja više aktera u jedan dijagram rezultirali jako nečitljivim i nezgrapnim dijagramom. Zadatak je takav da građanin, eko-udruga i administrator imaju potpuno drukčiji skup obrazaca uporabe te je samim time teže provesti proces generalizacije. Jedino građanin i eko-udruga dijele mali broj obrazaca, ali i tada zbog samoga broja ostalih obrazaca dijagram funkcionalnosti građanina i eko-udruge bi bio nepregledan.
 
 ## 3.2 Specifikacije obrazaca uporabe
+
+Obrascima uporabe objašnjavamo cilj aktera, uobičajenu interakciju s aplikacijom i važne alternative.
 
 ### UC-01: Prijava putem OAuth-a 2.0
 
@@ -322,52 +329,6 @@ _Slika 3.1.3: Dijagram obrazaca uporabe - Funkcionalnosti administratora (komuna
 | **Alternativni tokovi / Iznimke** | **2a — Nema podataka:** Sustav prikazuje grafikone bez vrijednosti uz poruku da još nema prijava. |
 | **Posljedice (ishod)** | Prikaz ne mijenja stanje sustava. |
 
-
-
-
-<details>
-<summary><strong>Primjeri specifikacija: Registracija i prijava kriznog događaja</strong></summary>
-
-**Primjer — CrisisMap:**
-
-**UC-001: Registracija računa.** Ovaj kratki primjer odnosi se na projekt čiji odobreni zadatak uključuje račune s adresom e-pošte i lozinkom.
-
-| Polje | Opis |
-| --- | --- |
-| Primarni akter | Građanin (A-02 u primjeru) |
-| ID zahtjeva | F-001 |
-| Preduvjeti, ako postoje | Nema. |
-| Glavni tijek | Građanin unosi adresu e-pošte; aplikacija šalje poveznicu za potvrdu; građanin potvrđuje račun. |
-| Alternativni ili neuspješni tijekovi, ako postoje | Adresa e-pošte već postoji → aplikacija objašnjava zašto se registracija ne može nastaviti. |
-| Rezultat | Račun je aktivan nakon potvrde. |
-
-Ako odobreni zadatak umjesto toga koristi isključivo OAuth prijavu, zamijenite ovaj primjer odgovarajućim ponašanjem prijave; nemojte dodavati registraciju lokalnom lozinkom samo radi podudaranja s primjerom.
-
-**UC-002: Podnošenje prijave kriznog događaja.** Ista polja mogu opisati dulji tijek u kojem odabir lokacije, provjera valjanosti i pohrana mogu ne uspjeti.
-
-| Polje | Opis |
-| --- | --- |
-| Primarni akter | Građanin |
-| ID zahtjeva | F-004 |
-| Preduvjeti, ako postoje | Obrazac za prijavu dostupan je. Ako odobreni zadatak zahtijeva prijavu u sustav, građanin je prijavljen. |
-| Glavni tijek | 1. Građanin otvara obrazac za prijavu; aplikacija prikazuje polja za vrstu kriznog događaja, razinu ozbiljnosti, opis i lokaciju.<br>2. Građanin unosi podatke i odabire lokaciju na karti ili drugim podržanim načinom.<br>3. Građanin podnosi obrazac; aplikacija provjerava obavezna polja i lokaciju.<br>4. Aplikacija pohranjuje prijavu i prikazuje potvrdu s referencom na nju. |
-| Alternativni ili neuspješni tijekovi, ako postoje | **1a — Prijava u sustav nije uspjela:** Ako je prijava obavezna, a pružatelj identiteta je ne dovrši, prijava kriznog događaja ostaje nepodnesena i aplikacija objašnjava kako pokušati ponovno.<br>**2a — Odbijen pristup lokaciji:** Ako aplikacija nudi geolokaciju, ali je korisnik odbije, građanin ručno odabire lokaciju ako ta mogućnost postoji; tijek se nastavlja u koraku 3.<br>**3a — Nevaljana ili nedostajuća lokacija:** Aplikacija objašnjava problem, po mogućnosti zadržava unesene podatke i ne pohranjuje prijavu; građanin ispravlja lokaciju i ponavlja korak 3.<br>**3b — Pohrana nije uspjela:** Aplikacija prijavljuje neuspjeh i ne prikazuje lažnu potvrdu o podnošenju. |
-| Rezultat | Aplikacija pohranjuje prijavu kriznog događaja i potvrđuje njezino podnošenje. |
-
-**Odabir razine detalja:** Oba primjera koriste ista polja. UC-001 je kratak jer je glavna iznimka jasna; UC-002 zahtijeva numerirane korake i alternative jer oni mijenjaju ishod i mogu usmjeravati ispitivanje. Uklonite grane prijave u sustav ili geolokacije koje ne postoje u stvarnoj aplikaciji tima. Obavještavanje spasilačkih timova, pokretanje akcije spašavanja ili dostavljanje povratnih informacija interventnih službi uvodi **zasebne mogućnosti s vanjskim posljedicama**; dokumentirajte ih samo ako ih odobreni zadatak i implementacija podržavaju. Oporavak lozinke odnosi se na račune s lokalnom lozinkom, a ne automatski na zadatak koji koristi isključivo OAuth. Pri prilagodbi primjera koristite ID-ove zahtjeva i ponašanje vlastite aplikacije.
-
-**UC-005: Moderiranje prijave kriznog događaja.** Ovaj primjer vrijedi samo za projekt u kojem odobreni opseg uključuje moderatorski pregled prijava.
-
-| Polje | Opis |
-| --- | --- |
-| Primarni akter | Moderator (A-05 u primjeru) |
-| ID zahtjeva | F-008 |
-| Preduvjeti, ako postoje | Moderator je prijavljen i ima moderatorske ovlasti; postoji prijava koja čeka pregled. |
-| Glavni tijek | 1. Moderator otvara prijavu koja čeka pregled.<br>2. Aplikacija prikazuje podatke prijave i dostupne moderatorske radnje.<br>3. Moderator odabire odobravanje ili odbijanje.<br>4. Aplikacija provjerava ovlasti, mijenja status prijave i prikazuje novi status. |
-| Alternativni ili neuspješni tijekovi, ako postoje | **3a — Radnja nije potvrđena:** Moderator odustaje od promjene i prijava ostaje nepromijenjena.<br>**4a — Ovlasti nisu valjane:** Aplikacija odbija promjenu i status prijave ostaje nepromijenjen. |
-| Rezultat | Prijava ima novi status ako je moderatorska radnja uspješno provedena; inače ostaje nepromijenjena. |
-</details>
-
 ---
 
 ## 3.3 Provjera dosljednosti obrazaca uporabe
@@ -407,5 +368,5 @@ Provjeravamo međusobnu usklađenost obrazaca uporabe, aktera, zahtjeva i ispitn
 | UC-28 | Pregled statističkih grafikona | F-022: Statistički grafikoni |
 
 **Problemi pokrivenosti koje treba riješiti:**
-- **F-019 / UC-16 / AS-06:** Alternativa 2a („slanje naloga nije uspjelo”) i kriterij prihvaćanja F-019 pretpostavljaju slanje, no prema AS-06 slanje je izvan sustava.
-- **UC-08 / 2.6:** Preduvjet UC-08 navodi mobilno sučelje, a arhitekturna realizacija F-004 u 2.6 navodi „Web klijent”.
+- **F-019, UC-16 i AS-06:** Alternativa 2a („slanje naloga nije uspjelo”) i kriterij prihvaćanja F-019 pretpostavljaju slanje, no prema AS-06 slanje je izvan sustava.
+- **UC-08 i 2.6:** Preduvjet UC-08 navodi mobilno sučelje, a arhitekturna realizacija F-004 u 2.6 navodi „Web klijent”.
